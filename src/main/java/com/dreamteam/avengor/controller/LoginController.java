@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-public class HelloController {
+public class LoginController {
 
     // inject via application.properties
     @Value("${welcome.message}")

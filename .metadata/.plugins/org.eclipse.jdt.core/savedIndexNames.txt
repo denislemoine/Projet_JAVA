@@ -1,3 +1,0 @@
-INDEX VERSION 1.131+C:\dev\avengor\Projet_JAVA\.metadata\.plugins\org.eclipse.jdt.core
-3509867687.index
-3278990113.index

@@ -1,41 +1,42 @@
 package com.dreamteam.avengor.controller;
 
 
-import org.springframework.beans.factory.annotation.Value;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Arrays;
-import java.util.List;
-
 @Controller
-public class LoginController {
-
-    // inject via application.properties
-    @Value("${welcome.message}")
-    private String message;
-
-    private List<String> tasks = Arrays.asList("a", "b", "c", "d", "e", "f", "g");
-
-    @GetMapping("/")
-    public String main(Model model) {
-        model.addAttribute("message", message);
-        model.addAttribute("tasks", tasks);
-
-        return "welcome"; //view
+public class LoginController
+{
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String loginPage(@RequestParam(value = "error", required = false) String error,
+                            @RequestParam(value = "logout", required = false) String logout,
+                            Model model) {
+        String errorMessge = null;
+        if(error != null) {
+            errorMessge = "Username or Password is incorrect !!";
+        }
+        if(logout != null) {
+            errorMessge = "You have been successfully logged out !!";
+        }
+        model.addAttribute("errorMessge", errorMessge);
+        return "login";
     }
 
-    // /hello?name=kotlin
-    @GetMapping("/hello")
-    public String mainWithParam(
-            @RequestParam(name = "name", required = false, defaultValue = "")
-                    String name, Model model) {
-
-        model.addAttribute("message", name);
-
-        return "welcome"; //view
+    @RequestMapping(value="/logout", method = RequestMethod.GET)
+    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "redirect:/login?logout=true";
     }
-
 }

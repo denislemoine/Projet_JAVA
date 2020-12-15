@@ -25,7 +25,7 @@ public class SuperHerosModel {
         this.Commentaire = Commentaire;
     }
 
-    public int getId_SuperHeros(int id_SuperHeros){
+    public int getId_SuperHeros(){
         return id_SuperHeros;
     }
 
@@ -33,7 +33,7 @@ public class SuperHerosModel {
         this.id_SuperHeros = id_SuperHeros;
     }
 
-    public String getNom(String Nom){
+    public String getNom(){
         return Nom;
     }
 
@@ -41,7 +41,7 @@ public class SuperHerosModel {
         this.Nom = Nom;
     }
 
-    public int getIdentiteSecrete(int IdentiteSecrete){
+    public int getIdentiteSecrete(){
         return IdentiteSecrete;
     }
 
@@ -49,7 +49,7 @@ public class SuperHerosModel {
         this.IdentiteSecrete = IdentiteSecrete;
     }
 
-    public String getPouvoir(String Pouvoir){
+    public String getPouvoir(){
         return Pouvoir;
     }
 
@@ -57,7 +57,7 @@ public class SuperHerosModel {
         this.Pouvoir = Pouvoir;
     }
 
-    public String getPointFaible(String PointFaible){
+    public String getPointFaible(){
         return PointFaible;
     }
 
@@ -65,7 +65,7 @@ public class SuperHerosModel {
         this.PointFaible = PointFaible;
     }
 
-    public float getScore(float Score){
+    public float getScore(){
         return Score;
     }
 
@@ -73,7 +73,7 @@ public class SuperHerosModel {
         this.Score = Score;
     }
 
-    public String getCommentaire(String Commentaire){
+    public String getCommentaire(){
         return Commentaire;
     }
 

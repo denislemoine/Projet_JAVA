@@ -47,7 +47,8 @@ public class Routes {
         return "incident";
     }
 
-
+    @GetMapping("/admin")
+    public String SuperUser(){ return "admin";}
     //===================================================================================
     //                                                                                  =
     //                              POST METHODS                                        =

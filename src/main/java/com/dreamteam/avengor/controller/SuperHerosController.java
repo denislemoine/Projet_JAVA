@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-public class SuperHerosController{
+public class SuperHerosController {
 
     private int id_SuperHeros;
     private String Nom;
@@ -21,10 +21,6 @@ public class SuperHerosController{
     private Float Score;
     private String Commentaire;
 
-        public SuperHerosController(){
-
-        }
-        
         public SuperHerosController(int id_SuperHeros,String Nom,int IdentiteSecrete,String Pouvoir,String PointFaible,Float Score,String Commentaire){
 
             super();

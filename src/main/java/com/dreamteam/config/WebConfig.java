@@ -15,23 +15,17 @@ import org.springframework.web.servlet.view.JstlView;
 @ComponentScan(basePackages = { "com.baeldung.web.controller" })
 public class WebConfig implements WebMvcConfigurer {
 
-    private static final String LOGIN_PROCESSING_URL = "/login.html";
-    private static final String LOGIN_FAILURE_URL = "/login?error";
-    private static final String LOGIN_URL = "/login.html";
-    private static final String LOGOUT_SUCCESS_URL = "/login.html";
-
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("welcome");
-        registry.addViewController("/").setViewName("login");
+        registry.addViewController("/login").setViewName("login");
     }
 
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver bean = new InternalResourceViewResolver();
 
-        bean.setViewClass(JstlView.class);
-        bean.setPrefix("/WEB-INF/views/");
+        bean.setPrefix("/WEB-INF/template/");
         bean.setSuffix(".html");
 
         return bean;

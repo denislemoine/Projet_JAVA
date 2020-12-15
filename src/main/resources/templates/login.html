@@ -1,1 +1,58 @@
-test
+<!DOCTYPE HTML>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Avengor - Authentification</title>
+
+    <link rel="icon" type="image/png" th:href="@{/assets/img/logo.png}" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}">
+
+</head>
+
+<body id="page-top">
+<header class="masthead" style="padding: 1px;background-size: auto;background-position: center;background-image: url(&quot;/assets/img/login/centered.png&quot;);background-color: #242424;background-repeat: no-repeat;">
+
+    <a class="d-flex overlay" style="margin-left: 1450px; width: 423px; height: 99px; background-image: url(&quot;assets/img/login/jarvis.png&quot;);background-repeat: no-repeat;"></a>
+
+    <div class="container d-xl-flex my-auto justify-content-xl-center align-items-xl-center text-center" style="background-repeat: no-repeat;background-position: center;background-size: contain;">
+        <div class="overlay" style="margin-top: 253px;margin-right: 639px;">
+            <a href="/register" class="btn border-danger shadow-sm" style="background-image: url(&quot;assets/img/login/button2.png&quot;);width: 163px;height: 36px;background-repeat: no-repeat;background-size: auto;background-position: center;font-size: 16px;font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);">
+                INSCRIPTION
+            </a>
+        </div>
+    </div>
+
+    <div class="d-xl-flex justify-content-xl-center overlay" style="margin-top: 359px;padding-bottom: 360px;">
+
+        <form action="" method="POST">
+            <input class="border rounded shadow-sm form-control-lg" type="text" style="z-index: 999; color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 18px;width: 235px;height: 35px;"
+                   required name="username" placeholder="Mail">
+            <input class="border rounded shadow-sm form-control-lg" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 18px;width: 235px;height: 35px;"
+                   required name="password" placeholder="Mot de passe">
+            <button class="btn shadow-sm" type="submit" style="background-image: url(&quot;assets/img/login/button2.png&quot;);width: 200px;height: 36px;background-repeat: no-repeat;background-size: cover;background-position: center;font-size: 16px;font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);">
+                START SYSTEM
+            </button>
+        </form>
+    </div>
+
+    <div class="container d-xl-flex my-auto justify-content-xl-center align-items-xl-center text-center"
+         style="background-repeat: no-repeat;background-position: center;background-size: contain;padding-right: 0px;padding-left: 986px;">
+        </div>
+    </header>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+</body>
+
+</html>

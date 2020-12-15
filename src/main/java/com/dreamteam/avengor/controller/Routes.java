@@ -23,4 +23,9 @@ public class Routes {
         return "register";
     }
 
+    @GetMapping("/incident")
+    public String incident() {
+        return "incident";
+    }
+
 }

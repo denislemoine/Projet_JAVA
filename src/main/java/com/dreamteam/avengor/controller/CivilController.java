@@ -16,6 +16,7 @@ import java.util.List;
 
 @Controller
 public class CivilController {
+    /*
     private List<CivilsModel> listeCivils = new ArrayList<>();
 
     @GetMapping("/civilslist")
@@ -31,4 +32,6 @@ public class CivilController {
 
         return "CivilsList";
     }
+
+     */
 }

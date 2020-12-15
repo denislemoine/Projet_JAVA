@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Arrays;
 import java.util.List;
 
-@Controller
+/*@Controller
 public class SuperHerosController {
 
     private int id_SuperHeros;
@@ -91,4 +91,4 @@ public class SuperHerosController {
 
 
 
-}
+}*/

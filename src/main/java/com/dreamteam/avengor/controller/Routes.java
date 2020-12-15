@@ -18,4 +18,9 @@ public class Routes {
         return "login";
     }
 
+    @GetMapping("/register")
+    public String register() {
+        return "register";
+    }
+
 }

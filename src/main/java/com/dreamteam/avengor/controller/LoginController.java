@@ -22,16 +22,6 @@ public class LoginController {
     @Value("${welcome.message}")
     private String message;
 
-    @GetMapping("/")
-    public String showForm() {
-        return "welcome";
-    }
-
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
-
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginPage(@RequestParam(value = "error", required = false) String error,
                             @RequestParam(value = "logout", required = false) String logout,

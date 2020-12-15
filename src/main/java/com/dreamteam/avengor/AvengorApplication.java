@@ -22,7 +22,7 @@ public class AvengorApplication {
 			ResultSet resultSet = statement.executeQuery("select * from TRef");
 			while (resultSet.next()){
 				System.out.println("id_TRef:" +resultSet.getInt("id_TRef"));
-				System.out.println("id_TRef:" +resultSet.getString("TypeRef"));
+				System.out.println("TypeRef:" +resultSet.getString("TypeRef"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

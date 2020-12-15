@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.core.Ordered;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -15,23 +17,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 
 @Controller
 @RequestMapping
-public class LoginController {
+@EnableWebMvc
+@ComponentScan("org.springframework.security.samples.mvc")
+public class LoginController extends WebMvcConfigurerAdapter {
 
     @Value("${welcome.message}")
     private String message;
 
-    @RequestMapping("/home")
+    @RequestMapping("/")
     public ModelAndView defaultHome() {
         return new ModelAndView("welcome");
     }
 
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/login").setViewName("login");
+        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
+    }
+
     @GetMapping("/login")
     String login() {
-        return "login";
+        return "welcome";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)

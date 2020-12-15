@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-public class SuperHerosController() {
+public class SuperHerosController {
 
     private int id_SuperHeros;
     private String Nom;

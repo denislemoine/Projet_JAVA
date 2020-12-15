@@ -44,19 +44,19 @@ public class OrganisationModel {
     }
 
     public String getAdresse() {
-        return Adresse;
+        return adresse;
     }
 
     public void setAdresse(String adresse) {
-        Adresse = adresse;
+        adresse = adresse;
     }
 
     public int getDirigeant() {
-        return Dirigeant;
+        return dirigeant;
     }
 
     public void setDirigeant(int dirigeant) {
-        Dirigeant = dirigeant;
+        dirigeant = dirigeant;
     }
 
     public String getCommentaire() {

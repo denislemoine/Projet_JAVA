@@ -47,10 +47,6 @@ public class Routes {
         return "incident";
     }
 
-    @GetMapping("/civilslist")
-    public String civilslist() {
-        return "civilslist";
-    }
 
     //===================================================================================
     //                                                                                  =

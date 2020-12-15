@@ -32,7 +32,7 @@ public class CivilsModel {
         this.encrytedPassword = encrytedPassword;
     }
 
-    public int getId_Civil(int id_Civil){
+    public int getId_Civil(){
         return id_Civil;
     }
 
@@ -40,7 +40,7 @@ public class CivilsModel {
         this.id_Civil = id_Civil;
     }
 
-    public String getNom(String nom){
+    public String getNom(){
         return nom;
     }
 
@@ -48,7 +48,7 @@ public class CivilsModel {
         this.nom = nom;
     }
 
-    public String getPrenom(String prenom){
+    public String getPrenom(){
         return prenom;
     }
 
@@ -56,7 +56,7 @@ public class CivilsModel {
         this.prenom = prenom;
     }
 
-    public String getCivilite(String civilite){
+    public String getCivilite(){
         return civilite;
     }
 
@@ -64,7 +64,7 @@ public class CivilsModel {
         this.civilite = civilite;
     }
 
-    public String getAdresse(String adresse){
+    public String getAdresse(){
         return adresse;
     }
 
@@ -72,7 +72,7 @@ public class CivilsModel {
         this.adresse = adresse;
     }
 
-    public String getEmail(String email){
+    public String getEmail(){
         return email;
     }
 
@@ -80,14 +80,14 @@ public class CivilsModel {
         this.email = email;
     }
 
-    public String getTel(String tel){
+    public String getTel(){
         return tel;
     }
 
     public void setTel(String tel){
         this.tel = tel;
     }
-    public Date getDateDeNaissance(Date dateDeNaissance){
+    public Date getDateDeNaissance(){
         return dateDeNaissance;
     }
 
@@ -95,7 +95,7 @@ public class CivilsModel {
         this.dateDeNaissance = dateDeNaissance;
     }
 
-    public String getencrytedPassword(String encrytedPassword){
+    public String getencrytedPassword(){
         return encrytedPassword;
     }
 

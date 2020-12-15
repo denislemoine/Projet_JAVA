@@ -17,34 +17,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
 
 @Controller
 @RequestMapping
-@EnableWebMvc
-@ComponentScan("org.springframework.security.samples.mvc")
-public class LoginController extends WebMvcConfigurerAdapter {
+public class LoginController {
 
     @Value("${welcome.message}")
     private String message;
 
-    @RequestMapping("/")
-    public ModelAndView defaultHome() {
-        return new ModelAndView("welcome");
-    }
-
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/login").setViewName("login");
-        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
+    @GetMapping("/")
+    public String showForm() {
+        return "welcome";
     }
 
     @GetMapping("/login")
-    String login() {
-        return "welcome";
+    public String login() {
+        return "login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)

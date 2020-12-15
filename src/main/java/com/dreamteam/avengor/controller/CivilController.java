@@ -27,7 +27,7 @@ public class CivilController {
         listeCivils.add(civil1);
         listeCivils.add(civil2);
 
-        model.addAttribute("civils",listeCivils);
+        model.addAttribute("civilian",listeCivils);
 
         return "CivilsList";
     }

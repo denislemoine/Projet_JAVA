@@ -24,14 +24,14 @@ private String Email;
 private String Tel;
 private String Nationalité;
 private Date DateDeNaissance;
-private String encrytedMotDePasse;
+private String encrytedPassword;
 
     public CivilController() {
 
     }
 
     public CivilController(int id_Civil,String Nom,String Prenom,String Civilite,String Adresse,String Email,String Tel,//
-                           Date DateDeNaissance, String encrytedMotDePasse){
+                           Date DateDeNaissance, String encrytedPassword){
         super();
         this.id_Civil = id_Civil;
         this.Nom = Nom;
@@ -41,7 +41,7 @@ private String encrytedMotDePasse;
         this.Email = Email;
         this.Tel = Tel;
         this.DateDeNaissance = DateDeNaissance;
-        this.encrytedMotDePasse = encrytedMotDePasse;
+        this.encrytedPassword = encrytedPassword;
     }
 
     public int getId_Civil(int id_Civil){
@@ -107,11 +107,11 @@ private String encrytedMotDePasse;
         this.DateDeNaissance = DateDeNaissance;
     }
 
-    public String getencrytedMotDePasse(String encrytedMotDePasse){
-        return encrytedMotDePasse;
+    public String getencrytedPassword(String encrytedPassword){
+        return encrytedPassword;
     }
 
-    public void setencrytedMotDePasse(String encrytedMotDePasse){
-        this.encrytedMotDePasse = encrytedMotDePasse;
+    public void setencrytedPassword(String encrytedPassword){
+        this.encrytedPassword = encrytedPassword;
     }
 }

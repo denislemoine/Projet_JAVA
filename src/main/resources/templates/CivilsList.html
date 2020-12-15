@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Civils List</title>
+</head>
+<body>
+    <h1>Liste des civils</h1>
+    <div th:each="civilList:${civils}">
+        <p th:text="${civilList.Nom}"></p>
+    </div>
+</body>
+</html>

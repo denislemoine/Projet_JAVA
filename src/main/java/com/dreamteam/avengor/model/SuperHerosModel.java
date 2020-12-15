@@ -10,7 +10,7 @@ public class SuperHerosModel {
     private String Commentaire;
 
     public SuperHerosModel(){
-        
+
     }
 
     public SuperHerosModel(int id_SuperHeros,String Nom,int IdentiteSecrete,String Pouvoir,String PointFaible,Float Score,String Commentaire){

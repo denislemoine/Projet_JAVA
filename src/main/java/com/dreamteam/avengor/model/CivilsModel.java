@@ -1,6 +1,9 @@
 package com.dreamteam.avengor.model;
 
+import com.dreamteam.avengor.database.Db;
+
 import java.util.Date;
+import java.util.List;
 
 public class CivilsModel {
     private int id_Civil;
@@ -101,5 +104,9 @@ public class CivilsModel {
 
     public void setencrytedPassword(String encrytedPassword){
         this.encrytedPassword = encrytedPassword;
+    }
+
+    public static List<CivilsModel> getAllCivils(){
+        return Db.getAllCivil();
     }
 }

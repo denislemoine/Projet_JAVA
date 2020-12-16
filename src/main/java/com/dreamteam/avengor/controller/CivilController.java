@@ -19,14 +19,10 @@ public class CivilController {
 
     private List<CivilsModel> listeCivils = new ArrayList<>();
 
-    @GetMapping("/resgister")
+    @GetMapping("/civil")
     public String showCivilList(Model model){
 
-        CivilsModel civil1 = new CivilsModel(1,"Dupont",null,null,null,null,null,null,null);
-        CivilsModel civil2 = new CivilsModel(2,"Dupuit",null,null,null,null,null,null,null);
-
-        listeCivils.add(civil1);
-        listeCivils.add(civil2);
+        listeCivils = CivilsModel.getAllCivils();
 
         model.addAttribute("civilian",listeCivils);
 

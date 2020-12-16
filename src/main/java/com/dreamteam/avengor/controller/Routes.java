@@ -48,19 +48,19 @@ public class Routes {
     }
 
     @GetMapping("/admin")
-    public String SuperUserHome(){ return new AdminController().adminHome();}
+    public String SuperUserHome(){ return "panelAdmin/admin";}
 
     @GetMapping("/admin/missions")
-    public String SuperUserMission(){ return new AdminController().adminMission();}
+    public String SuperUserMission(){ return "panelAdmin/missions";}
 
     @GetMapping("/admin/crise")
-    public String SuperUserCrise(){ return new AdminController().adminCrise();}
+    public String SuperUserCrise(){ return "panelAdmin/crise";}
 
     @GetMapping("/admin/accounts")
-    public String SuperUserAccount(){ return new AdminController().adminAccounts();}
+    public String SuperUserAccount(){ return "panelAdmin/accounts";}
 
     @GetMapping("/admin/organisation")
-    public String SuperUserOrga(){ return new AdminController().adminOrganisation();}
+    public String SuperUserOrga(){ return "panelAdmin/organisations";}
 
 
 

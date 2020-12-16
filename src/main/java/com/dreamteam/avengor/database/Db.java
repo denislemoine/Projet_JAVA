@@ -92,8 +92,8 @@ public class Db {
             Connection con = DriverManager.getConnection(url,userName,password);
 
             PreparedStatement statement = con.prepareStatement
-                        ("insert to Incidents (Adresse,TypeIncident,id_Civils,Ennemis,InfoComplementaire) " +
-                                "value = (?,?,?,?,?,?)");
+                        ("INSERT INTO Incidents (Adresse,TypeIncident,id_Civils,Ennemis,InfoComplementaire) " +
+                                "VALUES (?,?,?,?,?)");
             statement.setString(1,incidentModel.getAdresse());
             statement.setInt(2,incidentModel.getTypeIncident());
             statement.setInt(3,incidentModel.getId_Civils());

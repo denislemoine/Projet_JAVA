@@ -8,7 +8,7 @@ public class IncidentModel{
     private int TypeIncident;
     private int id_Civils;
     private int Ennemis;
-    private int Mission;
+    private Integer Mission;
     private String InfoComplementaire;
 
 
@@ -56,7 +56,7 @@ public class IncidentModel{
 
             Statement statement = con.createStatement();
             ResultSet resultSet = statement.executeQuery("select MAX(id_Incidents) as LastID from Incidents");
-            System.out.println(resultSet);
+//            System.out.println(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }

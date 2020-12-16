@@ -14,6 +14,7 @@ import com.dreamteam.avengor.database.Db;
 import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.constraints.Null;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +23,7 @@ import java.util.List;
 public class IncidentController {
 
     @RequestMapping(value="/incident", method = RequestMethod.POST)
-    public String addIncident(WebRequest request, IncidentModel incidentModel){
+    public String addIncident(WebRequest request) throws ParseException {
         
         
         String Adresse = request.getParameter("Adresse");
@@ -31,9 +32,9 @@ public class IncidentController {
         int Ennemis = Integer.parseInt(request.getParameter("Ennemis"));
         String InfoComplementaire = request.getParameter("InfoComplementaire");
         
-        IncidentModel incident = new IncidentModel(0,Adresse,TypeIncident,id_Civils,Ennemis,null,InfoComplementaire);
+        IncidentModel incident = new IncidentModel(1,Adresse,TypeIncident,id_Civils,Ennemis,null,InfoComplementaire);
         Db.saveIncident(incident);
-        return "/";
+        return "redirect:/interface";
     }
 
     @GetMapping("/incident")

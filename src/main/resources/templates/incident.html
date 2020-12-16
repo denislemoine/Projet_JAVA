@@ -1,25 +1,82 @@
-<!DOCTYPE html>
-<html lang="fr">
+<!DOCTYPE HTML>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Inscription</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Avengor - Interface</title>
+
+    <link rel="icon" type="image/png" th:href="@{/assets/img/logo.png}" />
+
+    <link rel="stylesheet" th:href="@{/assets/bootstrap/interface/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}">
 </head>
-<body>
 
-<label for="Adresse">Adresse</label>
-<input type="text" id="Adresse" name="Adresse"/>
-<label for="incident">Type d'incident</label>
-<input type="text" id="incident" name="TypeIncident"/>
-<label for="ennemi">Super vilains</label>
-<input type="text" id="ennemi" name="Ennemis"/>
-<label for="info">Complement d'informations</label>
-<input type="text" id="info" name="InfoComplementaire"/>
+<body class="d-flex" id="page-top">
+<header class="d-flex masthead" style="background-size: contain;background-position: center;background-color: #242424;background-repeat: no-repeat;background-image: url(&quot;assets/img/interface/bginterface.png&quot;);">
+    <div class="container d-flex d-xl-flex flex-column justify-content-center align-items-center align-content-center justify-content-xl-start align-items-xl-center" style="margin-right: 0px;margin-left: 253px;margin-top: 141px;height: 529px;">
+        <div class="d-flex d-xl-flex justify-content-center align-items-center align-content-center justify-content-xl-center align-items-xl-center" style="margin-top: -29px;">
+            <div class="d-flex flex-column">
 
-<br>
-<br>
+                <a class="btn border-dark shadow" role="button" style="background-repeat: no-repeat;font-size: 18px;font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);background-image: url(&quot;assets/img/interface/button.png&quot;);background-position: center;background-size: cover;margin-top: 0px;font-weight: normal;padding-bottom: 0px;height: 41px;width: 205px;"
+                   href="civil">CIVIL</a>
+                <a class="btn border-dark shadow" role="button" style="background-repeat: no-repeat;font-size: 18px;font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);background-image: url(&quot;assets/img/interface/button.png&quot;);background-position: center;background-size: cover;margin-top: 0px;font-weight: normal;padding-bottom: 0px;height: 41px;width: 205px;"
+                   href="hero">SUPER HERO</a>
+                <a class="btn border-dark shadow" role="button" style="background-repeat: no-repeat;font-size: 18px;font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);background-image: url(&quot;assets/img/interface/button.png&quot;);background-position: center;background-size: cover;margin-top: 0px;font-weight: normal;padding-bottom: 0px;height: 41px;width: 205px;"
+                   href="vilain">SUPER VILAIN</a>
+                <a class="btn border-dark shadow" role="button" style="background-repeat: no-repeat;font-size: 18px;font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);background-image: url(&quot;assets/img/interface/button.png&quot;);background-position: center;background-size: cover;margin-top: 0px;font-weight: normal;padding-bottom: 0px;height: 41px;width: 205px;"
+                   href="mission">MISSIONS</a>
+                <a class="btn border-dark shadow" role="button" style="background-repeat: no-repeat;font-size: 18px;font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);background-image: url(&quot;assets/img/interface/button.png&quot;);background-position: center;background-size: cover;margin-top: 0px;font-weight: normal;padding-bottom: 0px;height: 41px;width: 205px;"
+                   href="incident">INCIDENTS</a>
+                <a class="btn border-dark shadow" role="button" style="background-repeat: no-repeat;font-size: 18px;font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);background-image: url(&quot;assets/img/interface/button.png&quot;);background-position: center;background-size: cover;margin-top: 0px;font-weight: normal;padding-bottom: 0px;height: 41px;width: 205px;"
+                   href="organisation">ORGANISATIONS</a>
+                <a class="btn border-dark shadow" role="button" style="background-repeat: no-repeat;font-size: 18px;font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);background-image: url(&quot;assets/img/interface/button.png&quot;);background-position: center;background-size: cover;margin-top: 0px;font-weight: normal;padding-bottom: 0px;height: 41px;width: 205px;"
+                   href="satisfaction">SATISFACTION</a>
+                <a class="btn border-dark shadow" role="button" style="background-repeat: no-repeat;font-size: 18px;font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);background-image: url(&quot;assets/img/interface/button.png&quot;);background-position: center;background-size: cover;margin-top: 0px;font-weight: normal;padding-bottom: 0px;height: 41px;width: 205px;"
+                   href="litige">LITIGES</a>
+                <a class="btn border-dark shadow" role="button" style="background-repeat: no-repeat;font-size: 18px;font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);background-image: url(&quot;assets/img/interface/button.png&quot;);background-position: center;background-size: cover;margin-top: 0px;font-weight: normal;padding-bottom: 0px;height: 41px;width: 205px;"
+                   href="crise">CRISES</a>
+                <a class="btn border-dark shadow" role="button" style="background-repeat: no-repeat;font-size: 18px;font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);background-image: url(&quot;assets/img/interface/button.png&quot;);background-position: center;background-size: cover;margin-top: 0px;font-weight: normal;padding-bottom: 0px;height: 41px;width: 205px;"
+                   href="roles">GESTION PRIVILEGES</a>
+                <a class="btn border-dark shadow" role="button" style="background-repeat: no-repeat;font-size: 18px;font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);background-image: url(&quot;assets/img/interface/button.png&quot;);background-position: center;background-size: cover;margin-top: 0px;font-weight: normal;padding-bottom: 0px;height: 41px;width: 205px;"
+                   href="admin">PANEL ADMIN</a>
+                <a class="btn border-dark shadow" role="button" style="background-repeat: no-repeat;font-size: 18px;font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);background-image: url(&quot;assets/img/interface/button.png&quot;);background-position: center;background-size: cover;margin-top: 0px;font-weight: normal;padding-bottom: 0px;height: 41px;width: 205px;"
+                   href="settings">PARAMETRES</a>
 
-<div class="form-actions">
-    <button type="submit" class="btn">Envoyer incident</button>
-</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid border rounded-0 border-dark shadow d-flex d-xl-flex flex-column justify-content-center align-items-center align-content-center justify-content-xl-start align-items-xl-center" style="margin-right: 183px;margin-top: -47px;margin-left: 45px;filter: brightness(100%);">
+        <div class="d-flex d-xl-flex justify-content-center align-items-center align-content-center justify-content-xl-center align-items-xl-center" style="background-repeat: no-repeat;background-size: auto;background-position: center;width: 918px;opacity: 1;filter: grayscale(0%) hue-rotate(0deg) invert(0%) saturate(100%);height: 899px;margin: -1px;">
+            <div class="d-flex flex-column" style="margin-right: 61px;">
+                <h4 class="text-white">Enregistrer un incident</h4>
+                <form action="/incident" class="form" method="post">
+                    <input class="border rounded shadow-sm" type="text" required="" name="Adresse" placeholder="Adresse">
+                    <br>
+                    <input class="border rounded shadow-sm" type="number" required="" name="TypeIncident" placeholder="TypeIncident">
+                    <br>
+                    <input class="border rounded shadow-sm" type="number" required="" name="id_Civils" placeholder="id_Civils">
+                    <br>
+                    <input class="border rounded shadow-sm" type="number" required="" name="Ennemis" placeholder="Ennemis">
+                    <br>
+                    <input class="border rounded shadow-sm" type="text" required="" name="InfoComplementaire" placeholder="Infos complémentaire">
+                    <br>
+                    <button class="btn btn-danger mt-3">Enregistrer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <a class="btn border-danger shadow-sm" role="button" style="background-repeat: no-repeat;font-size: 18px;font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);background-image: url(&quot;assets/img/login/button2.png&quot;);background-position: center;background-size: contain;margin-left: 0px;margin-top: 0px;margin-right: 81px;padding-top: 9px;font-weight: normal;padding-bottom: 0px;padding-left: 75px;height: 39px;padding-right: 19px;" href="logout">DISCONNECT</a></header>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script th:src="@{/assets/js/register.js}"></script>
 </body>
+
 </html>

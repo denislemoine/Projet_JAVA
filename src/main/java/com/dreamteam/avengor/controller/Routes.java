@@ -51,7 +51,7 @@ public class Routes {
     public String SuperUser(){ return new AdminController().adminHome();}
     //===================================================================================
     //                                                                                  =
-    //                              POST METHODS                                        =
+    //                              POST / GET METHODS                                        =
     //                                                                                  =
     //===================================================================================
 

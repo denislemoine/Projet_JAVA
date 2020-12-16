@@ -1,43 +1,62 @@
-<!DOCTYPE html>
-<html lang="fr">
+<!DOCTYPE HTML>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Inscription</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Avengor - Inscription</title>
+
+    <link rel="icon" type="image/png" th:href="@{/assets/img/logo.png}" />
+
+    <link rel="stylesheet" th:href="@{/assets/bootstrap/register/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}">
 </head>
-<body>
-<label for="username">Username</label>
-<input type="text" id="username" name="username"/>
-<label for="password">Password</label>
-<input type="password" id="password" name="password"/>
-<label for="prenom">Prenom</label>
-<input type="text" id="prenom" name="prenom"/>
-<label for="nom">Nom</label>
-<input type="text" id="Nom" name="Nom"/>
-<label for="Adresse">Adresse</label>
-<input type="text" id="Adresse" name="Adresse"/>
-<label for="email">Email</label>
-<input type="text" id="Email" name="Email"/>
-<label for="Tel">Tel</label>
-<input type="text" id="Tel" name="Tel"/>
-<label for="Nationalite">Nationalité</label>
-<input type="text" id="Nationalite" name="Nationalite"/>
-<label for="DateDeNaissance">Date de Naissance</label>
-<input type="Date" id="DateDeNaissance" name="DateDeNaissance"/>
-<br>
-<br>
-<label>Super Heros</label>
-<br>
-<label for="identite"> Identité  Secrete</label>
-<input type="text" id="identite" name="identite"/>
-<label for="pouvoir">Pouvoir</label>
-<input type="text" id="pouvoir" name="pouvoir"/>
-<label for="pointFaible">Point Faible</label>
-<input type="text" id="pointFaible" name="pointFaible"/>
-<label for="score">score</label>
-<input type="text" id="score" name="score"/>
-<br>
-<div class="form-actions">
-    <button type="submit" class="btn">Inscription</button>
-</div>
+
+<body class="d-flex" id="page-top">
+<header class="d-flex masthead" style="background-size: contain;background-position: center;background-color: #242424;background-repeat: no-repeat;background-image: url(&quot;/assets/img/register/register.png&quot;);">
+    <div class="container d-flex d-xl-flex flex-column justify-content-center align-items-center align-content-center justify-content-xl-start align-items-xl-center" style="margin-right: 0px;margin-left: 407px;">
+        <div class="d-flex" style="margin-bottom: 45px;">
+
+            <span style="color: rgb(255,255,255);margin-right: 18px;font-size: 30px;letter-spacing: 9px;font-family: 'Source Sans Pro', sans-serif;">CIVIL</span>
+            <input class="custom-range border-danger d-flex d-xl-flex" type="range" name="isHero" value="0" min="0" max="1" required="" style="width: 62px;">
+            <span style="color: rgb(209,0,0);margin-right: 0px;font-size: 30px;letter-spacing: 9px;font-family: 'Source Sans Pro', sans-serif;margin-left: 18px;">SUPER HERO</span>
+
+        </div>
+        <div class="d-flex d-xl-flex justify-content-center align-items-center align-content-center justify-content-xl-center align-items-xl-center">
+            <div class="d-flex flex-column" style="margin-right: 61px;"><input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
+                                                                               required="" name="nom" placeholder="Nom"><input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
+                                                                                                                               required="" name="prenom" placeholder="Prénom"><input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
+                                                                                                                                                                                     required="" name="mail" placeholder="Mail"><input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
+                                                                                                                                                                                                                                       required="" name="tel" placeholder="Téléphone"><input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
+                                                                                                                                                                                                                                                                                             required="" name="nationalite" placeholder="Nationalité"><input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
+                                                                                                                                                                                                                                                                                                                                                             required="" name="birth" placeholder="Date de Naissance"><input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
+                                                                                                                                                                                                                                                                                                                                                                                                                             required="" name="password" placeholder="Mot de Passe"><input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           required="" name="adresse" placeholder="Adresse"></div>
+            <div class="d-flex d-xl-flex flex-column" style="margin-right: 55px;"><input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
+                                                                                         required="" name="super_name" placeholder="Nom de Super Héro"><input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
+                                                                                                                                                              required="" name="super_idsec" placeholder="Identité Secrète"><input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
+                                                                                                                                                                                                                                   required="" name="super_pouvoir" placeholder="Pouvoir"><input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
+                                                                                                                                                                                                                                                                                                 required="" name="super_pfaible" placeholder="Point Faible">
+                <div class="d-flex justify-content-xl-center align-items-xl-center" style="margin-bottom: 45px;margin-top: 137px;"><span style="color: rgb(255,255,255);margin-right: 18px;font-size: 20px;letter-spacing: 0px;font-family: 'Source Sans Pro', sans-serif;">HOMME</span><input class="custom-range border-danger d-flex d-xl-flex" type="range" name="isHero"
+                                                                                                                                                                                                                                                                                               value="0" min="0" max="1" required="" style="width: 30px;"><span style="color: rgb(209,0,0);margin-right: 0px;font-size: 20px;letter-spacing: 0px;font-family: 'Source Sans Pro', sans-serif;margin-left: 18px;">FEMME</span></div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn overlay border-danger shadow-sm" type="submit" style="width: 400px!important;height: 45px;background-repeat: no-repeat;font-size: 18px;
+    font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);background-image: url(&quot;/assets/img/register/Groupe%201497@2x.png&quot;);
+    background-position: center;background-size: cover;margin-left: 106px
+    ;margin-top: 480px;margin-right: 9px;padding-top: 6px;font-weight: normal;padding-bottom: 0px;padding-left: 30px;">CREER MON PROFIL</button>
+
+    </header>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script th:src="@{/assets/js/register.js}"></script>
 </body>
+
 </html>

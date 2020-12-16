@@ -19,7 +19,7 @@ public class CivilController {
 
     private List<CivilsModel> listeCivils = new ArrayList<>();
 
-    @GetMapping("/civilslist")
+    @GetMapping("/resgister")
     public String showCivilList(Model model){
 
         CivilsModel civil1 = new CivilsModel(1,"Dupont",null,null,null,null,null,null,null);

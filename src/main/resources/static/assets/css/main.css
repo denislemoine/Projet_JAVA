@@ -1,3 +1,15 @@
 body {
     overflow: hidden;
 }
+
+.custom-range::-webkit-slider-thumb {
+  background: rgb(209,0,0);
+}
+
+.custom-range::-moz-range-thumb {
+  background: rgb(209,0,0);
+}
+
+.custom-range::-ms-thumb {
+  background: rgb(209,0,0);
+}

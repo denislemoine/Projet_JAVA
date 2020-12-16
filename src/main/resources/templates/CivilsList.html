@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Liste des civils</h1>
-    <div th:each="civilList:${civilian}">
+    <div th:each="civilList : ${civilian}">
         <p th:text="${civilList.getNom()}"></p>
     </div>
 </body>

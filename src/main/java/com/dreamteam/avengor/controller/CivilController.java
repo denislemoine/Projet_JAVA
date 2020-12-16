@@ -49,7 +49,7 @@ public class CivilController {
         String dateDeNaissance = request.getParameter("birth");
         String password = request.getParameter("password");
 
-        if (request.getParameter("isHero") == "1"){
+        if (request.getParameter("isHero") == "0"){
 
         }
         String civ = null;

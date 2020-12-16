@@ -2,6 +2,7 @@ package com.dreamteam.avengor.database;
 
 import com.dreamteam.avengor.model.CivilsModel;
 import com.dreamteam.avengor.model.IncidentModel;
+import com.dreamteam.avengor.model.SuperHerosModel;
 
 
 import java.sql.*;
@@ -45,6 +46,33 @@ public class Db {
                 statement.setDate(7, birth);
                 statement.setString(8,civilsModel.getencrytedPassword());
                 statement.setString(9,civilsModel.getNationalite());
+                statement.execute();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void saveHero(SuperHerosModel superHerosModel){
+
+        String url="jdbc:mysql://185.31.40.53:3306/avengor_db";
+        String userName="avengor_paul";
+        String password ="avengor76";
+        try {
+            Connection con = DriverManager.getConnection(url,userName,password);
+
+            //creation d'un civils
+            if(superHerosModel.getId_SuperHeros() != 0){
+                PreparedStatement statement = con.prepareStatement
+                        ("INSERT INTO Super-heros (Nom, IdentitéSecretes, Pouvoir, Point-faible, , Commentaire) " +
+                                "VALUES (?, ?, ?, ?, ?, ?)");
+                statement.setString(1,superHerosModel.getNom());
+                statement.setInt(2,superHerosModel.getIdentiteSecrete());
+                statement.setString(3,superHerosModel.getPouvoir());
+                statement.setString(4,superHerosModel.getPointFaible());
+                statement.setFloat(5,superHerosModel.getScore());
+                statement.setString(6,superHerosModel.getCommentaire());
                 statement.execute();
             }
 

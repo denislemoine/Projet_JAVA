@@ -35,8 +35,8 @@ public class Db {
             if(civilsModel.getId_Civil() != 0){
                 Date birth = new SimpleDateFormat("dd/MM/yyyy").parse(civilsModel.getDateDeNaissance());
                 PreparedStatement statement = con.prepareStatement
-                        ("insert to civilsModel (Nom,Prenom,Civilite,Adresse,Email,Tel,DateDeNaissance,Password,Nationalite) "+
-                                "value = (?,?,?,?,?,?,?,?)");
+                        ("insert into Civils (Nom,Prenom,Civilite,Adresse,Email,Tel,DateDeNaissance,Password,Nationalite) "+
+                                "values = (?,?,?,?,?,?,?,?,?)");
                 statement.setString(1,civilsModel.getNom());
                 statement.setString(2,civilsModel.getPrenom());
                 statement.setString(3,civilsModel.getCivilite());

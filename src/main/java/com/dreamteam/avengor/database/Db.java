@@ -28,13 +28,12 @@ public class Db {
             //Si un civil exist déjà
             if(civilsModel.getId_Civil() != 0){
                 PreparedStatement statement = con.prepareStatement
-                        ("insert to civilsModel () value = (?)");
+                        ("insert to civilsModel (nom) value = (?), (prenom) value = (?), (civilite) value = (?), (prenom) value = (?), (adresse) value = (?)," +
+                                " (email) value = (?), (tel) value = (?), (nationalité) value = (?), (dateDeNaissance) value = (?), (encrytedPassword) value = (?) ");
                 statement.setString(1,civilsModel.getNom());
                 statement.setInt(2,civilsModel.getId_Civil());
                 statement.execute();
             }
-
-
 
         } catch (SQLException e) {
             e.printStackTrace();

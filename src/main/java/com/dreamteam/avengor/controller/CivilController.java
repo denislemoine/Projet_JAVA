@@ -59,9 +59,9 @@ public class CivilController {
 
 
 
-        CivilsModel civilsModel1 = new CivilsModel(0,nom,prenom,civ,adresse,email,tel,dateDeNaissance,password, nationalite);
+        CivilsModel civilsModel1 = new CivilsModel(1,nom,prenom,civ,adresse,email,tel,dateDeNaissance,password, nationalite);
         Db.saveCivil(civilsModel1);
-        return "/login";
+        return "redirect:/login";
     }
 
 }

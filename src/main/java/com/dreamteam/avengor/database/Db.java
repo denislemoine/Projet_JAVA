@@ -8,7 +8,6 @@ import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Db {
@@ -33,23 +32,23 @@ public class Db {
 
             //creation d'un civils
             if(civilsModel.getId_Civil() != 0){
-                Date birth = new SimpleDateFormat("dd/MM/yyyy").parse(civilsModel.getDateDeNaissance());
+                Date birth = Date.valueOf(civilsModel.getDateDeNaissance());
                 PreparedStatement statement = con.prepareStatement
-                        ("insert into Civils (Nom,Prenom,Civilite,Adresse,Email,Tel,DateDeNaissance,Password,Nationalite) "+
-                                "values = (?,?,?,?,?,?,?,?,?)");
+                        ("INSERT INTO Civils (Nom, Prenom, Civilite, Adresse, Email, Tel, DateDeNaissance, Password, Nationalite) " +
+                                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
                 statement.setString(1,civilsModel.getNom());
                 statement.setString(2,civilsModel.getPrenom());
                 statement.setString(3,civilsModel.getCivilite());
                 statement.setString(4,civilsModel.getAdresse());
                 statement.setString(5,civilsModel.getEmail());
                 statement.setString(6,civilsModel.getTel());
-                statement.setDate(7, (java.sql.Date) birth);
+                statement.setDate(7, birth);
                 statement.setString(8,civilsModel.getencrytedPassword());
                 statement.setString(9,civilsModel.getNationalite());
                 statement.execute();
             }
 
-        } catch (SQLException | ParseException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

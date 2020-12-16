@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.dreamteam.avengor.controller.IncidentController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,10 +43,8 @@ public class Routes {
         return "register";
     }
 
-    @GetMapping("/incident")
-    public String incident() {
-        return "incident";
-    }
+//    @GetMapping("/incident")
+    // Geré dans le controller IncidentController
 
     @GetMapping("/admin")
     public String SuperUserHome(){ return "panelAdmin/admin";}
@@ -57,7 +56,7 @@ public class Routes {
     public String SuperUserCrise(){ return "panelAdmin/crise";}
 
     @GetMapping("/admin/accounts")
-    public String SuperUserAccount(){ return "panelAdmin/accounts";}
+    public String SuperUserAccount(){ return "1panelAdmin/accounts";}
 
     @GetMapping("/admin/organisation")
     public String SuperUserOrga(){ return "panelAdmin/organisations";}

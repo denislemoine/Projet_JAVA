@@ -23,7 +23,6 @@ public class Db {
         String url="jdbc:mysql://185.31.40.53:3306/avengor_db";
         String userName="avengor_paul";
         String password ="avengor76";
-
         try {
             Connection con = DriverManager.getConnection(url,userName,password);
 
@@ -59,20 +58,15 @@ public class Db {
         try {
             Connection con = DriverManager.getConnection(url,userName,password);
 
-            //Si un civil exist déjà
-            if(incidentModel.getId_Incidents() != 0){
-                PreparedStatement statement = con.prepareStatement
-                        ("insert to Incidents () value = (?)");
-                statement.setString(1,incidentModel.getAdresse());
-                statement.setInt(2,incidentModel.getTypeIncident());
-                statement.setInt(3,incidentModel.getId_Civils());
-                statement.setInt(4,incidentModel.getEnnemis());
-                statement.setInt(5,incidentModel.getMission());
-                statement.setString(6,incidentModel.getInfoComplementaire());
-                statement.execute();
-            }
-
-
+            PreparedStatement statement = con.prepareStatement
+                        ("insert to Incidents (Adresse,TypeIncident,id_Civils,Ennemis,InfoComplementaire) " +
+                                "value = (?,?,?,?,?,?)");
+            statement.setString(0,incidentModel.getAdresse());
+            statement.setInt(1,incidentModel.getTypeIncident());
+            statement.setInt(2,incidentModel.getId_Civils());
+            statement.setInt(3,incidentModel.getEnnemis());
+            statement.setString(4,incidentModel.getInfoComplementaire());
+            statement.execute();
 
         } catch (SQLException e) {
             e.printStackTrace();

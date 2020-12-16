@@ -56,8 +56,8 @@ public class Routes {
     @GetMapping("/admin/crise")
     public String SuperUserCrise(){ return "panelAdmin/crise";}
 
-    @GetMapping("/admin/accounts")
-    public String SuperUserAccount(){ return "panelAdmin/accounts";}
+    /*@GetMapping("/admin/accounts")
+    public String SuperUserAccount(){ return "panelAdmin/accounts";}*/
 
     @GetMapping("/admin/organisation")
     public String SuperUserOrga(){ return "panelAdmin/organisations";}

@@ -1,12 +1,18 @@
 package com.dreamteam.avengor.controller;
 
 import com.dreamteam.avengor.model.AdminModel;
+import com.dreamteam.avengor.model.CivilsModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class AdminController {
+
+    private List<CivilsModel> listeCivils = new ArrayList<>();
 
     public String adminHome(){
         String login = "admin"; // a changer par la variable contenant le role de l'utilisateur
@@ -20,10 +26,12 @@ public class AdminController {
     public String adminMission(){
         return "panelAdmin/missions";
     }
-
+    @GetMapping("/admin/accounts")
     public String adminAccounts(Model model){
 
+        listeCivils = CivilsModel.getAllCivils();
 
+        model.addAttribute("civil",listeCivils);
         return "panelAdmin/accounts";
     }
     public String adminCrise(){

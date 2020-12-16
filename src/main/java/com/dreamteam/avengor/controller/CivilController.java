@@ -34,19 +34,20 @@ public class CivilController {
         return "CivilsList";
     }
 
-    @RequestMapping(value="/register", method = RequestMethod.GET)
+    @RequestMapping(value="/register", method = RequestMethod.POST)
     public String addCivils (HttpServletRequest request, CivilsModel civilsModel) {
 
         String nom = request.getParameter("nom");
         String prenom = request.getParameter("prenom");
         int id_Civils = Integer.parseInt(request.getParameter("id_Civils"));
-        String civilite = request.getParameter("civilite");
+        int civilite = Integer.parseInt(request.getParameter("civilite"));
         String adresse = request.getParameter("adresse");
         String email = request.getParameter("mail");
         String tel = request.getParameter("tel");
         String nationalite = request.getParameter("nationalite");
        // String dateDeNaissance = request.getParameter("birth");
         String password = request.getParameter("password");
+
 
         CivilsModel civilsModel1 = new CivilsModel(id_Civils,nom,prenom,civilite,adresse,email,tel,dateDeNaissance,password);
         Db.saveCivil(civilsModel1);

@@ -19,7 +19,6 @@ public class IncidentModel{
     public int getEnnemis()                 {   return Ennemis;              }
     public int getMission()                 {   return Mission;              }
     public String getInfoComplementaire()   {   return InfoComplementaire;   }
-
     // SETTER IncidentModel
     public void setAdresse(String adresse)                       { Adresse = adresse;            }
     public void setTypeIncident(int typeIncident)                { TypeIncident = typeIncident;  }

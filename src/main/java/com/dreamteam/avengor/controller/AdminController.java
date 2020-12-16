@@ -1,10 +1,12 @@
 package com.dreamteam.avengor.controller;
 
+import com.dreamteam.avengor.database.Db;
 import com.dreamteam.avengor.model.AdminModel;
 import com.dreamteam.avengor.model.CivilsModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,14 @@ public class AdminController {
 
         model.addAttribute("civil",listeCivils);
         return "panelAdmin/accounts";
+    }
+    @RequestMapping(value = "/admin/accounts/{id}", method = RequestMethod.GET)
+    public String deleteAccount(@PathVariable("id") int id,Model model){
+
+        CivilsModel civil = Db.findCivilById(id);
+        model.addAttribute("civil",civil);
+        return "panelAdmin/deleteAccount";
+
     }
     public String adminCrise(){
         return "panelAdmin/crise";

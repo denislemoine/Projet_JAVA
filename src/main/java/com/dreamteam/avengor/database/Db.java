@@ -128,4 +128,24 @@ public class Db {
         }
         return civils;
     }
+    public static CivilsModel findCivilById(int id){
+        String url="jdbc:mysql://185.31.40.53:3306/avengor_db";
+        String userName="avengor_paul";
+        String password ="avengor76";
+        List<CivilsModel> civils = new ArrayList<>();
+        try {
+            Connection con = DriverManager.getConnection(url,userName,password);
+
+            //renvoie un civil
+            Statement statement = con.createStatement();
+            ResultSet resultSet = statement.executeQuery("select * from Civils where " + id);
+            CivilsModel civil = new CivilsModel(resultSet.getInt("id_Civil"),resultSet.getString("nom"),resultSet.getString("prenom"),resultSet.getString("civilite"),resultSet.getString("adresse"),
+                    resultSet.getString("email"),resultSet.getString("tel"),resultSet.getString("dateDeNaissance"),null,resultSet.getString("Nationalite"));
+            return civil;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 }

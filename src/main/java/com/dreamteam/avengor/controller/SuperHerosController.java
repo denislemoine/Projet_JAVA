@@ -26,7 +26,7 @@ import java.util.List;
 public class SuperHerosController {
 
 
-    @RequestMapping(value="/register", method = RequestMethod.POST)
+    @RequestMapping(value="/registerHero", method = RequestMethod.POST)
     public String addSuperHero (HttpServletRequest request, SuperHerosModel superHerosModel) throws ParseException {
 
         String nom = request.getParameter("nom");

@@ -55,7 +55,7 @@ public class Db {
     }
     
     // Ajout d'un incident
-    public void saveIncident(IncidentModel incidentModel){
+    public static void saveIncident(IncidentModel incidentModel){
 
         String url="jdbc:mysql://185.31.40.53:3306/avengor_db";
         String userName="avengor_pe";
@@ -67,17 +67,18 @@ public class Db {
             PreparedStatement statement = con.prepareStatement
                         ("insert to Incidents (Adresse,TypeIncident,id_Civils,Ennemis,InfoComplementaire) " +
                                 "value = (?,?,?,?,?,?)");
-            statement.setString(0,incidentModel.getAdresse());
-            statement.setInt(1,incidentModel.getTypeIncident());
-            statement.setInt(2,incidentModel.getId_Civils());
-            statement.setInt(3,incidentModel.getEnnemis());
-            statement.setString(4,incidentModel.getInfoComplementaire());
+            statement.setString(1,incidentModel.getAdresse());
+            statement.setInt(2,incidentModel.getTypeIncident());
+            statement.setInt(3,incidentModel.getId_Civils());
+            statement.setInt(4,incidentModel.getEnnemis());
+            statement.setString(5,incidentModel.getInfoComplementaire());
             statement.execute();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     public static List<CivilsModel> getAllCivil(){
         String url="jdbc:mysql://185.31.40.53:3306/avengor_db";
         String userName="avengor_paul";

@@ -13,3 +13,14 @@ body {
 .custom-range::-ms-thumb {
   background: rgb(209,0,0);
 }
+
+
+input {
+    color: rgb(255,255,255);
+    background-color: rgb(87,87,87);
+    background-repeat: no-repeat;
+    background-size: cover;background-position: center;
+    margin-right: 0px;width: 235px;height: 35px;
+    padding-right: 8px;
+    margin-top: 18px;
+}

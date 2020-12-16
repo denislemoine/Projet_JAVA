@@ -37,7 +37,7 @@ public class AdminController {
         return "panelAdmin/accounts";
     }
     @RequestMapping(value = "/admin/accounts/{id}", method = RequestMethod.GET)
-    public String deleteAccount(@PathVariable("id") int id,Model model){
+    public String deleteAccount(@PathVariable("id") String id,Model model){
 
         CivilsModel civil = Db.findCivilById(id);
         model.addAttribute("civil",civil);

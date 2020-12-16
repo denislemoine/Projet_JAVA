@@ -20,7 +20,7 @@ public class Db {
         this.password = password;
     }
 
-    public void saveCivil(CivilsModel civilsModel){
+    public static void saveCivil(CivilsModel civilsModel){
 
         String url="jdbc:mysql://185.31.40.53:3306/avengor_db";
         String userName="avengor_paul";

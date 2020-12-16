@@ -48,7 +48,7 @@ public class Routes {
     }
 
     @GetMapping("/admin")
-    public String SuperUser(){ return "admin";}
+    public String SuperUser(){ return new AdminController().adminHome();}
     //===================================================================================
     //                                                                                  =
     //                              POST METHODS                                        =

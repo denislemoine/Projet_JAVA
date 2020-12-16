@@ -1,16 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Accounts</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Avengor - Admin User Panel</title>
+
+    <link rel="icon" type="image/png" th:href="@{/assets/img/logo.png}" />
+
+    <link rel="stylesheet" th:href="@{/assets/bootstrap/register/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}">
 </head>
+
 <body>
-    <div>
-        <div>
-            <p>Civilite Nom Prenom</p>
-            <p>Adresse</p>
-            <p>Nationalite</p>
-        </div>
+<div>
+    <div class="list-group" th:each="civilList : ${civil}">
+        <a href="#" class="list-group-item list-group-item-action">
+            <div name="FirstLine" class="d-flex justify-content-around">
+                <p th:text="|${civilList.getId_Civil()}  ${civilList.getCivilite()}.${civilList.getNom()} ${civilList.getPrenom()}|">Civilite Nom Prenom</p>
+                <p>Nationality</p>
+            </div>
+            <div name="SecondLine" class="d-flex justify-content-around">
+                <p th:text="${civilList.getAdresse()}">Adresse</p>
+            </div>
+        </a>
     </div>
+</div>
 </body>
+
 </html>

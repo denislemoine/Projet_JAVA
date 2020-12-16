@@ -5,7 +5,10 @@ import com.dreamteam.avengor.model.IncidentModel;
 
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Db {
@@ -20,7 +23,7 @@ public class Db {
         this.password = password;
     }
 
-    public void saveCivil(CivilsModel civilsModel){
+    public static void saveCivil(CivilsModel civilsModel){
 
         String url="jdbc:mysql://185.31.40.53:3306/avengor_db";
         String userName="avengor_paul";
@@ -30,28 +33,29 @@ public class Db {
 
             //creation d'un civils
             if(civilsModel.getId_Civil() != 0){
+                Date birth = new SimpleDateFormat("dd/MM/yyyy").parse(civilsModel.getDateDeNaissance());
                 PreparedStatement statement = con.prepareStatement
-                        ("insert to civilsModel (nom) value = (?), (prenom) value = (?), (civilite) value = (?), (Id_Civil) value = (?), (adresse) value = (?)," +
-                                " (email) value = (?), (tel) value = (?), (nationalité) value = (?), (dateDeNaissance) value = (?), (encrytedPassword) value = (?); ");
+                        ("insert into Civils (Nom,Prenom,Civilite,Adresse,Email,Tel,DateDeNaissance,Password,Nationalite) "+
+                                "values = (?,?,?,?,?,?,?,?,?)");
                 statement.setString(1,civilsModel.getNom());
                 statement.setString(2,civilsModel.getPrenom());
                 statement.setString(3,civilsModel.getCivilite());
-                statement.setInt(4,civilsModel.getId_Civil());
-                statement.setString(5,civilsModel.getAdresse());
-                statement.setString(6,civilsModel.getEmail());
-                statement.setString(7,civilsModel.getTel());
-                //statement.setDate(8,civilsModel.getDateDeNaissance());
-                statement.setString(9,civilsModel.getencrytedPassword());
+                statement.setString(4,civilsModel.getAdresse());
+                statement.setString(5,civilsModel.getEmail());
+                statement.setString(6,civilsModel.getTel());
+                statement.setDate(7, (java.sql.Date) birth);
+                statement.setString(8,civilsModel.getencrytedPassword());
+                statement.setString(9,civilsModel.getNationalite());
                 statement.execute();
             }
 
-        } catch (SQLException e) {
+        } catch (SQLException | ParseException e) {
             e.printStackTrace();
         }
     }
     
     // Ajout d'un incident
-    public void saveIncident(IncidentModel incidentModel){
+    public static void saveIncident(IncidentModel incidentModel){
 
         String url="jdbc:mysql://185.31.40.53:3306/avengor_db";
         String userName="avengor_pe";
@@ -63,17 +67,18 @@ public class Db {
             PreparedStatement statement = con.prepareStatement
                         ("insert to Incidents (Adresse,TypeIncident,id_Civils,Ennemis,InfoComplementaire) " +
                                 "value = (?,?,?,?,?,?)");
-            statement.setString(0,incidentModel.getAdresse());
-            statement.setInt(1,incidentModel.getTypeIncident());
-            statement.setInt(2,incidentModel.getId_Civils());
-            statement.setInt(3,incidentModel.getEnnemis());
-            statement.setString(4,incidentModel.getInfoComplementaire());
+            statement.setString(1,incidentModel.getAdresse());
+            statement.setInt(2,incidentModel.getTypeIncident());
+            statement.setInt(3,incidentModel.getId_Civils());
+            statement.setInt(4,incidentModel.getEnnemis());
+            statement.setString(5,incidentModel.getInfoComplementaire());
             statement.execute();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     public static List<CivilsModel> getAllCivil(){
         String url="jdbc:mysql://185.31.40.53:3306/avengor_db";
         String userName="avengor_paul";
@@ -87,7 +92,7 @@ public class Db {
             ResultSet resultSet = statement.executeQuery("select * from Civils");
             while(resultSet.next()){
                 CivilsModel civil = new CivilsModel(resultSet.getInt("id_Civil"),resultSet.getString("nom"),resultSet.getString("prenom"),resultSet.getString("civilite"),resultSet.getString("adresse"),
-                        resultSet.getString("email"),resultSet.getString("tel"),resultSet.getDate("dateDeNaissance"),null);
+                        resultSet.getString("email"),resultSet.getString("tel"),resultSet.getString("dateDeNaissance"),null,resultSet.getString("Nationalite"));
                 civils.add(civil);
             }
 

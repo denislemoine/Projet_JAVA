@@ -1,6 +1,6 @@
 package com.dreamteam.avengor.model;
 
-import java.util.Date;
+import java.sql.*;
 
 public class IncidentModel{
     private int id_Incidents;
@@ -10,6 +10,7 @@ public class IncidentModel{
     private int Ennemis;
     private int Mission;
     private String InfoComplementaire;
+
 
     // GETTER IncidentModel
     public int getId_Incidents()            {   return id_Incidents;         }
@@ -30,12 +31,12 @@ public class IncidentModel{
     // CONSTRUCT IncidentModel
     public IncidentModel(
             int id_Incidents
-            ,String Adresse
-            ,int TypeIncident
-            ,int id_Civils
-            ,int Ennemis
-            ,int Mission
-            ,String InfoComplementaire
+            , String Adresse
+            , int TypeIncident
+            , int id_Civils
+            , int Ennemis
+            , Integer Mission
+            , String InfoComplementaire
     ){
         this.id_Incidents = id_Incidents;
         this.Adresse = Adresse;
@@ -44,5 +45,22 @@ public class IncidentModel{
         this.Ennemis = Ennemis;
         this.Mission = Mission;
         this.InfoComplementaire = InfoComplementaire;
+    }
+
+    public static int getLastId(){
+        String url="jdbc:mysql://185.31.40.53:3306/avengor_db";
+        String userName="avengor_pe";
+        String password ="avengor76";
+        try {
+            Connection con = DriverManager.getConnection(url,userName,password);
+
+            Statement statement = con.createStatement();
+            ResultSet resultSet = statement.executeQuery("select MAX(id_Incidents) as LastID from Incidents");
+            System.out.println(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 1;
     }
 }

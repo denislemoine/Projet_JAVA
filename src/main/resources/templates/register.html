@@ -17,7 +17,12 @@
 
 <body class="d-flex" id="page-top">
 <header class="d-flex masthead" style="background-size: contain;background-position: center;background-color: #242424;background-repeat: no-repeat;background-image: url(&quot;/assets/img/register/register.png&quot;);">
-    <div class="container d-flex d-xl-flex flex-column justify-content-center align-items-center align-content-center justify-content-xl-start align-items-xl-center" style="margin-right: 0px;margin-left: 407px;">
+
+
+    <form action="/register" method="POST">
+    <div class="container d-flex d-xl-flex flex-column justify-content-center align-items-center align-content-center justify-content-xl-start align-items-xl-center" style="margin-right: 0px;margin-left: 300px;">
+
+
         <div class="d-flex" style="margin-bottom: 45px;">
 
             <span style="color: rgb(255,255,255);margin-right: 18px;font-size: 30px;letter-spacing: 9px;font-family: 'Source Sans Pro', sans-serif;">CIVIL</span>
@@ -25,6 +30,7 @@
             <span style="color: rgb(209,0,0);margin-right: 0px;font-size: 30px;letter-spacing: 9px;font-family: 'Source Sans Pro', sans-serif;margin-left: 18px;">SUPER HERO</span>
 
         </div>
+
         <div class="d-flex d-xl-flex justify-content-center align-items-center align-content-center justify-content-xl-center align-items-xl-center">
             <div class="d-flex flex-column" style="margin-right: 61px;">
 
@@ -44,34 +50,36 @@
                 <input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
                        required="" name="password" placeholder="Mot de Passe">
                 <input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
-                <!---------->
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           required="" name="adresse" placeholder="Adresse"></div>
+                       required="" name="adresse" placeholder="Adresse"></div>
+
             <div class="d-flex d-xl-flex flex-column" style="margin-right: 55px;">
 
                 <!-- PARTIE SUPER HERO -->
                 <input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
-                       required="" name="super_name" placeholder="Nom de Super Héro">
+                        name="super_name" placeholder="Nom de Super Héro">
                 <input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
-                       required="" name="super_idsec" placeholder="Identité Secrète">
+                        name="super_idsec" placeholder="Identité Secrète">
                 <input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
-                       required="" name="super_pouvoir" placeholder="Pouvoir">
+                        name="super_pouvoir" placeholder="Pouvoir">
                 <input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
-                       required="" name="super_pfaible" placeholder="Point Faible">
-                <div class="d-flex justify-content-xl-center align-items-xl-center" style="margin-bottom: 45px;margin-top: 137px;">
+                        name="super_pfaible" placeholder="Point Faible">
+
+                <div class="d-flex justify-content-xl-center align-items-xl-center" style="margin-bottom: 9px;margin-top: 45px;">
                     <span style="color: rgb(255,255,255);margin-right: 18px;font-size: 20px;letter-spacing: 0px;font-family: 'Source Sans Pro', sans-serif;">HOMME</span>
                     <input class="custom-range border-danger d-flex d-xl-flex" type="range" name="civilite" value="0" min="0" max="1" required="" style="width: 30px;">
                     <span style="color: rgb(209,0,0);margin-right: 0px;font-size: 20px;letter-spacing: 0px;font-family: 'Source Sans Pro', sans-serif;margin-left: 18px;">FEMME</span>
                 </div>
+
+                <button class="btn border-danger shadow-sm" type="submit" style="margin-top: 18px; background-repeat: no-repeat;font-size: 18px;
+                font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);background-image: url(&quot;/assets/img/register/Groupe%201497@2x.png&quot;);
+                background-position: center;background-size: cover; padding-top: 6px;font-weight: normal;padding-bottom: 0px;padding-left: 30px;">CREER MON PROFIL</button>
+
                 <!------------------->
             </div>
         </div>
     </div>
 
-    <button class="btn overlay border-danger shadow-sm" type="submit" style="width: 400px!important;height: 45px;background-repeat: no-repeat;font-size: 18px;
-    font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);background-image: url(&quot;/assets/img/register/Groupe%201497@2x.png&quot;);
-    background-position: center;background-size: cover;margin-left: 106px
-    ;margin-top: 480px;margin-right: 9px;padding-top: 6px;font-weight: normal;padding-bottom: 0px;padding-left: 30px;">CREER MON PROFIL</button>
-
+    </form>
     </header>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

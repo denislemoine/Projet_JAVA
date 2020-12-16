@@ -27,9 +27,9 @@ public class Routes {
     //                                                                                  =
     //===================================================================================
 
-    @GetMapping("/")
-    public String showForm() {
-        return "welcome";
+    @GetMapping("/interface")
+    public String showInterface() {
+        return "interface";
     }
 
     @GetMapping("/login")

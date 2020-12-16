@@ -48,7 +48,22 @@ public class Routes {
     }
 
     @GetMapping("/admin")
-    public String SuperUser(){ return new AdminController().adminHome();}
+    public String SuperUserHome(){ return new AdminController().adminHome();}
+
+    @GetMapping("/admin/missions")
+    public String SuperUserMission(){ return new AdminController().adminMission();}
+
+    @GetMapping("/admin/crise")
+    public String SuperUserCrise(){ return new AdminController().adminCrise();}
+
+    @GetMapping("/admin/accounts")
+    public String SuperUserAccount(){ return new AdminController().adminAccounts();}
+
+    @GetMapping("/admin/organisation")
+    public String SuperUserOrga(){ return new AdminController().adminOrganisation();}
+
+
+
     //===================================================================================
     //                                                                                  =
     //                              POST / GET METHODS                                        =

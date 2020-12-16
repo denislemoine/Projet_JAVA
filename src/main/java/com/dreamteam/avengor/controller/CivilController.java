@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -35,21 +37,29 @@ public class CivilController {
     }
 
     @RequestMapping(value="/register", method = RequestMethod.POST)
-    public String addCivils (HttpServletRequest request, CivilsModel civilsModel) {
+    public String addCivils (HttpServletRequest request, CivilsModel civilsModel) throws ParseException {
 
         String nom = request.getParameter("nom");
         String prenom = request.getParameter("prenom");
-        int id_Civils = Integer.parseInt(request.getParameter("id_Civils"));
         int civilite = Integer.parseInt(request.getParameter("civilite"));
         String adresse = request.getParameter("adresse");
         String email = request.getParameter("mail");
         String tel = request.getParameter("tel");
         String nationalite = request.getParameter("nationalite");
-       // String dateDeNaissance = request.getParameter("birth");
+        String dateDeNaissance = request.getParameter("birth");
         String password = request.getParameter("password");
 
+        if (request.getParameter("isHero") == "1"){
 
-        CivilsModel civilsModel1 = new CivilsModel(id_Civils,nom,prenom,civilite,adresse,email,tel,dateDeNaissance,password);
+        }
+        String civ = null;
+        if (civilite == 0){
+          civ = "H";
+        }else{ civ = "F"; }
+
+
+
+        CivilsModel civilsModel1 = new CivilsModel(0,nom,prenom,civ,adresse,email,tel,dateDeNaissance,password, nationalite);
         Db.saveCivil(civilsModel1);
         return "/login";
     }

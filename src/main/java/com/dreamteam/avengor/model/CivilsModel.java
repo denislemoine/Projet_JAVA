@@ -13,16 +13,18 @@ public class CivilsModel {
     private String adresse;
     private String email;
     private String tel;
-    private String nationalité;
-    private Date dateDeNaissance;
+    private String nationalite;
+    private String dateDeNaissance;
     private String encrytedPassword;
 
     public CivilsModel() {
 
     }
 
-    public CivilsModel(int id_Civil,String nom,String prenom,String civilite,String adresse,String email,String tel,//
-                           Date dateDeNaissance, String encrytedPassword){
+
+
+    public CivilsModel(int id_Civil, String nom, String prenom, String civilite, String adresse, String email, String tel,//
+                       String dateDeNaissance, String encrytedPassword, String nationalite){
 
         this.id_Civil = id_Civil;
         this.nom = nom;
@@ -33,6 +35,7 @@ public class CivilsModel {
         this.tel = tel;
         this.dateDeNaissance = dateDeNaissance;
         this.encrytedPassword = encrytedPassword;
+        this.nationalite= nationalite;
     }
 
     public int getId_Civil(){
@@ -90,11 +93,11 @@ public class CivilsModel {
     public void setTel(String tel){
         this.tel = tel;
     }
-    public Date getDateDeNaissance(){
+    public String getDateDeNaissance(){
         return dateDeNaissance;
     }
 
-    public void setDateDeNaissance(Date dateDeNaissance){
+    public void setDateDeNaissance(String dateDeNaissance){
         this.dateDeNaissance = dateDeNaissance;
     }
 
@@ -108,5 +111,13 @@ public class CivilsModel {
 
     public static List<CivilsModel> getAllCivils(){
         return Db.getAllCivil();
+    }
+
+    public String getNationalite() {
+        return nationalite;
+    }
+
+    public void setNationalite(String nationalite) {
+        this.nationalite = nationalite;
     }
 }

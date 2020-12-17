@@ -50,7 +50,7 @@ public class CivilsModel {
         return nom;
     }
 
-    public void setNom(String Nom){
+    public void setNom(String nom){
         this.nom = nom;
     }
 

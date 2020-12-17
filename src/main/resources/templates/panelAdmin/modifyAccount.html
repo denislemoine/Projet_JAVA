@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Avengor - Inscription</title>
+
+    <link rel="icon" type="image/png" th:href="@{/assets/img/logo.png}" />
+
+    <link rel="stylesheet" th:href="@{/assets/bootstrap/register/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}">
+</head>
+
+<body class="d-flex" id="page-top">
+<header class="d-flex masthead" style="background-size: contain;background-position: center;background-color: #242424;background-repeat: no-repeat;background-image: url(&quot;/assets/img/register/register.png&quot;);">
+
+
+    <form action="/admin/accounts/m" method="POST">
+        <div class="container d-flex d-xl-flex flex-column justify-content-center align-items-center align-content-center justify-content-xl-start align-items-xl-center" style="margin-right: 0px;margin-left: 300px;">
+
+
+            <div class="d-flex" style="margin-bottom: 45px;">
+
+                <span style="color: rgb(255,255,255);margin-right: 18px;font-size: 30px;letter-spacing: 9px;font-family: 'Source Sans Pro', sans-serif;">CIVIL</span>
+            </div>
+
+            <div class="d-flex d-xl-flex justify-content-center align-items-center align-content-center justify-content-xl-center align-items-xl-center">
+                <div class="d-flex flex-column" style="margin-right: 61px;">
+
+                    <!-- PARTIE CIVIL -->
+                    <input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
+                           required="" name="civilite" th:value="${civil.getCivilite()}">
+                    <input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
+                           required="" name="nom" th:value="${civil.getNom()}">
+                    <input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
+                           required="" name="prenom" th:value="${civil.getPrenom()}">
+                    <input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
+                           required="" name="mail" th:value="${civil.getEmail()}">
+                    <input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
+                           required="" name="tel" th:value="${civil.getTel()}">
+                    <input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
+                           required="" name="nationalite" th:value="${civil.getNationalite()}">
+                    <input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
+                           required="" name="birth" th:value="${civil.getDateDeNaissance()}">
+                    <input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style="color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 35px;padding-right: 8px;margin-top: 18px;"
+                           required="" name="adresse" th:value="${civil.getAdresse()}">
+                </div>
+                <input type="hidden" name="modify" th:value="${civil.getId_Civil()}">
+                <button type="submit" class="btn btn-danger">Enregistrer les modifications</button>
+                <a name="2" href="/admin/accounts" class="btn btn-light">Retour</a>
+            </div>
+        </div>
+
+    </form>
+</header>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<script th:src="@{/assets/js/register.js}"></script>
+</body>
+
+</html>

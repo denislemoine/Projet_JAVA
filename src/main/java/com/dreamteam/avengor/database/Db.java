@@ -4,6 +4,7 @@ import com.dreamteam.avengor.model.*;
 
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -231,19 +232,52 @@ public class Db {
     public static void deleteCivil(String id){
 
         try {
+            java.util.Date date = new java.util.Date();
+            long now = date.getTime();
+            Timestamp dateDelete = new Timestamp(now);
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
             PreparedStatement statement = CON.prepareStatement
                     ("Update Civils set Password = null, Nom = null, Prenom = null, Civilite = null, Adresse = null, Email = null," +
-                            " Tel = null, DateDeNaissance = null,DateDeDeces = null,Orga = null,Nationalite = null,Commentaire = null, DateAjout = null, DateDerniereModif = null " +
+                            " Tel = null, DateDeNaissance = null,DateDeDeces = null,Orga = null,Nationalite = null,Commentaire = null, DateAjout = null, DateDerniereModif = ?" +
                             "Where id_Civil = ?");
-            statement.setString(1,id);
+            statement.setTimestamp(1,dateDelete);
+            statement.setString(2,id);
             statement.execute();
         } catch (SQLException e) {
 
             e.printStackTrace();
         }
         
+    }
+    public static void modifyCivil(String id,CivilsModel civil){
+
+        try {
+            java.util.Date date = new java.util.Date();
+            long now = date.getTime();
+            Timestamp dateModif = new Timestamp(now);
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            PreparedStatement statement = CON.prepareStatement
+                    ("Update Civils set Nom = ?, Prenom = ?, Civilite = ?, Adresse = ?, Email = ?," +
+                            " Tel = ?, DateDeNaissance = ?,Nationalite = ?, DateDerniereModif = ?"+
+                            "where id_Civil = ?");
+            statement.setString(1,civil.getNom());
+            statement.setString(2,civil.getPrenom());
+            statement.setString(3,civil.getCivilite());
+            statement.setString(4,civil.getAdresse());
+            statement.setString(5,civil.getEmail());
+            statement.setString(6,civil.getTel());
+            statement.setString(7,civil.getDateDeNaissance());
+            statement.setString(8,civil.getNationalite());
+            statement.setTimestamp(9,dateModif);
+            statement.setString(10,id);
+            statement.execute();
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+
     }
 
     //=========================================================================

@@ -25,7 +25,7 @@
         </div>
         <p>Etes vous sur de vouloir supprimer ce profil ?</p>
         <div class="d-flex flex-row bd-highlight mb-3">
-            <form action="/admin/accounts" method="post">
+            <form action="/admin/accounts/d" method="post">
                 <input type="hidden" name="delete" th:value="${civil.getId_Civil()}">
                 <button type="submit" class="btn btn-danger">Supprimer</button>
             </form>

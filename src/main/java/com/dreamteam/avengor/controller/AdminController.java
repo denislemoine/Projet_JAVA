@@ -39,24 +39,46 @@ public class AdminController {
         model.addAttribute("civil",listeCivils);
         return "panelAdmin/accounts";
     }
-    @RequestMapping(value = "/admin/accounts", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/accounts/d", method = RequestMethod.POST)
     public String deleteAccount(HttpServletRequest request,Model model) throws ParseException {
         if(request.getParameter("delete")!= null){
+            AdminModel.deleteCivil(request.getParameter("delete"));
             listeCivils = CivilsModel.getAllCivils();
             model.addAttribute("civil",listeCivils);
-            AdminModel.deleteCivil(request.getParameter("delete"));
         }
-
         return "panelAdmin/accounts";
     }
 
-    @RequestMapping(value = "/admin/accounts/{id}")
+    @RequestMapping(value = "/admin/deleteaccounts/{id}")
     public String viewDeleteAccount(@PathVariable("id") String id,Model model){
 
         CivilsModel civil = AdminModel.findCivilById(id);
         model.addAttribute("civil",civil);
         return "panelAdmin/deleteAccount";
 
+    }
+    @RequestMapping(value = "/admin/accounts/m", method = RequestMethod.POST)
+    public String modifyAccount(HttpServletRequest request,Model model) throws ParseException{
+        CivilsModel civil = new CivilsModel();
+        civil.setCivilite(request.getParameter("civilite"));
+        civil.setNom(request.getParameter("nom"));
+        civil.setPrenom(request.getParameter("prenom"));
+        civil.setEmail(request.getParameter("mail"));
+        civil.setTel(request.getParameter("tel"));
+        civil.setNationalite(request.getParameter("nationalite"));
+        civil.setDateDeNaissance(request.getParameter("birth"));
+        civil.setAdresse(request.getParameter("adresse"));
+        AdminModel.modifyCivil(request.getParameter("modify"),civil);
+        listeCivils = CivilsModel.getAllCivils();
+        model.addAttribute("civil",listeCivils);
+        return "panelAdmin/accounts";
+    }
+    @RequestMapping("/admin/modifyaccounts/{id}")
+    public String viewModifyAccount(@PathVariable("id") String id,Model model){
+
+        CivilsModel civil = AdminModel.findCivilById(id);
+        model.addAttribute("civil",civil);
+        return "panelAdmin/modifyAccount";
     }
     public String adminCrise(){
         return "panelAdmin/crise";

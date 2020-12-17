@@ -12,15 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -53,7 +48,7 @@ public class SuperHerosController {
 
         }
 
-        SuperHerosModel superHerosModel1 = new SuperHerosModel(1,nom,IdentiteSecrete,pouvoir,pontFaible,null,commentaire);
+        SuperHerosModel superHerosModel1 = new SuperHerosModel(1,nom,IdentiteSecrete,pouvoir,pontFaible,null,commentaire, null);
         Db.saveHero(superHerosModel1);
         return "redirect:/login";
     }

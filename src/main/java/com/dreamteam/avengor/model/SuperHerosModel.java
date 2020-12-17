@@ -12,8 +12,9 @@ public class SuperHerosModel {
     private String PointFaible;
     private Float Score;
     private String Commentaire;
+    private CivilsModel civil;
 
-    public SuperHerosModel(int id_SuperHeros,String Nom,int IdentiteSecrete,String Pouvoir,String PointFaible,Float Score,String Commentaire) {
+    public SuperHerosModel(int id_SuperHeros,String Nom,int IdentiteSecrete,String Pouvoir,String PointFaible,Float Score,String Commentaire, CivilsModel civil) {
         super();
         this.id_SuperHeros = id_SuperHeros;
         this.Nom = Nom;
@@ -22,6 +23,7 @@ public class SuperHerosModel {
         this.PointFaible = PointFaible;
         this.Score = Score;
         this.Commentaire = Commentaire;
+        this.civil = civil;
     }
 
     //==================================================================================
@@ -82,6 +84,14 @@ public class SuperHerosModel {
 
     public void setCommentaire(String Commentaire){
         this.Commentaire = Commentaire;
+    }
+
+    public CivilsModel getCivil(){
+        return civil;
+    }
+
+    public void setCivil(CivilsModel civil){
+        this.civil = civil;
     }
 
     //==================================================================================

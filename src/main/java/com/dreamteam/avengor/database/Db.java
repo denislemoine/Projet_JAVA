@@ -114,22 +114,27 @@ public class Db {
         }
         return civils;
     }
+
     public static CivilsModel findCivilById(String id){
         try {
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            //renvoie un civil
             Statement statement = CON.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from Civils where  id_Civil =" + id);
-            CivilsModel civil = new CivilsModel(resultSet.getInt("id_Civil"),resultSet.getString("nom"),resultSet.getString("prenom"),resultSet.getString("civilite"),resultSet.getString("adresse"),
-                    resultSet.getString("email"),resultSet.getString("tel"),resultSet.getString("dateDeNaissance"),null,resultSet.getString("Nationalite"));
-            return civil;
+            ResultSet resultSet = statement.executeQuery("select * from Civils where id_Civil =" + id);
+
+            if(resultSet.next()) {
+                CivilsModel civil = new CivilsModel(resultSet.getInt("id_Civil"),resultSet.getString("nom"),resultSet.getString("prenom"),resultSet.getString("civilite"),resultSet.getString("adresse"),
+                        resultSet.getString("email"),resultSet.getString("tel"),resultSet.getString("dateDeNaissance"),null,resultSet.getString("Nationalite"));
+                return civil;
+            } else {
+                return null;
+            }
+
         } catch (SQLException e) {
 
             e.printStackTrace();
-            CivilsModel civil = new CivilsModel(0,"erreur",null,null,null,null,null,null,null,null);
+            CivilsModel civil = new CivilsModel(0,"ERREUR",null,null,null,null,null,null,null,null);
             return civil;
         }
-
     }
 
     //=========================================================================
@@ -142,11 +147,16 @@ public class Db {
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             Statement statement = CON.createStatement();
 
-            ResultSet resultSet = statement.executeQuery("select * from Super-heros");
+            ResultSet res = statement.executeQuery("SELECT * FROM Super_heros");
 
-            while(resultSet.next()){
+            while(res.next()){
+
+                CivilsModel civil = findCivilById("10");
+
                 SuperHerosModel hero = new SuperHerosModel(
-                    1, null, 0, null, null, null, null
+                    res.getInt("id_SuperHeros"), res.getString("Nom"), res.getInt("IdentitéSecretes"),
+                        res.getString("Pouvoir"), res.getString("Point_faible"), res.getFloat("Score"),
+                        res.getString("Commentaire"), civil
                 );
                 heros.add(hero);
             }

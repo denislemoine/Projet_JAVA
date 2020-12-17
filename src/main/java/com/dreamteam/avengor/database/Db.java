@@ -14,6 +14,28 @@ public class Db {
     private static final String PASSWORD = "avengor76";
     private static Connection CON;
 
+    //=========================================================================
+    //                          QUERY LOGIN                                   =
+    //=========================================================================
+
+    public static String login(String mail){
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Statement state = CON.createStatement();
+            ResultSet res = state.executeQuery("SELECT Password, Email FROM Civils WHERE Email = '" + mail + "'");
+            if(res.next()){
+                if(res.getString("Email").equals(mail)) {
+                    return res.getString("Password");
+                }
+            } else {
+                return "null";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "null";
+        }
+        return "null";
+    }
 
     //=========================================================================
     //                          QUERIES SAVE                                  =
@@ -449,7 +471,7 @@ public class Db {
 
             if(resultSet.next()) {
                 MissionModel mission = new MissionModel(resultSet.getInt("id_Mission"),resultSet.getString("titre"),resultSet.getTimestamp("dateDebut"),resultSet.getTimestamp("dateFin"),resultSet.getInt("niveaux"),
-                        resultSet.getInt("urgence"),resultSet.getInt("id_incidents"));
+                        resultSet.getInt("urgence"),resultSet.getInt("id_incidents"), null);
                 return mission;
             } else {
                 return null;
@@ -458,8 +480,7 @@ public class Db {
         } catch (SQLException e) {
 
             e.printStackTrace();
-            MissionModel mission = new MissionModel(0,"ERREUR",null,null,0,0,0);
-            return mission;
+            return null;
         }
     }
     public static void deleteMission(String id){

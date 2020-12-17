@@ -5,17 +5,17 @@ import com.dreamteam.avengor.model.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import com.dreamteam.avengor.database.Db;
 import org.springframework.web.context.request.WebRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.Null;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -57,6 +57,12 @@ public class IncidentController {
         model.addAttribute("superVilainList",superVilainList);
 
         return "incident/incidentAdd";
+    }
+
+    @RequestMapping(value="/incident-delete-{id}", method = RequestMethod.GET)
+    public String deleteIncident (@PathVariable("id") String id, HttpServletRequest request) {
+        Db.deleteIncidentByID(id);
+        return "redirect:incident";
     }
 
 }

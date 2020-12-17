@@ -132,8 +132,9 @@ public class Db {
     public static void deleteIncidentByID(String id){
         try {
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            Statement statement = CON.createStatement();
-            ResultSet res = statement.executeQuery("DELETE FROM Incidents WHERE id_Incidents ="+ id);
+            PreparedStatement statement = CON.prepareStatement("DELETE FROM Incidents WHERE id_Incidents = ?");
+            statement.setString(1,id);
+            statement.execute();
 
         } catch (SQLException e) {
             e.printStackTrace();

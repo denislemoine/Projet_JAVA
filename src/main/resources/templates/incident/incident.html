@@ -72,8 +72,8 @@
                             <h6 class="card-text card-subtitle mb-2" th:text="| Date de début : ${incident.getAdresse()}|"></h6>
                             <h6 class="card-text card-subtitle mb-2" th:text="| Date de Fin : ${incident.getInfoComplementaire()}|"></h6>
                             <a th:if="${incident.getMission() == 0}" th:href="|mission-add-${incident.getId_Incidents()}|" class="btn btn-link"><i class="bi text-danger bi-plus-square-fill"></i>Creer mission</a>
-                            <a th:if="${incident.getMission() == 0}" th:href="|incident-delete-${incident.getId_Incidents()}|" class="btn btn-link"><i class="bi bi-trash2-fill"></i>Sans suite</a>
-                            <p th:if="${incident.getMission() != 0}" th:href="|incident-delete-${incident.getId_Incidents()}|" class="text-white">Déjà sur mission</p>
+                            <a th:if="${incident.getMission() == 0}" th:href="|incident-delete-${incident.getId_Incidents()}|" class="btn btn-link"><i class="bi bi-trash2-fill"></i>Classer sans suite</a>
+                            <p th:if="${incident.getMission() != 0}" class="text-white">Déjà sur une mission</p>
                         </div>
                     </div>
 <!--                    mission-add-id-->

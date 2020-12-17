@@ -198,6 +198,29 @@ public class Db {
         }
     }
 
+    public static void deleteCivil(String id){
+
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            PreparedStatement statement = CON.prepareStatement
+                    ("delete id_civils from Incidents where id_civils = ?");
+            statement.setString(1,id);
+            statement.execute();
+            statement = CON.prepareStatement
+                    ("delete identiteSecrete from super_heros where id_Civil = ?");
+            statement.setString(1,id);
+            statement.execute();
+            statement = CON.prepareStatement
+                    ("delete from Civils where id_Civil = ?");
+            statement.setString(1,id);
+            statement.execute();
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+        
+    }
+
     //=========================================================================
     //                          QUERIES HERO                                  =
     //=========================================================================

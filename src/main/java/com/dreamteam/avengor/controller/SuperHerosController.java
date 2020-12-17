@@ -3,6 +3,7 @@ package com.dreamteam.avengor.controller;
 
 import com.dreamteam.avengor.model.CivilsModel;
 import  com.dreamteam.avengor.database.Db;
+import com.dreamteam.avengor.model.IncidentModel;
 import com.dreamteam.avengor.model.SuperHerosModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,6 +26,17 @@ import java.util.List;
 @Controller
 public class SuperHerosController {
 
+    private List<SuperHerosModel> herosList = new ArrayList<>();
+
+    @GetMapping("/hero")
+    public String showListHero(Model model){
+
+        herosList = SuperHerosModel.getAllHeros();
+
+        model.addAttribute("heros", herosList);
+
+        return "hero/HeroList";
+    }
 
     @RequestMapping(value="/registerHero", method = RequestMethod.POST)
     public String addSuperHero (HttpServletRequest request, SuperHerosModel superHerosModel) throws ParseException {

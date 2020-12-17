@@ -1,5 +1,9 @@
 package com.dreamteam.avengor.model;
 
+import com.dreamteam.avengor.database.Db;
+
+import java.util.List;
+
 public class SuperHerosModel {
     private int id_SuperHeros;
     private String Nom;
@@ -9,12 +13,7 @@ public class SuperHerosModel {
     private Float Score;
     private String Commentaire;
 
-    public SuperHerosModel(){
-
-    }
-
-    public SuperHerosModel(int id_SuperHeros,String Nom,int IdentiteSecrete,String Pouvoir,String PointFaible,Float Score,String Commentaire){
-
+    public SuperHerosModel(int id_SuperHeros,String Nom,int IdentiteSecrete,String Pouvoir,String PointFaible,Float Score,String Commentaire) {
         super();
         this.id_SuperHeros = id_SuperHeros;
         this.Nom = Nom;
@@ -24,6 +23,10 @@ public class SuperHerosModel {
         this.Score = Score;
         this.Commentaire = Commentaire;
     }
+
+    //==================================================================================
+    //                               GETTERS & SETTERS
+    //==================================================================================
 
     public int getId_SuperHeros(){
         return id_SuperHeros;
@@ -80,4 +83,14 @@ public class SuperHerosModel {
     public void setCommentaire(String Commentaire){
         this.Commentaire = Commentaire;
     }
+
+    //==================================================================================
+    //                              CALLBACK QUERIES DB
+    //==================================================================================
+
+    public static List<SuperHerosModel> getAllHeros(){
+        return null;
+    }
+
+
 }

@@ -105,7 +105,6 @@ public class Db {
         return civils;
     }
     public static CivilsModel findCivilById(String id){
-        List<CivilsModel> civils = new ArrayList<>();
         try {
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             //renvoie un civil

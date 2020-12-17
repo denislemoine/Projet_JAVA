@@ -16,12 +16,12 @@
     <link rel="stylesheet" th:href="@{/assets/css/main.css}">
 </head>
 
-<body>
-
-    <div class="list-group-item list-group-item-action">
+<body class="d-flex" id="page-top">
+<header class="d-flex masthead" style="background-size: contain;background-position: center;background-color: #242424;background-repeat: no-repeat;background-image: url(&quot;assets/img/interface/bginterface.png&quot;);">
+    <div class="container d-flex d-xl-flex flex-column justify-content-center align-items-center align-content-center justify-content-xl-start align-items-xl-center btn-light">
         <div name="FirstLine" class="d-flex justify-content-around">
             <p th:text="|${civil.getId_Civil()}  ${civil.getCivilite()}.${civil.getNom()} ${civil.getPrenom()}|">Civilite Nom Prenom</p>
-            <p>Nationality</p>
+            <p th:text="${civil.getNationalite()}">Nationality</p>
         </div>
         <p>Etes vous sur de vouloir supprimer ce profil ?</p>
         <div class="d-flex flex-row bd-highlight mb-3">

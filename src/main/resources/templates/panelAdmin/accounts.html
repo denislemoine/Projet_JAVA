@@ -54,7 +54,7 @@
 
         <div>
             <div class="list-group btn-light mt-1 mr-xl-5" th:each="civilList : ${civil}">
-                    <ul name="FirstLine" class="list-group list-group-horizontal">
+                    <ul name="FirstLine" class="list-group list-group-horizontal-xl">
                         <li class="list-group-item" th:text="|${civilList.getId_Civil()}  ${civilList.getCivilite()}.${civilList.getNom()} ${civilList.getPrenom()}|">Civilite Nom Prenom</li>
                         <li class="list-group-item" th:text="${civilList.getNationalite()}">Nationality</li>
                         <li class="list-group-item">

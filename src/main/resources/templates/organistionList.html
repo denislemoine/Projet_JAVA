@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Avengor - Les Missions</title>
+    <title>Avengor - Organisation</title>
 
     <link rel="icon" type="image/png" th:href="@{/assets/img/logo.png}" />
 
@@ -54,7 +54,8 @@
     <div class="container-fluid border rounded-0 border-dark shadow d-flex d-xl-flex flex-column justify-content-center align-items-center align-content-center justify-content-xl-start align-items-xl-center" style="margin-right: 183px;margin-top: -47px;margin-left: 45px;filter: brightness(100%); padding-bottom: 18px;">
 
         <div class="btn-group" role="group" style="margin-top: 12px; margin-bottom: 18px;">
-            <a href="/mission" class="btn btn-dark">Liste des Missions</a>
+            <a href="/civil" class="btn btn-dark">Liste des organisations</a>
+            <a href="/register" class="btn btn-dark">Ajouter une organisation</organis></a>
         </div>
 
         <div class="d-flex overflow-auto d-xl-flex flex-wrap justify-content-center align-items-center align-content-center justify-content-xl-center align-items-xl-center"
@@ -62,20 +63,11 @@
 
             <div class="d-flex flex-wrap overflow-auto" style="margin-top: 18px;">
 
-                <div th:each="mission : ${missions}" class="d-flex flex-row">
-
-                <div class="card border-light bg-dark text-white" style="margin-right: 18px; margin-bottom: 18px;">
-                    <div class="card-body" style="width: 420px;">
-                        <h4 class="card-title" th:text="${mission.getTitre()}"></h4>
-                        <h6 class="card-text card-subtitle mb-2" th:text="| Date de début : ${mission.getDateDebut()}|"></h6>
-                        <h6 class="card-text card-subtitle mb-2" th:text="| Date de Fin : ${mission.getDateFin()}|"></h6>
-                        <h6 class="text-muted card-subtitle mb-2" th:text="| Niveaux : ${mission.getNiveaux()}|"></h6>
-                        <h6 class="text-muted card-subtitle mb-2" th:text="| Urgence : ${mission.getUrgence()}|"></h6>
+                <div th:each="civilList : ${civilian}" class="card" style="margin-right: 18px; margin-bottom: 18px;">
+                    <div class="card-body" style="width: 900px; height: 100px;">
+                        <h4 class="card-title" th:text="${civilList.getNom()}"></h4>
+                        <h6 class="text-muted card-subtitle mb-2">CIVIL</h6>
                     </div>
-                </div>
-
-
-
                 </div>
 
             </div>

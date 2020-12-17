@@ -5,9 +5,9 @@ import java.sql.*;
 public class IncidentModel{
     private int id_Incidents;
     private String Adresse;
-    private int TypeIncident;
+    private String TypeIncident;
     private int id_Civils;
-    private int Ennemis;
+    private Integer Ennemis;
     private Integer Mission;
     private String InfoComplementaire;
 
@@ -15,14 +15,14 @@ public class IncidentModel{
     // GETTER IncidentModel
     public int getId_Incidents()            {   return id_Incidents;         }
     public String getAdresse()              {   return Adresse;              }
-    public int getTypeIncident()            {   return TypeIncident;         }
+    public String getTypeIncident()         {   return TypeIncident;         }
     public int getId_Civils()               {   return id_Civils;            }
-    public int getEnnemis()                 {   return Ennemis;              }
-    public int getMission()                 {   return Mission;              }
+    public Integer getEnnemis()             {   return Ennemis;              }
+    public Integer getMission()             {   return Mission;              }
     public String getInfoComplementaire()   {   return InfoComplementaire;   }
     // SETTER IncidentModel
     public void setAdresse(String adresse)                       { Adresse = adresse;            }
-    public void setTypeIncident(int typeIncident)                { TypeIncident = typeIncident;  }
+    public void setTypeIncident(String typeIncident)             { TypeIncident = typeIncident;  }
     public void setId_Civils(int id_Civils)                      { this.id_Civils = id_Civils;   }
     public void setEnnemis(int ennemis)                          { Ennemis = ennemis;            }
     public void setMission(int mission)                          { Mission = mission;            }
@@ -32,9 +32,9 @@ public class IncidentModel{
     public IncidentModel(
             int id_Incidents
             , String Adresse
-            , int TypeIncident
+            , String TypeIncident
             , int id_Civils
-            , int Ennemis
+            , Integer Ennemis
             , Integer Mission
             , String InfoComplementaire
     ){

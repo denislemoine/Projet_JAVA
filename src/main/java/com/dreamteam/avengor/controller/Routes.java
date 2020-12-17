@@ -40,6 +40,11 @@ public class Routes {
         return "register";
     }
 
+    @GetMapping("/organisation")
+    public String organisation() {
+        return "organisation";
+    }
+
     @GetMapping("/admin")
     public String SuperUserHome(){ return "panelAdmin/admin";}
 

@@ -61,7 +61,7 @@ public class Db {
 
             if(superHerosModel.getId_SuperHeros() != 0){
                 PreparedStatement statement = CON.prepareStatement
-                        ("INSERT INTO Super_heros (Nom, IdentitéSecretes, Pouvoir, Point_faible, Score, Commentaire) " +
+                        ("INSERT INTO Super_heros (Nom, IdentiteSecretes, Pouvoir, Point_faible, Score, Commentaire) " +
                                 "VALUES (?, ?, ?, ?, ?, ?)");
                 statement.setString(1,superHerosModel.getNom());
                 statement.setInt(2,superHerosModel.getIdentiteSecrete());
@@ -76,19 +76,24 @@ public class Db {
             e.printStackTrace();
         }
     }
-    
+    //=========================================================================
+    //                          QUERIES INCIDENT                              =
+    //=========================================================================
     // Ajout d'un incident
     public static void saveIncident(IncidentModel incidentModel){
-
         try {
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             PreparedStatement statement = CON.prepareStatement
-                        ("INSERT INTO Incidents (Adresse,TypeIncident,id_Civils,Ennemis,InfoComplementaire) " +
-                                "VALUES (?,?,?,?,?)");
+                    ("INSERT INTO Incidents (Adresse,TypeIncident,id_Civils,Ennemis,InfoComplementaire) " +
+                            "VALUES (?,?,?,?,?)");
             statement.setString(1,incidentModel.getAdresse());
-            statement.setInt(2,incidentModel.getTypeIncident());
+            statement.setString(2,incidentModel.getTypeIncident());
             statement.setInt(3,incidentModel.getId_Civils());
-            statement.setInt(4,incidentModel.getEnnemis());
+            if (incidentModel.getEnnemis() != null) {
+                statement.setInt(4,incidentModel.getEnnemis());
+            } else {
+                statement.setNull(4,Types.NULL);
+            }
             statement.setString(5,incidentModel.getInfoComplementaire());
             statement.execute();
 
@@ -96,11 +101,58 @@ public class Db {
             e.printStackTrace();
         }
     }
-    //=========================================================================
-    //                          QUERIES CIVIL                                 =
-    //=========================================================================
+    // Suppression d'un incident avec son identifiant
+    public static void deleteIncidentByID(String id){
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Statement statement = CON.createStatement();
+            ResultSet res = statement.executeQuery("DELETE FROM Incidents WHERE id_Incidents ="+ id);
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    // Liste de tous les incidents
+    public static List<IncidentModel> getAllIncidents(){
+        List<IncidentModel> incidents = new ArrayList<>();
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Statement statement = CON.createStatement();
+            ResultSet res = statement.executeQuery("SELECT * FROM Incidents");
 
+            while(res.next()){
+                IncidentModel incident = new IncidentModel(
+                        res.getInt("id_Incidents"), res.getString("Adresse"), res.getString("TypeIncident"),
+                        res.getInt("id_Civils"), res.getInt("Ennemis"), res.getInt("Mission"), res.getString("InfoComplementaire")
+                );
+                incidents.add(incident);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return incidents;
+    }
+    // Un incident particulié avec son identifiant
+    public static IncidentModel getIncidentByID(String id){
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Statement statement = CON.createStatement();
+            ResultSet res = statement.executeQuery("SELECT * FROM Incidents WHERE id_Incidents ="+ id);
+
+            if(res.next()){
+                IncidentModel incident = new IncidentModel(
+                        res.getInt("id_Incidents"), res.getString("Adresse"), res.getString("TypeIncident"),
+                        res.getInt("id_Civils"), res.getInt("Ennemis"), res.getInt("Mission"), res.getString("InfoComplementaire")
+                );
+                return incident;
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     //=========================================================================
     //                          QUERIES CIVIL                                 =
     //=========================================================================
@@ -183,10 +235,10 @@ public class Db {
 
             while(res.next()){
 
-                CivilsModel civil = findCivilById(res.getString("IdentitéSecretes"));
+                CivilsModel civil = findCivilById(res.getString("IdentiteSecretes"));
 
                 SuperHerosModel hero = new SuperHerosModel(
-                    res.getInt("id_SuperHeros"), res.getString("Nom"), res.getInt("IdentitéSecretes"),
+                    res.getInt("id_SuperHeros"), res.getString("Nom"), res.getInt("IdentiteSecretes"),
                         res.getString("Pouvoir"), res.getString("Point_faible"), res.getFloat("Score"),
                         res.getString("Commentaire"), civil
                 );
@@ -226,6 +278,24 @@ public class Db {
         return missions;
     }
 
+    public static void saveMission(MissionModel missionModel){
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            PreparedStatement statement = CON.prepareStatement
+                    ("INSERT INTO Missions (Titre, DateDebut, Niveaux, Urgence, id_Incidents) " +
+                            "VALUES (?,?,?,?,?)");
+            statement.setString(1,missionModel.getTitre());
+            statement.setTimestamp(2,missionModel.getDateDebut());
+            statement.setInt(3,missionModel.getNiveaux());
+            statement.setInt(4,missionModel.getUrgence());
+            statement.setInt(4,missionModel.getId_Incidents());
+            statement.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     //=========================================================================
     //                          QUERIES DES SUPERVILAINS                      =
     //=========================================================================
@@ -238,8 +308,8 @@ public class Db {
 
             while(res.next()){
                 SuperVilainModel vilain = new SuperVilainModel(
-                        res.getInt("id_SuperVilains"), res.getString("Nom"), res.getInt("IdentitéSecretes"),
-                        res.getString("Pouvoir"), res.getString("Point-faible"), (float) res.getInt("Score"),
+                        res.getInt("id_SuperVilains"), res.getString("Nom"), res.getInt("IdentiteSecretes"),
+                        res.getString("Pouvoir"), res.getString("Point_faible"), (float) res.getInt("Score"),
                         res.getString("Commentaire")
                 );
                 vilains.add(vilain);

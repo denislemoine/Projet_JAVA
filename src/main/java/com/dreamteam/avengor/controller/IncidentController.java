@@ -21,28 +21,42 @@ import java.util.List;
 @Controller
 public class IncidentController {
 
-    @RequestMapping(value="/incident", method = RequestMethod.POST)
+
+    @GetMapping("/incident")
+    public String showListIncidents(Model model){
+        List<IncidentModel> incidentList = new ArrayList<>();
+        incidentList = Db.getAllIncidents();
+        model.addAttribute("incidentList",incidentList);
+
+        return "incident/incident";
+    }
+
+    @RequestMapping(value="/incident-add", method = RequestMethod.POST)
     public String addIncident(WebRequest request) throws ParseException {
 
         String Adresse = request.getParameter("Adresse");
-        int TypeIncident = Integer.parseInt(request.getParameter("TypeIncident"));
+        String TypeIncident = request.getParameter("TypeIncident");
         int id_Civils = Integer.parseInt(request.getParameter("id_Civils"));
-        int Ennemis = Integer.parseInt(request.getParameter("Ennemis"));
+        Integer Ennemis = Integer.parseInt(request.getParameter("Ennemis"));
         String InfoComplementaire = request.getParameter("InfoComplementaire");
+
+        if (Ennemis == 0) {
+            Ennemis = null;
+        }
         
         IncidentModel incident = new IncidentModel(1,Adresse,TypeIncident,id_Civils,Ennemis,null,InfoComplementaire);
         Db.saveIncident(incident);
         return "redirect:/interface";
     }
 
-    @GetMapping("/incident")
+    @GetMapping("/incident-add")
     public String showFormIncident(Model model){
         List<SuperVilainModel> superVilainList = new ArrayList<>();
         superVilainList = Db.getAllVilains();
 
         model.addAttribute("superVilainList",superVilainList);
 
-        return "incident";
+        return "incident/incidentAdd";
     }
 
 }

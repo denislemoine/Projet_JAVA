@@ -101,9 +101,48 @@ public class Db {
         }
     }
     //=========================================================================
-    //                          QUERIES                                  =
+    //                          QUERIES INCIDENT                              =
     //=========================================================================
+    public static List<IncidentModel> getAllIncidents(){
+        List<IncidentModel> incidents = new ArrayList<>();
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Statement statement = CON.createStatement();
+            ResultSet res = statement.executeQuery("SELECT * FROM Incidents");
 
+            while(res.next()){
+                IncidentModel incident = new IncidentModel(
+                        res.getInt("id_Incidents"), res.getString("Adresse"), res.getString("TypeIncident"),
+                        res.getInt("id_Civils"), res.getInt("Ennemis"), res.getInt("Mission"), res.getString("InfoComplementaire")
+                );
+                incidents.add(incident);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return incidents;
+    }
+
+    public static IncidentModel getIncidentByID(String id){
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Statement statement = CON.createStatement();
+            ResultSet res = statement.executeQuery("SELECT * FROM Incidents WHERE id_Incidents ="+ id);
+
+            if(res.next()){
+                IncidentModel incident = new IncidentModel(
+                        res.getInt("id_Incidents"), res.getString("Adresse"), res.getString("TypeIncident"),
+                        res.getInt("id_Civils"), res.getInt("Ennemis"), res.getInt("Mission"), res.getString("InfoComplementaire")
+                );
+                return incident;
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     //=========================================================================
     //                          QUERIES CIVIL                                 =

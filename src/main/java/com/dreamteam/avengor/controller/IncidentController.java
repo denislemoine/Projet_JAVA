@@ -25,10 +25,14 @@ public class IncidentController {
     public String addIncident(WebRequest request) throws ParseException {
 
         String Adresse = request.getParameter("Adresse");
-        int TypeIncident = Integer.parseInt(request.getParameter("TypeIncident"));
+        String TypeIncident = request.getParameter("TypeIncident");
         int id_Civils = Integer.parseInt(request.getParameter("id_Civils"));
-        int Ennemis = Integer.parseInt(request.getParameter("Ennemis"));
+        Integer Ennemis = Integer.parseInt(request.getParameter("Ennemis"));
         String InfoComplementaire = request.getParameter("InfoComplementaire");
+
+        if (Ennemis == 0) {
+            Ennemis = null;
+        }
         
         IncidentModel incident = new IncidentModel(1,Adresse,TypeIncident,id_Civils,Ennemis,null,InfoComplementaire);
         Db.saveIncident(incident);

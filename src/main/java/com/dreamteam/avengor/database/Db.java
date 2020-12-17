@@ -86,9 +86,13 @@ public class Db {
                         ("INSERT INTO Incidents (Adresse,TypeIncident,id_Civils,Ennemis,InfoComplementaire) " +
                                 "VALUES (?,?,?,?,?)");
             statement.setString(1,incidentModel.getAdresse());
-            statement.setInt(2,incidentModel.getTypeIncident());
+            statement.setString(2,incidentModel.getTypeIncident());
             statement.setInt(3,incidentModel.getId_Civils());
-            statement.setInt(4,incidentModel.getEnnemis());
+            if (incidentModel.getEnnemis() != null) {
+                statement.setInt(4,incidentModel.getEnnemis());
+            } else {
+                statement.setNull(4,Types.NULL);
+            }
             statement.setString(5,incidentModel.getInfoComplementaire());
             statement.execute();
 
@@ -97,9 +101,48 @@ public class Db {
         }
     }
     //=========================================================================
-    //                          QUERIES CIVIL                                 =
+    //                          QUERIES INCIDENT                              =
     //=========================================================================
+    public static List<IncidentModel> getAllIncidents(){
+        List<IncidentModel> incidents = new ArrayList<>();
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Statement statement = CON.createStatement();
+            ResultSet res = statement.executeQuery("SELECT * FROM Incidents");
 
+            while(res.next()){
+                IncidentModel incident = new IncidentModel(
+                        res.getInt("id_Incidents"), res.getString("Adresse"), res.getString("TypeIncident"),
+                        res.getInt("id_Civils"), res.getInt("Ennemis"), res.getInt("Mission"), res.getString("InfoComplementaire")
+                );
+                incidents.add(incident);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return incidents;
+    }
+
+    public static IncidentModel getIncidentByID(String id){
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Statement statement = CON.createStatement();
+            ResultSet res = statement.executeQuery("SELECT * FROM Incidents WHERE id_Incidents ="+ id);
+
+            if(res.next()){
+                IncidentModel incident = new IncidentModel(
+                        res.getInt("id_Incidents"), res.getString("Adresse"), res.getString("TypeIncident"),
+                        res.getInt("id_Civils"), res.getInt("Ennemis"), res.getInt("Mission"), res.getString("InfoComplementaire")
+                );
+                return incident;
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     //=========================================================================
     //                          QUERIES CIVIL                                 =
@@ -214,15 +257,13 @@ public class Db {
             ResultSet res = statement.executeQuery("SELECT * FROM Super_vilains");
 
             while(res.next()){
-
                 SuperVilainModel vilain = new SuperVilainModel(
-                        res.getInt("id_SuperVilain"), res.getString("Nom"), res.getInt("IdentiteSecrete"),
-                        res.getString("Pouvoir"), res.getString("PointFaible"), (float) res.getInt("Score"),
+                        res.getInt("id_SuperVilains"), res.getString("Nom"), res.getInt("IdentitéSecretes"),
+                        res.getString("Pouvoir"), res.getString("Point-faible"), (float) res.getInt("Score"),
                         res.getString("Commentaire")
                 );
                 vilains.add(vilain);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -2,6 +2,7 @@ package com.dreamteam.avengor.database;
 
 import com.dreamteam.avengor.model.CivilsModel;
 import com.dreamteam.avengor.model.IncidentModel;
+import com.dreamteam.avengor.model.MissionModel;
 import com.dreamteam.avengor.model.SuperHerosModel;
 
 import java.sql.*;
@@ -165,6 +166,33 @@ public class Db {
             e.printStackTrace();
         }
         return heros;
+    }
+
+    //=========================================================================
+    //                          QUERIES MISSIONS                              =
+    //=========================================================================
+
+    public static List<MissionModel> getAllMission(){
+        List<MissionModel> missions = new ArrayList<>();
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Statement statement = CON.createStatement();
+            ResultSet res = statement.executeQuery("SELECT * FROM Missions");
+
+            while(res.next()){
+
+                MissionModel mission = new MissionModel(
+                        res.getInt("id_Mission"), res.getString("Titre"), res.getTimestamp("DateDebut"),
+                        res.getTimestamp("DateFin"), res.getInt("Niveaux"), res.getInt("Urgence"),
+                        res.getInt("id_Incidents"), null
+                );
+                missions.add(mission);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return missions;
     }
 
 }

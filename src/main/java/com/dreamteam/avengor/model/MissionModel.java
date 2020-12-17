@@ -1,17 +1,23 @@
 package com.dreamteam.avengor.model;
 
+import com.dreamteam.avengor.database.Db;
+
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.List;
+
 public class MissionModel {
-    
+
     private int id_Mission;
     private String Titre;
-    private String DateDebut;
-    private String DateFin;
+    private Timestamp DateDebut;
+    private Timestamp DateFin;
     private int Niveaux;
     private int Urgence;
     private int id_Incidents;
     private IncidentModel incident;
 
-    public MissionModel(int id_Mission, String Titre, String DateDebut, String DateFin, int Niveaux, int Urgence, int Id_Incidents, IncidentModel incident) {
+    public MissionModel(int id_Mission, String Titre, Timestamp DateDebut, Timestamp DateFin, int Niveaux, int Urgence, int Id_Incidents, IncidentModel incident) {
         super();
         this.id_Mission = id_Mission;
         this.Titre = Titre;
@@ -41,17 +47,17 @@ public class MissionModel {
         this.Titre = Titre;
     }
 
-    public String getDateDebut(){
+    public Timestamp getDateDebut(){
         return DateDebut;
     }
-    public void setDateDebut(String DateDebut){
+    public void setDateDebut(Timestamp DateDebut){
         this.DateDebut = DateDebut;
     }
 
-    public String getDateFin(){
+    public Timestamp getDateFin(){
         return DateFin;
     }
-    public void setDateFin(String DateFin){
+    public void setDateFin(Timestamp DateFin){
         this.DateFin = DateFin;
     }
 
@@ -79,7 +85,7 @@ public class MissionModel {
     public IncidentModel getIncident(){
         return incident;
     }
-    public void setIncident(IncidentModel incdient){
+    public void setIncident(IncidentModel incident){
         this.incident = incident;
     }
 
@@ -87,7 +93,9 @@ public class MissionModel {
     //                              CALLBACK QUERIES DB
     //==================================================================================
 
-
+    public static List<MissionModel> getAllMissions(){
+        return Db.getAllMission();
+    }
 
 
 }

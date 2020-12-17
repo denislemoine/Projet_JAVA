@@ -54,8 +54,8 @@
     <div class="container-fluid border rounded-0 border-dark shadow d-flex d-xl-flex flex-column justify-content-center align-items-center align-content-center justify-content-xl-start align-items-xl-center" style="margin-right: 183px;margin-top: -47px;margin-left: 45px;filter: brightness(100%); padding-bottom: 18px;">
 
         <div class="btn-group" role="group" style="margin-top: 12px; margin-bottom: 18px;">
-            <a href="/hero" class="btn btn-dark">Liste des Supers Héros</a>
-            <a href="/register" class="btn btn-dark">Ajouter un Super Héro</a>
+            <a href="/mission" class="btn btn-dark">Liste des Missions</a>
+            <a href="/mission/add" class="btn btn-dark">Ajouter une Mission</a>
         </div>
 
         <div class="d-flex overflow-auto d-xl-flex flex-wrap justify-content-center align-items-center align-content-center justify-content-xl-center align-items-xl-center"
@@ -63,30 +63,19 @@
 
             <div class="d-flex flex-wrap overflow-auto" style="margin-top: 18px;">
 
-                <div th:each="hero : ${heros}" class="d-flex flex-row">
+                <div th:each="mission : ${missions}" class="d-flex flex-row">
 
                 <div class="card border-light bg-dark text-white" style="margin-right: 18px; margin-bottom: 18px;">
                     <div class="card-body" style="width: 420px;">
-                        <h4 class="card-title" th:text="${hero.getNom()}"></h4>
-                        <h6 class="card-text card-subtitle mb-2" th:text="| Pouvoir ${hero.getPouvoir()}|">Pouvoir</h6>
-                        <h6 class="card-text card-subtitle mb-2" th:text="| Point Faible ${hero.getPointFaible()}|">Point Faible</h6>
-                        <h6 class="text-muted card-subtitle mb-2" th:text="| Score ${hero.getScore()}|">Score</h6>
-                        <h6 class="text-muted card-subtitle mb-2" th:text="| Commentaire : ${hero.getCommentaire()}|">Commentaire</h6>
+                        <h4 class="card-title" th:text="${mission.getTitre()}"></h4>
+                        <h6 class="card-text card-subtitle mb-2" th:text="| Date de début : ${mission.getDateDebut()}|"></h6>
+                        <h6 class="card-text card-subtitle mb-2" th:text="| Date de Fin : ${mission.getDateFin()}|"></h6>
+                        <h6 class="text-muted card-subtitle mb-2" th:text="| Niveaux : ${mission.getNiveaux()}|"></h6>
+                        <h6 class="text-muted card-subtitle mb-2" th:text="| Urgence : ${mission.getUrgence()}|"></h6>
                     </div>
                 </div>
 
-                    <div class="card border-dark" style="margin-right: 18px; margin-bottom: 18px;">
-                        <div class="card-body" style="width: 420px;">
-                            <h4 class="card-title" th:text="|${hero.getCivil().getPrenom()} ${hero.getCivil().getNom()}|"></h4>
-                            <h6 class="card-text card-subtitle mb-2" th:text="| Civilité : ${hero.getCivil().getCivilite()}|"></h6>
-                            <h6 class="card-text card-subtitle mb-2" th:text="| Résidence : ${hero.getCivil().getAdresse()}|"></h6>
-                            <h6 class="card-text card-subtitle mb-2" th:text="| Email : ${hero.getCivil().getEmail()}|"></h6>
-                            <h6 class="card-text card-subtitle mb-2" th:text="| Téléphone : ${hero.getCivil().getTel()}|"></h6>
-                            <h6 class="text-muted card-subtitle mb-2" th:text="| Nationalité : ${hero.getCivil().getNationalite()}|"></h6>
-                            <h6 class="text-muted card-subtitle mb-2" th:text="| Date de Naissance : ${hero.getCivil().getDateDeNaissance()}|"></h6>
-                            <h6 class="text-muted card-subtitle mb-2" th:text="| Date de Décès : |"></h6>
-                        </div>
-                    </div>
+
 
                 </div>
 

@@ -2,6 +2,7 @@ package com.dreamteam.avengor.model;
 
 import com.dreamteam.avengor.database.Db;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public class SuperHerosModel {

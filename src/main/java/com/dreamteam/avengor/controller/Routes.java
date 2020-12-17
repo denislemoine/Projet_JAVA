@@ -42,7 +42,12 @@ public class Routes {
 
     @GetMapping("/organisation")
     public String organisation() {
-        return "organisation";
+        return "organisation/organisationList";
+    }
+
+    @GetMapping("/organisation-add")
+    public String organisationAdd() {
+        return "organisation/organisation";
     }
 
     @GetMapping("/admin")

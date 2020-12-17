@@ -62,13 +62,12 @@ public class Db {
 
             //creation d'une organisation
 
-
                 PreparedStatement statement = CON.prepareStatement
-                        ("INSERT INTO Civils (Nom, Adresse, Dirigeant, Commentaire,) " +
+                        ("INSERT INTO Civils (Nom, Adresse, Dirigeant, Commentaire) " +
                                 "VALUES (?, ?, ?, ?)");
                 statement.setString(1,organisationModel.getNom());
                 statement.setString(2,organisationModel.getAdresse());
-                //statement.setString(3,organisationModel.getDirigeant());
+                statement.setInt(3,organisationModel.getDirigeant());
                 statement.setString(4,organisationModel.getCommentaire());
 
                 statement.execute();
@@ -355,4 +354,9 @@ public class Db {
         }
         return vilains;
     }
+
+    //=========================================================================
+    //                          QUERIES DES ORGANISATION                    =
+    //=========================================================================
+
 }

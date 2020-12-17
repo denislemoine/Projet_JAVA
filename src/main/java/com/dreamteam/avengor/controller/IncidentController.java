@@ -1,6 +1,5 @@
 package com.dreamteam.avengor.controller;
 
-
 import com.dreamteam.avengor.model.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -29,6 +28,14 @@ public class IncidentController {
         model.addAttribute("incidentList",incidentList);
 
         return "incident/incident";
+    }
+
+    @RequestMapping(value="/incident-{id}", method = RequestMethod.GET)
+    public String deleteIncident (@PathVariable("id") String id, HttpServletRequest request, Model model) {
+        IncidentModel incident = Db.getIncidentByID(id);
+        model.addAttribute("incident",incident);
+
+        return "incident/incidentDetail";
     }
 
     @RequestMapping(value="/incident-add", method = RequestMethod.POST)

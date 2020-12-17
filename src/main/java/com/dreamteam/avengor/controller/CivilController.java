@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -61,12 +58,12 @@ public class CivilController {
         CivilsModel civilsModel1 = new CivilsModel(1,nom,prenom,civ,adresse,email,tel,dateDeNaissance,password, nationalite);
         int id_civil = Db.saveCivil(civilsModel1);
 
-        if (request.getParameter("isHero") == "1"){
-            SuperHerosModel superHerosModel = new SuperHerosModel(1,request.getParameter("super_name"),id_civil,request.getParameter("super_pouvoir"),
-                    request.getParameter("super_pfaible"), (float) 0,null,civilsModel1);
-            Db.saveHero(superHerosModel);
+        if (request.getParameter("isHero").equals("1")){
+            SuperHerosModel hero = new SuperHerosModel(1,request.getParameter("super_name"),id_civil,request.getParameter("super_pouvoir"),
+                    request.getParameter("super_pfaible"), (float) 0,null, civilsModel1);
+            Db.saveHero(hero);
         }
-        return "redirect:/login";
+        return "redirect:login";
     }
 
 }

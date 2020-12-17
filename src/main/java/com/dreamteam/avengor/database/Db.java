@@ -41,10 +41,10 @@ public class Db {
                 statement.setString(9,civilsModel.getNationalite());
                 statement.execute();
 
-                ResultSet res = statement.executeQuery("SELECT Id_Civil FROM Civils WHERE Email = " + civilsModel.getEmail());
+                Statement state = CON.createStatement();
+                ResultSet res = state.executeQuery("SELECT Id_Civil FROM Civils WHERE Email = '" + civilsModel.getEmail() + "'");
                 if(res.next()){
-                    return res.getInt("Id_civil");
-
+                    return res.getInt("Id_Civil");
                 }
             }
 
@@ -58,10 +58,10 @@ public class Db {
 
         try {
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            //creation d'un civils
+
             if(superHerosModel.getId_SuperHeros() != 0){
                 PreparedStatement statement = CON.prepareStatement
-                        ("INSERT INTO Super-heros (Nom, IdentitéSecretes, Pouvoir, Point-faible, , Commentaire) " +
+                        ("INSERT INTO Super_heros (Nom, IdentitéSecretes, Pouvoir, Point_faible, Score, Commentaire) " +
                                 "VALUES (?, ?, ?, ?, ?, ?)");
                 statement.setString(1,superHerosModel.getNom());
                 statement.setInt(2,superHerosModel.getIdentiteSecrete());

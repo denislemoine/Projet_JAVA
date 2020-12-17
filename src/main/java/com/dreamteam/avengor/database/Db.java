@@ -132,10 +132,8 @@ public class Db {
         String url="jdbc:mysql://185.31.40.53:3306/avengor_db";
         String userName="avengor_paul";
         String password ="avengor76";
-        List<CivilsModel> civils = new ArrayList<>();
         try {
             Connection con = DriverManager.getConnection(url,userName,password);
-
             //renvoie un civil
             Statement statement = con.createStatement();
             ResultSet resultSet = statement.executeQuery("select * from Civils where  id_Civil =" + id);
@@ -143,8 +141,10 @@ public class Db {
                     resultSet.getString("email"),resultSet.getString("tel"),resultSet.getString("dateDeNaissance"),null,resultSet.getString("Nationalite"));
             return civil;
         } catch (SQLException e) {
+
             e.printStackTrace();
-            return null;
+            CivilsModel civil = new CivilsModel(0,"erreur",null,null,null,null,null,null,null,null);
+            return civil;
         }
 
     }

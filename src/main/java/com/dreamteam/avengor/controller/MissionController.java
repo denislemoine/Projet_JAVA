@@ -39,6 +39,7 @@ public class MissionController {
     @GetMapping("/mission-add-{id}")
     public String showFormAddMission(@PathVariable("id") String id, Model model){
 
+        model.addAttribute("id", id);
 
         return "mission/missionAdd";
     }

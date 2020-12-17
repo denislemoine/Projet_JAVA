@@ -4,37 +4,26 @@ import com.dreamteam.avengor.model.CivilsModel;
 import com.dreamteam.avengor.model.IncidentModel;
 import com.dreamteam.avengor.model.SuperHerosModel;
 
-
 import java.sql.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Db {
 
-    String url;
-    String userName;
-    String password;
-
-    public Db(String url, String userName, String password) {
-        this.url = url;
-        this.userName = userName;
-        this.password = password;
-    }
+    private static final String URL = "jdbc:mysql://185.31.40.53:3306/avengor_db";
+    private static final String USERNAME = "avengor_paul";
+    private static final String PASSWORD = "avengor76";
+    private static Connection CON;
 
     public static void saveCivil(CivilsModel civilsModel){
 
-        String url="jdbc:mysql://185.31.40.53:3306/avengor_db";
-        String userName="avengor_paul";
-        String password ="avengor76";
         try {
-            Connection con = DriverManager.getConnection(url,userName,password);
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
             //creation d'un civils
             if(civilsModel.getId_Civil() != 0){
                 Date birth = Date.valueOf(civilsModel.getDateDeNaissance());
-                PreparedStatement statement = con.prepareStatement
+                PreparedStatement statement = CON.prepareStatement
                         ("INSERT INTO Civils (Nom, Prenom, Civilite, Adresse, Email, Tel, DateDeNaissance, Password, Nationalite) " +
                                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
                 statement.setString(1,civilsModel.getNom());
@@ -56,15 +45,11 @@ public class Db {
 
     public static void saveHero(SuperHerosModel superHerosModel){
 
-        String url="jdbc:mysql://185.31.40.53:3306/avengor_db";
-        String userName="avengor_paul";
-        String password ="avengor76";
         try {
-            Connection con = DriverManager.getConnection(url,userName,password);
-
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             //creation d'un civils
             if(superHerosModel.getId_SuperHeros() != 0){
-                PreparedStatement statement = con.prepareStatement
+                PreparedStatement statement = CON.prepareStatement
                         ("INSERT INTO Super-heros (Nom, IdentitéSecretes, Pouvoir, Point-faible, , Commentaire) " +
                                 "VALUES (?, ?, ?, ?, ?, ?)");
                 statement.setString(1,superHerosModel.getNom());
@@ -84,14 +69,9 @@ public class Db {
     // Ajout d'un incident
     public static void saveIncident(IncidentModel incidentModel){
 
-        String url="jdbc:mysql://185.31.40.53:3306/avengor_db";
-        String userName="avengor_pe";
-        String password ="avengor76";
-
         try {
-            Connection con = DriverManager.getConnection(url,userName,password);
-
-            PreparedStatement statement = con.prepareStatement
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            PreparedStatement statement = CON.prepareStatement
                         ("INSERT INTO Incidents (Adresse,TypeIncident,id_Civils,Ennemis,InfoComplementaire) " +
                                 "VALUES (?,?,?,?,?)");
             statement.setString(1,incidentModel.getAdresse());
@@ -107,15 +87,11 @@ public class Db {
     }
 
     public static List<CivilsModel> getAllCivil(){
-        String url="jdbc:mysql://185.31.40.53:3306/avengor_db";
-        String userName="avengor_paul";
-        String password ="avengor76";
         List<CivilsModel> civils = new ArrayList<>();
         try {
-            Connection con = DriverManager.getConnection(url,userName,password);
-
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             //renvoie de tout les civils
-            Statement statement = con.createStatement();
+            Statement statement = CON.createStatement();
             ResultSet resultSet = statement.executeQuery("select * from Civils");
             while(resultSet.next()){
                 CivilsModel civil = new CivilsModel(resultSet.getInt("id_Civil"),resultSet.getString("nom"),resultSet.getString("prenom"),resultSet.getString("civilite"),resultSet.getString("adresse"),
@@ -129,15 +105,11 @@ public class Db {
         return civils;
     }
     public static CivilsModel findCivilById(String id){
-        String url="jdbc:mysql://185.31.40.53:3306/avengor_db";
-        String userName="avengor_paul";
-        String password ="avengor76";
         List<CivilsModel> civils = new ArrayList<>();
         try {
-            Connection con = DriverManager.getConnection(url,userName,password);
-
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             //renvoie un civil
-            Statement statement = con.createStatement();
+            Statement statement = CON.createStatement();
             ResultSet resultSet = statement.executeQuery("select * from Civils where  id_Civil =" + id);
             CivilsModel civil = new CivilsModel(resultSet.getInt("id_Civil"),resultSet.getString("nom"),resultSet.getString("prenom"),resultSet.getString("civilite"),resultSet.getString("adresse"),
                     resultSet.getString("email"),resultSet.getString("tel"),resultSet.getString("dateDeNaissance"),null,resultSet.getString("Nationalite"));

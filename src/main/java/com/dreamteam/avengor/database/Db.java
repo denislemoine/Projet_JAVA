@@ -54,6 +54,32 @@ public class Db {
         return 0;
     }
 
+    public static int saveOrganisation(OrganisationModel organisationModel){
+
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            //creation d'une organisation
+
+
+                PreparedStatement statement = CON.prepareStatement
+                        ("INSERT INTO Civils (Nom, Adresse, Dirigeant, Commentaire,) " +
+                                "VALUES (?, ?, ?, ?)");
+                statement.setString(1,organisationModel.getNom());
+                statement.setString(2,organisationModel.getAdresse());
+                //statement.setString(3,organisationModel.getDirigeant());
+                statement.setString(4,organisationModel.getCommentaire());
+
+                statement.execute();
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
     public static void saveHero(SuperHerosModel superHerosModel){
 
         try {

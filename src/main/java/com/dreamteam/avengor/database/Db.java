@@ -265,7 +265,7 @@ public class Db {
                 MissionModel mission = new MissionModel(
                         res.getInt("id_Mission"), res.getString("Titre"), res.getTimestamp("DateDebut"),
                         res.getTimestamp("DateFin"), res.getInt("Niveaux"), res.getInt("Urgence"),
-                        res.getInt("id_Incidents"), null
+                        res.getInt("id_Incidents")
                 );
                 missions.add(mission);
             }
@@ -286,8 +286,20 @@ public class Db {
             statement.setTimestamp(2,missionModel.getDateDebut());
             statement.setInt(3,missionModel.getNiveaux());
             statement.setInt(4,missionModel.getUrgence());
-            statement.setInt(4,missionModel.getId_Incidents());
+            statement.setInt(5,missionModel.getId_Incidents());
             statement.execute();
+
+            ResultSet res = statement.executeQuery("SELECT id_Mission FROM Missions WHERE id_Incidents = " + missionModel.getId_Incidents());
+
+            if(res.next()) {
+                int id_mission = res.getInt("id_Mission");
+
+                PreparedStatement state = CON.prepareStatement
+                        ("UPDATE Incidents SET Mission = (?) WHERE id_Incidents = (?)");
+                state.setInt(1, id_mission);
+                state.setInt(2, missionModel.getId_Incidents());
+                state.execute();
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();

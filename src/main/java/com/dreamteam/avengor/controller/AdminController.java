@@ -6,7 +6,6 @@ import com.dreamteam.avengor.model.CivilsModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +35,12 @@ public class AdminController {
         model.addAttribute("civil",listeCivils);
         return "panelAdmin/accounts";
     }
-    @RequestMapping(value = "/admin/accounts/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/accounts/{id}")
     public String deleteAccount(@PathVariable("id") String id,Model model){
 
-        CivilsModel civil = Db.findCivilById(id);
+        CivilsModel civil = AdminModel.findCivilById(id);
         model.addAttribute("civil",civil);
+        System.out.println(civil.getId_Civil() + "coucou");
         return "panelAdmin/deleteAccount";
 
     }

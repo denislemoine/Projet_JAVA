@@ -125,8 +125,10 @@ public class Db {
                     resultSet.getString("email"),resultSet.getString("tel"),resultSet.getString("dateDeNaissance"),null,resultSet.getString("Nationalite"));
             return civil;
         } catch (SQLException e) {
+
             e.printStackTrace();
-            return null;
+            CivilsModel civil = new CivilsModel(0,"erreur",null,null,null,null,null,null,null,null);
+            return civil;
         }
 
     }

@@ -437,7 +437,10 @@ public class Db {
 
             statement.setString(5,satisfactionModel.getSatisfactionType());
             statement.setString(6,satisfactionModel.getMessage());
-            statement.setInt(7,satisfactionModel.getNote());
+
+            if (satisfactionModel.getNote() != null) { statement.setInt(7,satisfactionModel.getNote()); }
+            else { statement.setNull(7,Types.NULL); }
+
             statement.setString(8,satisfactionModel.getCommentaire());
             statement.execute();
         } catch (SQLException e) {

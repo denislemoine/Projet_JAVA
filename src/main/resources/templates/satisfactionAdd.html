@@ -57,7 +57,7 @@
             <div class="d-flex flex-column" style="margin-right: 61px;">
                 <h4 class="text-white">Enregistrer une satisfaction</h4>
                 <form action="/satisfaction-add" class="form" method="post">
-                    <label for="type">Type de satisfaction</label>
+                    <label for="type" class="text-white">Type de satisfaction</label>
                     <select name="type" id="type" class="border form-control rounded shadow-sm mb-0">
                         <option selected value="courier">Courier reçu</option>
                         <option value="smsMail">SMS / Mail</option>
@@ -65,25 +65,25 @@
                         <option value="enquete">Enquête terrain</option>
                     </select>
 
-                    <label for="hero">Concernant Super Héro</label>
+                    <label for="hero" class="labelhero text-white">Concernant Super Héro</label>
                     <select name="hero" id="hero" class="border form-control rounded shadow-sm mb-0">
                         <option selected value="0">Ne concerne pas un héro</option>
-                        <option th:each="superHero : ${superHeroList}" th:value="${superHero.getId_SuperHeros()}" th:text="${superHero.getNom()}"></option>
+                        <option th:each="superHero : ${superHeroList}" th:value="${superHero.getIdentiteSecrete()}" th:text="${superHero.getNom()}"></option>
                     </select>
 
-                    <label for="vilain">Concernant Super Vilain</label>
+                    <label for="vilain" class="labelvilain text-white">Concernant Super Vilain</label>
                     <select name="vilain" id="vilain" class="border form-control rounded shadow-sm mb-0">
                         <option selected value="0">Ne concerne pas un vilain</option>
                         <option th:each="superVilain : ${superVilainList}" th:value="${superVilain.getId_SuperVilain()}" th:text="${superVilain.getNom()}"></option>
                     </select>
 
-                    <label for="incident">Concernant un incident</label>
+                    <label for="incident" class="labelincident text-white">Concernant un incident</label>
                     <select name="incident" id="incident" class="border form-control rounded shadow-sm mb-0">
                         <option selected value="0">Ne concerne pas un incident</option>
                         <option th:each="incident : ${incidentList}" th:value="${incident.getId_Incidents()}" th:text="${incident.getTypeIncident()}"></option>
                     </select>
 
-                    <label for="mission">Concernant une mission</label>
+                    <label for="mission" class="labelmission text-white">Concernant une mission</label>
                     <select name="mission" id="mission" class="border form-control rounded shadow-sm mb-0">
                         <option selected value="0">Ne concerne pas une mission</option>
                         <option th:each="mission : ${missionList}" th:value="${mission.getId_Mission()}" th:text="${mission.getTitre()}"></option>
@@ -107,19 +107,79 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 <script>
     $('#hero').change(function(){
-        console.log($('#hero').val());
         if ($('#hero').val() == 0){
             $('#note').css('display','none');
+            $('#vilain').css('display','block');
+            $('.labelvilain').css('display','block');
+            $('#mission').css('display','block');
+            $('.labelmission').css('display','block');
+            $('#incident').css('display','block');
+            $('.labelincident').css('display','block');
         } else {
             $('#note').css('display','block');
+            $('#vilain').css('display','none');
+            $('.labelvilain').css('display','none');
+            $('#mission').css('display','none');
+            $('.labelmission').css('display','none');
+            $('#incident').css('display','none');
+            $('.labelincident').css('display','none');
         }
     })
     $('#vilain').change(function(){
-        console.log($('#vilain').val());
         if ($('#vilain').val() == 0){
             $('#note').css('display','none');
+            $('#hero').css('display','block');
+            $('.labelhero').css('display','block');
+            $('#mission').css('display','block');
+            $('.labelmission').css('display','block');
+            $('#incident').css('display','block');
+            $('.labelincident').css('display','block');
         } else {
             $('#note').css('display','block');
+            $('#hero').css('display','none');
+            $('.labelhero').css('display','none');
+            $('#mission').css('display','none');
+            $('.labelmission').css('display','none');
+            $('#incident').css('display','none');
+            $('.labelincident').css('display','none');
+        }
+    })
+    $('#incident').change(function(){
+        if ($('#incident').val() == 0){
+            $('#note').css('display','none');
+            $('#hero').css('display','block');
+            $('.labelhero').css('display','block');
+            $('#mission').css('display','block');
+            $('.labelmission').css('display','block');
+            $('#vilain').css('display','block');
+            $('.labelvilain').css('display','block');
+        } else {
+            $('#note').css('display','none');
+            $('#hero').css('display','none');
+            $('.labelhero').css('display','none');
+            $('#mission').css('display','none');
+            $('.labelmission').css('display','none');
+            $('#vilain').css('display','none');
+            $('.labelvilain').css('display','none');
+        }
+    })
+    $('#mission').change(function(){
+        if ($('#mission').val() == 0){
+            $('#note').css('display','none');
+            $('#hero').css('display','block');
+            $('.labelhero').css('display','block');
+            $('#vilain').css('display','block');
+            $('.labelvilain').css('display','block');
+            $('#incident').css('display','block');
+            $('.labelincident').css('display','block');
+        } else {
+            $('#note').css('display','none');
+            $('#hero').css('display','none');
+            $('.labelhero').css('display','none');
+            $('#vilain').css('display','none');
+            $('.labelvilain').css('display','none');
+            $('#incident').css('display','none');
+            $('.labelincident').css('display','none');
         }
     })
 </script>

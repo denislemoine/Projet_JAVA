@@ -63,20 +63,20 @@
 
             <div class="d-flex flex-wrap overflow-auto" style="margin-top: 18px;">
 
-                <div th:each="mission : ${missions}" class="d-flex flex-row">
+                <div th:each="incident : ${incidentList}" class="d-flex flex-row">
 
                     <div class="card border-light bg-dark text-white" style="margin-right: 18px; margin-bottom: 18px;">
                         <div class="card-body" style="width: 420px;">
-                            <h4 class="card-title" th:text="${mission.getTitre()}"></h4>
-                            <h6 class="card-text card-subtitle mb-2" th:text="| Date de début : ${mission.getDateDebut()}|"></h6>
-                            <h6 class="card-text card-subtitle mb-2" th:text="| Date de Fin : ${mission.getDateFin()}|"></h6>
-                            <h6 class="text-muted card-subtitle mb-2" th:text="| Niveaux : ${mission.getNiveaux()}|"></h6>
-                            <h6 class="text-muted card-subtitle mb-2" th:text="| Urgence : ${mission.getUrgence()}|"></h6>
+                            <h4 class="card-title" th:text="${incident.getTypeIncident()}"></h4>
+                            <h4 class="card-title" th:text="${incident.getMission()}"></h4>
+                            <h6 class="card-text card-subtitle mb-2" th:text="| Date de début : ${incident.getAdresse()}|"></h6>
+                            <h6 class="card-text card-subtitle mb-2" th:text="| Date de Fin : ${incident.getInfoComplementaire()}|"></h6>
+                            <a th:if="${incident.getMission() == 0}" th:href="|mission-add-${incident.getId_Incidents()}|" class="btn btn-link"><i class="bi text-danger bi-plus-square-fill"></i>Creer mission</a>
+                            <a th:if="${incident.getMission() == 0}" th:href="|incident-delete-${incident.getId_Incidents()}|" class="btn btn-link"><i class="bi bi-trash2-fill"></i>Sans suite</a>
+                            <p th:if="${incident.getMission() != 0}" th:href="|incident-delete-${incident.getId_Incidents()}|" class="text-white">Déjà sur mission</p>
                         </div>
                     </div>
-
-
-
+<!--                    mission-add-id-->
                 </div>
 
             </div>

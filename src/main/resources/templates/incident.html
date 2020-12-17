@@ -60,11 +60,16 @@
                     <br>
                     <input class="border rounded shadow-sm" type="number" required="" name="TypeIncident" placeholder="TypeIncident">
                     <br>
-                    <input class="border rounded shadow-sm" type="number" required="" name="Votre ID (en attendant le logIn)" placeholder="id_Civils">
+                    <input class="border rounded shadow-sm" type="number" required="" name="id_Civils" placeholder="Votre ID (en attendant le logIn)">
                     <br>
-                    <input class="border rounded shadow-sm" type="number" required="" name="Ennemis" placeholder="Ennemis">
+                    <label for="Ennemis" class="text-white">Super Vilain impliqué</label>
                     <br>
-                    <input class="border rounded shadow-sm" type="text" required="" name="InfoComplementaire" placeholder="Infos complémentaire">
+                    <select th:each="superVilain : ${superVilainList}" name="Ennemis" id="Ennemis" class="border form-control rounded shadow-sm mb-0">
+                        <option value="">Non connus</option>
+                        <option th:value="${superVilain.getId_SuperVilain()}" th:text="${superVilain.getNom()}"></option>
+                    </select>
+                    <br>
+                    <input class="border rounded shadow-sm mt-0" type="text" required="" name="InfoComplementaire" placeholder="Infos complémentaire">
                     <br>
                     <button class="btn btn-danger mt-3">Enregistrer</button>
                 </form>

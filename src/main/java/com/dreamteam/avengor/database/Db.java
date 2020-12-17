@@ -214,15 +214,13 @@ public class Db {
             ResultSet res = statement.executeQuery("SELECT * FROM Super_vilains");
 
             while(res.next()){
-
                 SuperVilainModel vilain = new SuperVilainModel(
-                        res.getInt("id_SuperVilain"), res.getString("Nom"), res.getInt("IdentiteSecrete"),
-                        res.getString("Pouvoir"), res.getString("PointFaible"), (float) res.getInt("Score"),
+                        res.getInt("id_SuperVilains"), res.getString("Nom"), res.getInt("IdentitéSecretes"),
+                        res.getString("Pouvoir"), res.getString("Point-faible"), (float) res.getInt("Score"),
                         res.getString("Commentaire")
                 );
                 vilains.add(vilain);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

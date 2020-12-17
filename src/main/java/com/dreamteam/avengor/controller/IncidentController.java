@@ -21,7 +21,14 @@ import java.util.List;
 @Controller
 public class IncidentController {
 
-    @RequestMapping(value="/incident", method = RequestMethod.POST)
+
+    @GetMapping("/incident")
+    public String showListIncidents(Model model){
+
+        return "incident/incident";
+    }
+
+    @RequestMapping(value="/incident-add", method = RequestMethod.POST)
     public String addIncident(WebRequest request) throws ParseException {
 
         String Adresse = request.getParameter("Adresse");
@@ -39,14 +46,14 @@ public class IncidentController {
         return "redirect:/interface";
     }
 
-    @GetMapping("/incident")
+    @GetMapping("/incident-add")
     public String showFormIncident(Model model){
         List<SuperVilainModel> superVilainList = new ArrayList<>();
         superVilainList = Db.getAllVilains();
 
         model.addAttribute("superVilainList",superVilainList);
 
-        return "incident";
+        return "incident/incidentAdd";
     }
 
 }

@@ -20,10 +20,19 @@ public class MissionController {
     public String showListHero(Model model){
 
         missionsList = MissionModel.getAllMissions();
-
         model.addAttribute("missions", missionsList);
 
         return "mission/missionList";
     }
+
+    @GetMapping("/mission-add")
+    public String addHero(Model model){
+
+        missionsList = MissionModel.getAllMissions();
+        model.addAttribute("missions", missionsList);
+
+        return "mission/missionAdd";
+    }
+
 
 }

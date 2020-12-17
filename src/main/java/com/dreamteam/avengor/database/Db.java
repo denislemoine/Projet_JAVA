@@ -2,6 +2,7 @@ package com.dreamteam.avengor.database;
 
 import com.dreamteam.avengor.model.*;
 
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +88,7 @@ public class Db {
 
             if(superHerosModel.getId_SuperHeros() != 0){
                 PreparedStatement statement = CON.prepareStatement
-                        ("INSERT INTO Super_heros (Nom, IdentitéSecretes, Pouvoir, Point_faible, Score, Commentaire) " +
+                        ("INSERT INTO Super_heros (Nom, IdentiteSecretes, Pouvoir, Point_faible, Score, Commentaire) " +
                                 "VALUES (?, ?, ?, ?, ?, ?)");
                 statement.setString(1,superHerosModel.getNom());
                 statement.setInt(2,superHerosModel.getIdentiteSecrete());
@@ -191,9 +192,11 @@ public class Db {
             Statement statement = CON.createStatement();
             ResultSet resultSet = statement.executeQuery("select * from Civils");
             while(resultSet.next()){
-                CivilsModel civil = new CivilsModel(resultSet.getInt("id_Civil"),resultSet.getString("nom"),resultSet.getString("prenom"),resultSet.getString("civilite"),resultSet.getString("adresse"),
-                        resultSet.getString("email"),resultSet.getString("tel"),resultSet.getString("dateDeNaissance"),null,resultSet.getString("Nationalite"));
-                civils.add(civil);
+                if(resultSet.getString("Password") != null){
+                    CivilsModel civil = new CivilsModel(resultSet.getInt("id_Civil"),resultSet.getString("nom"),resultSet.getString("prenom"),resultSet.getString("civilite"),resultSet.getString("adresse"),
+                            resultSet.getString("email"),resultSet.getString("tel"),resultSet.getString("dateDeNaissance"),null,resultSet.getString("Nationalite"));
+                    civils.add(civil);
+                }
             }
 
         } catch (SQLException e) {
@@ -224,6 +227,24 @@ public class Db {
         }
     }
 
+    public static void deleteCivil(String id){
+
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            PreparedStatement statement = CON.prepareStatement
+                    ("Update Civils set Password = null, Nom = null, Prenom = null, Civilite = null, Adresse = null, Email = null," +
+                            " Tel = null, DateDeNaissance = null,DateDeDeces = null,Orga = null,Nationalite = null,Commentaire = null, DateAjout = null, DateDerniereModif = null " +
+                            "Where id_Civil = ?");
+            statement.setString(1,id);
+            statement.execute();
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+        
+    }
+
     //=========================================================================
     //                          QUERIES HERO                                  =
     //=========================================================================
@@ -238,10 +259,10 @@ public class Db {
 
             while(res.next()){
 
-                CivilsModel civil = findCivilById(res.getString("IdentitéSecretes"));
+                CivilsModel civil = findCivilById(res.getString("IdentiteSecretes"));
 
                 SuperHerosModel hero = new SuperHerosModel(
-                    res.getInt("id_SuperHeros"), res.getString("Nom"), res.getInt("IdentitéSecretes"),
+                    res.getInt("id_SuperHeros"), res.getString("Nom"), res.getInt("IdentiteSecretes"),
                         res.getString("Pouvoir"), res.getString("Point_faible"), res.getFloat("Score"),
                         res.getString("Commentaire"), civil
                 );
@@ -270,7 +291,7 @@ public class Db {
                 MissionModel mission = new MissionModel(
                         res.getInt("id_Mission"), res.getString("Titre"), res.getTimestamp("DateDebut"),
                         res.getTimestamp("DateFin"), res.getInt("Niveaux"), res.getInt("Urgence"),
-                        res.getInt("id_Incidents"), null
+                        res.getInt("id_Incidents")
                 );
                 missions.add(mission);
             }
@@ -279,6 +300,36 @@ public class Db {
             e.printStackTrace();
         }
         return missions;
+    }
+
+    public static void saveMission(MissionModel missionModel){
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            PreparedStatement statement = CON.prepareStatement
+                    ("INSERT INTO Missions (Titre, DateDebut, Niveaux, Urgence, id_Incidents) " +
+                            "VALUES (?,?,?,?,?)");
+            statement.setString(1,missionModel.getTitre());
+            statement.setTimestamp(2,missionModel.getDateDebut());
+            statement.setInt(3,missionModel.getNiveaux());
+            statement.setInt(4,missionModel.getUrgence());
+            statement.setInt(5,missionModel.getId_Incidents());
+            statement.execute();
+
+            ResultSet res = statement.executeQuery("SELECT id_Mission FROM Missions WHERE id_Incidents = " + missionModel.getId_Incidents());
+
+            if(res.next()) {
+                int id_mission = res.getInt("id_Mission");
+
+                PreparedStatement state = CON.prepareStatement
+                        ("UPDATE Incidents SET Mission = (?) WHERE id_Incidents = (?)");
+                state.setInt(1, id_mission);
+                state.setInt(2, missionModel.getId_Incidents());
+                state.execute();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     //=========================================================================
@@ -293,8 +344,8 @@ public class Db {
 
             while(res.next()){
                 SuperVilainModel vilain = new SuperVilainModel(
-                        res.getInt("id_SuperVilains"), res.getString("Nom"), res.getInt("IdentitéSecretes"),
-                        res.getString("Pouvoir"), res.getString("Point-faible"), (float) res.getInt("Score"),
+                        res.getInt("id_SuperVilains"), res.getString("Nom"), res.getInt("IdentiteSecretes"),
+                        res.getString("Pouvoir"), res.getString("Point_faible"), (float) res.getInt("Score"),
                         res.getString("Commentaire")
                 );
                 vilains.add(vilain);

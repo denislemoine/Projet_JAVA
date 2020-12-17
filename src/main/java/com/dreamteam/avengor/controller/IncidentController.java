@@ -24,6 +24,9 @@ public class IncidentController {
 
     @GetMapping("/incident")
     public String showListIncidents(Model model){
+        List<IncidentModel> incidentList = new ArrayList<>();
+        incidentList = Db.getAllIncidents();
+        model.addAttribute("incidentList",incidentList);
 
         return "incident/incident";
     }

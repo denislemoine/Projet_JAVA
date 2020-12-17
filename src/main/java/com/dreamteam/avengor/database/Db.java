@@ -160,7 +160,7 @@ public class Db {
 
             while(res.next()){
 
-                CivilsModel civil = findCivilById("10");
+                CivilsModel civil = findCivilById(res.getString("IdentitéSecretes"));
 
                 SuperHerosModel hero = new SuperHerosModel(
                     res.getInt("id_SuperHeros"), res.getString("Nom"), res.getInt("IdentitéSecretes"),

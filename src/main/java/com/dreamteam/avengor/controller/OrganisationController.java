@@ -19,7 +19,7 @@ import java.util.List;
 
 @Controller
 public class OrganisationController {
-    
+
     @RequestMapping(value="/organisation", method = RequestMethod.POST)
     public String addCivils (HttpServletRequest request, OrganisationModel organisationModel) throws ParseException {
 
@@ -31,6 +31,6 @@ public class OrganisationController {
 
         OrganisationModel organisationModel1 = new OrganisationModel(1, nom, adresse, dirigent, commentaire, null, null, 0, 0);
         Db.saveOrganisation(organisationModel1);
-
+        return "/";
     }
 }

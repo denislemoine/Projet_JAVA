@@ -30,6 +30,9 @@ public class SuperVilainController {
         //Float score = float request.getParameter(0);
         String commentaire = request.getParameter("commentaire");
 
+        if (request.getParameter("isVilain") == "1"){
+
+        }
 
         SuperVilainModel superVilainModel1 = new SuperVilainModel(1,nom,IdentiteSecrete,pouvoir,pontFaible,null,commentaire);
         Db.saveVilain(superVilainModel1);

@@ -40,6 +40,9 @@ public class Routes {
         return "register";
     }
 
+    @GetMapping("/vilain")
+    public String vilain() { return "Vilain"; }
+
     @GetMapping("/organisation")
     public String organisation() {
         return "organisation/organisationList";

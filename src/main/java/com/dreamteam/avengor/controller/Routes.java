@@ -40,9 +40,17 @@ public class Routes {
         return "register";
     }
 
+    @GetMapping("/vilain")
+    public String vilain() { return "Vilain"; }
+
     @GetMapping("/organisation")
     public String organisation() {
-        return "organisation";
+        return "organisation/organisationList";
+    }
+
+    @GetMapping("/organisation-add")
+    public String organisationAdd() {
+        return "organisation/organisation";
     }
 
     @GetMapping("/admin")

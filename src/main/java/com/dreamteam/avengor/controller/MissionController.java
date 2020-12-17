@@ -8,10 +8,7 @@ import com.dreamteam.avengor.model.MissionModel;
 import com.dreamteam.avengor.model.SuperHerosModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
@@ -55,10 +52,8 @@ public class MissionController {
         Date date = new Date();
         long now = date.getTime();
         Timestamp dateDebut = new Timestamp(now);
-        IncidentModel incident = Db.getIncidentByID(id);
-        Integer.parseInt(id);
 
-        MissionModel mission = new MissionModel(1, titre, dateDebut, null, niveau, urgence, Integer.parseInt(id), incident);
+        MissionModel mission = new MissionModel(1, titre, dateDebut, null, niveau, urgence, Integer.parseInt(id));
         Db.saveMission(mission);
 
         return "redirect:mission";

@@ -2,6 +2,7 @@ package com.dreamteam.avengor.database;
 
 import com.dreamteam.avengor.model.*;
 
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -165,9 +166,11 @@ public class Db {
             Statement statement = CON.createStatement();
             ResultSet resultSet = statement.executeQuery("select * from Civils");
             while(resultSet.next()){
-                CivilsModel civil = new CivilsModel(resultSet.getInt("id_Civil"),resultSet.getString("nom"),resultSet.getString("prenom"),resultSet.getString("civilite"),resultSet.getString("adresse"),
-                        resultSet.getString("email"),resultSet.getString("tel"),resultSet.getString("dateDeNaissance"),null,resultSet.getString("Nationalite"));
-                civils.add(civil);
+                if(resultSet.getString("Password") != null){
+                    CivilsModel civil = new CivilsModel(resultSet.getInt("id_Civil"),resultSet.getString("nom"),resultSet.getString("prenom"),resultSet.getString("civilite"),resultSet.getString("adresse"),
+                            resultSet.getString("email"),resultSet.getString("tel"),resultSet.getString("dateDeNaissance"),null,resultSet.getString("Nationalite"));
+                    civils.add(civil);
+                }
             }
 
         } catch (SQLException e) {
@@ -202,16 +205,11 @@ public class Db {
 
         try {
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
             PreparedStatement statement = CON.prepareStatement
-                    ("delete id_civils from Incidents where id_civils = ?");
-            statement.setString(1,id);
-            statement.execute();
-            statement = CON.prepareStatement
-                    ("delete identiteSecrete from super_heros where id_Civil = ?");
-            statement.setString(1,id);
-            statement.execute();
-            statement = CON.prepareStatement
-                    ("delete from Civils where id_Civil = ?");
+                    ("Update Civils set Password = null, Nom = null, Prenom = null, Civilite = null, Adresse = null, Email = null," +
+                            " Tel = null, DateDeNaissance = null,DateDeDeces = null,Orga = null,Nationalite = null,Commentaire = null, DateAjout = null, DateDerniereModif = null " +
+                            "Where id_Civil = ?");
             statement.setString(1,id);
             statement.execute();
         } catch (SQLException e) {

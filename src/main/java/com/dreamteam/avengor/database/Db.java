@@ -286,7 +286,7 @@ public class Db {
             while(res.next()){
                 SuperVilainModel vilain = new SuperVilainModel(
                         res.getInt("id_SuperVilains"), res.getString("Nom"), res.getInt("IdentiteSecretes"),
-                        res.getString("Pouvoir"), res.getString("Pointfaible"), (float) res.getInt("Score"),
+                        res.getString("Pouvoir"), res.getString("Point_faible"), (float) res.getInt("Score"),
                         res.getString("Commentaire")
                 );
                 vilains.add(vilain);

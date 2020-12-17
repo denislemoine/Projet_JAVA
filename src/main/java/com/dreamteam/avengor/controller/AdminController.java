@@ -1,12 +1,16 @@
 package com.dreamteam.avengor.controller;
 
-import com.dreamteam.avengor.database.Db;
 import com.dreamteam.avengor.model.AdminModel;
 import com.dreamteam.avengor.model.CivilsModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,12 +39,22 @@ public class AdminController {
         model.addAttribute("civil",listeCivils);
         return "panelAdmin/accounts";
     }
+    @RequestMapping(value = "/admin/accounts", method = RequestMethod.POST)
+    public String deleteAccount(HttpServletRequest request,Model model) throws ParseException {
+        if(request.getParameter("delete")!= null){
+            listeCivils = CivilsModel.getAllCivils();
+            model.addAttribute("civil",listeCivils);
+            AdminModel.deleteCivil(request.getParameter("delete"));
+        }
+
+        return "panelAdmin/accounts";
+    }
+
     @RequestMapping(value = "/admin/accounts/{id}")
-    public String deleteAccount(@PathVariable("id") String id,Model model){
+    public String viewDeleteAccount(@PathVariable("id") String id,Model model){
 
         CivilsModel civil = AdminModel.findCivilById(id);
         model.addAttribute("civil",civil);
-        System.out.println(civil.getId_Civil() + "coucou");
         return "panelAdmin/deleteAccount";
 
     }

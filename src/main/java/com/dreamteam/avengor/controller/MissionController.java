@@ -23,6 +23,7 @@ import java.util.List;
 public class MissionController {
 
     private List<MissionModel> missionsList = new ArrayList<>();
+    private List<SuperHerosModel> herosList = new ArrayList<>();
 
     @GetMapping("/mission")
     public String showListHero(Model model){
@@ -30,13 +31,18 @@ public class MissionController {
         missionsList = MissionModel.getAllMissions();
         model.addAttribute("missions", missionsList);
 
+
+
         return "mission/missionList";
     }
 
     @GetMapping("/mission-add-{id}")
     public String showFormAddMission(@PathVariable("id") String id, Model model){
 
+        herosList = SuperHerosModel.getAllHeros();
+
         model.addAttribute("id", id);
+        model.addAttribute("herosList", herosList);
 
         return "mission/missionAdd";
     }
@@ -48,13 +54,14 @@ public class MissionController {
         String titre = request.getParameter("titre");
         int niveau = Integer.parseInt(request.getParameter("niveau"));
         int urgence = Integer.parseInt(request.getParameter("urgence"));
+        int idHero = Integer.parseInt(request.getParameter("hero"));
 
         Date date = new Date();
         long now = date.getTime();
         Timestamp dateDebut = new Timestamp(now);
 
-        MissionModel mission = new MissionModel(1, titre, dateDebut, null, niveau, urgence, Integer.parseInt(id));
-        Db.saveMission(mission);
+        MissionModel mission = new MissionModel(1, titre, dateDebut, null, niveau, urgence, Integer.parseInt(id), null);
+        Db.saveMission(mission, idHero);
 
         return "redirect:mission";
     }

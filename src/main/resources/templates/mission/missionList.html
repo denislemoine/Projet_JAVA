@@ -71,6 +71,7 @@
                         <h6 class="card-text card-subtitle mb-2" th:text="| Date de Fin : ${mission.getDateFin()}|"></h6>
                         <h6 class="text-muted card-subtitle mb-2" th:text="| Niveaux : ${mission.getNiveaux()}|"></h6>
                         <h6 class="text-muted card-subtitle mb-2" th:text="| Urgence : ${mission.getUrgence()}|"></h6>
+                        <h6 th:if="${mission.getHero()} != null" class="text-muted card-subtitle mb-2" th:text="| Super Héro impliqué : ${mission.getHero().getNom()}|"></h6>
                     </div>
                 </div>
 

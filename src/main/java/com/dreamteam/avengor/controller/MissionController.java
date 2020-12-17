@@ -8,6 +8,7 @@ import com.dreamteam.avengor.model.SuperHerosModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -34,18 +35,16 @@ public class MissionController {
         return "mission/missionList";
     }
 
-    @GetMapping("/mission-add")
-    public String showFormAddMission(Model model){
+    @GetMapping("/mission-add-{id}")
+    public String showFormAddMission(@PathVariable("id") String id, Model model){
 
-        missionsList = MissionModel.getAllMissions();
-        model.addAttribute("missions", missionsList);
 
         return "mission/missionAdd";
     }
 
 
-    @RequestMapping(value="/mission-add", method = RequestMethod.POST)
-    public String addMission (HttpServletRequest request, CivilsModel civilsModel) throws ParseException {
+    @RequestMapping(value="/mission-add-{id}", method = RequestMethod.POST)
+    public String addMission (@PathVariable("id") String id, HttpServletRequest request, CivilsModel civilsModel) throws ParseException {
 
         String titre = request.getParameter("titre");
         int niveau = Integer.parseInt(request.getParameter("niveau"));

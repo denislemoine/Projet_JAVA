@@ -1,9 +1,6 @@
 package com.dreamteam.avengor.database;
 
-import com.dreamteam.avengor.model.CivilsModel;
-import com.dreamteam.avengor.model.IncidentModel;
-import com.dreamteam.avengor.model.MissionModel;
-import com.dreamteam.avengor.model.SuperHerosModel;
+import com.dreamteam.avengor.model.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -92,6 +89,10 @@ public class Db {
             e.printStackTrace();
         }
     }
+    //=========================================================================
+    //                          QUERIES CIVIL                                 =
+    //=========================================================================
+
 
     //=========================================================================
     //                          QUERIES CIVIL                                 =
@@ -195,4 +196,29 @@ public class Db {
         return missions;
     }
 
+    //=========================================================================
+    //                          QUERIES DES SUPERVILAINS                      =
+    //=========================================================================
+    public static List<SuperVilainModel> getAllVilains(){
+        List<SuperVilainModel> vilains = new ArrayList<>();
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Statement statement = CON.createStatement();
+            ResultSet res = statement.executeQuery("SELECT * FROM Super-vilains");
+
+            while(res.next()){
+
+                SuperVilainModel vilain = new SuperVilainModel(
+                        res.getInt("id_SuperVilain"), res.getString("Nom"), res.getInt("IdentiteSecrete"),
+                        res.getString("Pouvoir"), res.getString("PointFaible"), (float) res.getInt("Score"),
+                        res.getString("Commentaire")
+                );
+                vilains.add(vilain);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return vilains;
+    }
 }

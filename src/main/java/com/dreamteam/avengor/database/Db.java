@@ -255,6 +255,24 @@ public class Db {
         return missions;
     }
 
+    public static void saveMission(MissionModel missionModel){
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            PreparedStatement statement = CON.prepareStatement
+                    ("INSERT INTO Missions (Titre, DateDebut, Niveaux, Urgence, id_Incidents) " +
+                            "VALUES (?,?,?,?,?)");
+            statement.setString(1,missionModel.getTitre());
+            statement.setTimestamp(2,missionModel.getDateDebut());
+            statement.setInt(3,missionModel.getNiveaux());
+            statement.setInt(4,missionModel.getUrgence());
+            statement.setInt(4,missionModel.getId_Incidents());
+            statement.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     //=========================================================================
     //                          QUERIES DES SUPERVILAINS                      =
     //=========================================================================

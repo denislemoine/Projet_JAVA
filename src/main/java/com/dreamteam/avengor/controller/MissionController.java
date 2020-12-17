@@ -3,6 +3,7 @@ package com.dreamteam.avengor.controller;
 
 import com.dreamteam.avengor.database.Db;
 import com.dreamteam.avengor.model.CivilsModel;
+import com.dreamteam.avengor.model.IncidentModel;
 import com.dreamteam.avengor.model.MissionModel;
 import com.dreamteam.avengor.model.SuperHerosModel;
 import org.springframework.stereotype.Controller;
@@ -53,15 +54,12 @@ public class MissionController {
         Date date = new Date();
         long now = date.getTime();
         Timestamp dateDebut = new Timestamp(now);
+        IncidentModel incident = Db.getIncidentByID(id);
+        Integer.parseInt(id);
 
+        MissionModel mission = new MissionModel(1, titre, dateDebut, null, niveau, urgence, Integer.parseInt(id), incident);
+        Db.saveMission(mission);
 
-        /*Db.getIncidentByID();
-
-
-        MissionModel mission = new MissionModel(1, titre, dateDebut, null, niveau, urgence, 0, null);
-        int id_civil = Db.saveMission(mission);
-
-        */
         return "redirect:mission";
     }
 

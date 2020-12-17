@@ -102,6 +102,29 @@ public class Db {
             e.printStackTrace();
         }
     }
+
+    public static void saveVilain(SuperVilainModel superVilainModel){
+
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            //if(superHerosModel.getId_SuperHeros() != 0){
+                PreparedStatement statement = CON.prepareStatement
+                        ("INSERT INTO Super_vilains (Nom, IdentiteSecretes, Pouvoir, Point_faible, Score, Commentaire) " +
+                                "VALUES (?, ?, ?, ?, ?, ?)");
+                statement.setString(1,superVilainModel.getNom());
+                statement.setInt(2,superVilainModel.getIdentiteSecrete());
+                statement.setString(3,superVilainModel.getPouvoir());
+                statement.setString(4,superVilainModel.getPointFaible());
+                statement.setFloat(5,superVilainModel.getScore());
+                statement.setString(6,superVilainModel.getCommentaire());
+                statement.execute();
+            //}
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     //=========================================================================
     //                          QUERIES INCIDENT                              =
     //=========================================================================

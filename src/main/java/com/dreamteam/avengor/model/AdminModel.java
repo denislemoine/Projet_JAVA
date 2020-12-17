@@ -11,4 +11,7 @@ public class AdminModel {
     public static void deleteCivil(String id){
         Db.deleteCivil(id);
     }
+    public static void modifyCivil(String id, CivilsModel civil){
+        Db.modifyCivil(id,civil);
+    }
 }

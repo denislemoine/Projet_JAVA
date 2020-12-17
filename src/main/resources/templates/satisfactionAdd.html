@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Avengor - Les Incidents</title>
+    <title>Avengor - Créer un Incident</title>
 
     <link rel="icon" type="image/png" th:href="@{/assets/img/logo.png}" />
 
@@ -51,47 +51,76 @@
         </div>
     </div>
 
-    <div class="container-fluid border rounded-0 border-dark shadow d-flex d-xl-flex flex-column justify-content-center align-items-center align-content-center justify-content-xl-start align-items-xl-center" style="margin-right: 183px;margin-top: -47px;margin-left: 45px;filter: brightness(100%); padding-bottom: 18px;">
+    <div class="container-fluid border rounded-0 border-dark shadow d-flex d-xl-flex flex-column justify-content-center align-items-center align-content-center justify-content-xl-start align-items-xl-center" style="margin-right: 183px;margin-top: -47px;margin-left: 45px;filter: brightness(100%);">
 
-        <div class="btn-group" role="group" style="margin-top: 12px; margin-bottom: 18px;">
-            <a href="/incident" class="btn btn-dark">Liste des Incidents</a>
-        </div>
+        <div class="d-flex d-xl-flex justify-content-center align-items-center align-content-center justify-content-xl-center align-items-xl-center" style="background-repeat: no-repeat;background-size: auto;background-position: center;width: 918px;opacity: 1;filter: grayscale(0%) hue-rotate(0deg) invert(0%) saturate(100%);height: 899px;margin: -1px;">
+            <div class="d-flex flex-column" style="margin-right: 61px;">
+                <h4 class="text-white">Enregistrer une satisfaction</h4>
+                <form action="/satisfaction-add" class="form" method="post">
+                    <label for="type">Type de satisfaction</label>
+                    <select name="type" id="type" class="border form-control rounded shadow-sm mb-0">
+                        <option selected value="courier">Courier reçu</option>
+                        <option value="smsMail">SMS / Mail</option>
+                        <option value="press">Coupure de presse</option>
+                        <option value="enquete">Enquête terrain</option>
+                    </select>
 
-        <div class="d-flex overflow-auto d-xl-flex flex-wrap justify-content-center align-items-center align-content-center justify-content-xl-center align-items-xl-center"
-             style="background-repeat: no-repeat;background-size: auto;background-position: center;width: 918px;opacity: 1;filter: grayscale(0%) hue-rotate(0deg) invert(0%) saturate(100%);height: 899px;margin: -1px;">
+                    <label for="type">Concernant Super Héro</label>
+                    <select th:each="superHero : ${superHeroList}" name="hero" id="hero" class="border form-control rounded shadow-sm mb-0">
+                        <option selected value="0">Ne concerne pas un héro</option>
+                        <option th:value="${superHero.getId_SuperHeros()}" th:text="${superHero.getNom()}"></option>
+                    </select>
 
-            <div class="d-flex flex-wrap overflow-auto" style="margin-top: 18px;">
+                    <label for="type">Concernant Super Vilain</label>
+                    <select th:each="superVilain : ${superVilainList}" name="vilain" id="vilain" class="border form-control rounded shadow-sm mb-0">
+                        <option selected value="0">Ne concerne pas un vilain</option>
+                        <option th:value="${superVilain.getId_SuperVilain()}" th:text="${superVilain.getNom()}"></option>
+                    </select>
 
-                <div class="d-flex flex-row">
+                    <label for="type">Concernant un incident</label>
+                    <select th:each="incident : ${incidentList}" name="incident" id="incident" class="border form-control rounded shadow-sm mb-0">
+                        <option selected value="0">Ne concerne pas un incident</option>
+                        <option th:value="${incident.getId_Incidents()}" th:text="${incident.getTypeIncident()}"></option>
+                    </select>
 
-                    <div class="card border-light bg-dark text-white" style="margin-right: 18px; margin-bottom: 18px;">
-                        <div class="card-body" style="width: 420px;">
-                            <h4 class="card-title" th:text="${incident.getTypeIncident()}"></h4>
-                            <h4 class="card-title" th:text="${incident.getMission()}"></h4>
-                            <h6 class="card-text card-subtitle mb-2" th:text="| Date de début : ${incident.getAdresse()}|"></h6>
-                            <h6 class="card-text card-subtitle mb-2" th:text="| Date de Fin : ${incident.getInfoComplementaire()}|"></h6>
-                            <a th:if="${incident.getMission() == 0}" th:href="|mission-add-${incident.getId_Incidents()}|" class="btn btn-link"><i class="bi text-danger bi-plus-square-fill"></i>Creer mission</a>
-                            <a th:if="${incident.getMission() == 0}" th:href="|incident-delete-${incident.getId_Incidents()}|" class="btn btn-link"><i class="bi bi-trash2-fill"></i>Classer sans suite</a>
-                            <p th:if="${incident.getMission() != 0}" class="text-white">Déjà sur une mission</p>
-                        </div>
-                        <div class="card-footer">
-                            <h4 class="card-title">Les satisfactions :</h4>
+                    <label for="type">Concernant une mission</label>
+                    <select th:each="mission : ${missionList}" name="mission" id="mission" class="border form-control rounded shadow-sm mb-0">
+                        <option selected value="0">Ne concerne pas une mission</option>
+                        <option th:value="${mission.getId_Mission()}" th:text="${mission.getTitre()}"></option>
+                    </select>
 
-                        </div>
-                    </div>
-                </div>
-
+                    <input class="border rounded shadow-sm" type="text" required="" name="commentaire" placeholder="Commentaire">
+                    <br>
+                    <input class="border rounded shadow-sm" type="number" min="0" max="5" id="note" required name="note" placeholder="Note entre 0 et 5" style="display: none">
+                    <br>
+                    <button class="btn btn-danger mt-3">Enregistrer</button>
+                </form>
             </div>
-
         </div>
     </div>
 
-    <a class="btn border-danger shadow-sm" role="button" style="background-repeat: no-repeat;font-size: 18px;font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);background-image: url(&quot;assets/img/login/button2.png&quot;);background-position: center;background-size: contain;margin-left: 0px;margin-top: 0px;margin-right: 81px;padding-top: 9px;font-weight: normal;padding-bottom: 0px;padding-left: 75px;height: 39px;padding-right: 19px;"
-       href="logout">DISCONNECT</a></header>
-
+    <a class="btn border-danger shadow-sm" role="button" style="background-repeat: no-repeat;font-size: 18px;font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);background-image: url(&quot;assets/img/login/button2.png&quot;);background-position: center;background-size: contain;margin-left: 0px;margin-top: 0px;margin-right: 81px;padding-top: 9px;font-weight: normal;padding-bottom: 0px;padding-left: 75px;height: 39px;padding-right: 19px;" href="logout">DISCONNECT</a></header>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<script>
+    $('#hero').change(function(){
+        console.log($('#hero').val());
+        if ($('#hero').val() == 0){
+            $('#note').css('display','none');
+        } else {
+            $('#note').css('display','block');
+        }
+    })
+    $('#vilain').change(function(){
+        console.log($('#vilain').val());
+        if ($('#vilain').val() == 0){
+            $('#note').css('display','none');
+        } else {
+            $('#note').css('display','block');
+        }
+    })
+</script>
 <script th:src="@{/assets/js/register.js}"></script>
 </body>
 

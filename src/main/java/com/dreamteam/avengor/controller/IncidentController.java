@@ -46,7 +46,7 @@ public class IncidentController {
         
         IncidentModel incident = new IncidentModel(1,Adresse,TypeIncident,id_Civils,Ennemis,null,InfoComplementaire);
         Db.saveIncident(incident);
-        return "redirect:/interface";
+        return "redirect:incident";
     }
 
     @GetMapping("/incident-add")

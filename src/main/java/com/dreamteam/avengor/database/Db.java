@@ -76,15 +76,16 @@ public class Db {
             e.printStackTrace();
         }
     }
-    
+    //=========================================================================
+    //                          QUERIES INCIDENT                              =
+    //=========================================================================
     // Ajout d'un incident
     public static void saveIncident(IncidentModel incidentModel){
-
         try {
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             PreparedStatement statement = CON.prepareStatement
-                        ("INSERT INTO Incidents (Adresse,TypeIncident,id_Civils,Ennemis,InfoComplementaire) " +
-                                "VALUES (?,?,?,?,?)");
+                    ("INSERT INTO Incidents (Adresse,TypeIncident,id_Civils,Ennemis,InfoComplementaire) " +
+                            "VALUES (?,?,?,?,?)");
             statement.setString(1,incidentModel.getAdresse());
             statement.setString(2,incidentModel.getTypeIncident());
             statement.setInt(3,incidentModel.getId_Civils());
@@ -100,9 +101,18 @@ public class Db {
             e.printStackTrace();
         }
     }
-    //=========================================================================
-    //                          QUERIES INCIDENT                              =
-    //=========================================================================
+    // Suppression d'un incident avec son identifiant
+    public static void deleteIncidentByID(String id){
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Statement statement = CON.createStatement();
+            ResultSet res = statement.executeQuery("DELETE FROM Incidents WHERE id_Incidents ="+ id);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    // Liste de tous les incidents
     public static List<IncidentModel> getAllIncidents(){
         List<IncidentModel> incidents = new ArrayList<>();
         try {
@@ -122,7 +132,7 @@ public class Db {
         }
         return incidents;
     }
-
+    // Un incident particulié avec son identifiant
     public static IncidentModel getIncidentByID(String id){
         try {
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -143,7 +153,6 @@ public class Db {
             return null;
         }
     }
-
     //=========================================================================
     //                          QUERIES CIVIL                                 =
     //=========================================================================

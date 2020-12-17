@@ -345,13 +345,14 @@ public class Db {
             ResultSet res = statement.executeQuery("SELECT * FROM Missions");
 
             while(res.next()){
-
-                MissionModel mission = new MissionModel(
-                        res.getInt("id_Mission"), res.getString("Titre"), res.getTimestamp("DateDebut"),
-                        res.getTimestamp("DateFin"), res.getInt("Niveaux"), res.getInt("Urgence"),
-                        res.getInt("id_Incidents")
-                );
-                missions.add(mission);
+                if(res.getString("Titre") != null){
+                    MissionModel mission = new MissionModel(
+                            res.getInt("id_Mission"), res.getString("Titre"), res.getTimestamp("DateDebut"),
+                            res.getTimestamp("DateFin"), res.getInt("Niveaux"), res.getInt("Urgence"),
+                            res.getInt("id_Incidents")
+                    );
+                    missions.add(mission);
+                }
             }
 
         } catch (SQLException e) {
@@ -388,6 +389,46 @@ public class Db {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public static MissionModel findMissionById(String id){
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Statement statement = CON.createStatement();
+            ResultSet resultSet = statement.executeQuery("select * from Missions where id_Mission =" + id);
+
+            if(resultSet.next()) {
+                MissionModel mission = new MissionModel(resultSet.getInt("id_Mission"),resultSet.getString("titre"),resultSet.getTimestamp("dateDebut"),resultSet.getTimestamp("dateFin"),resultSet.getInt("niveaux"),
+                        resultSet.getInt("urgence"),resultSet.getInt("id_incidents"));
+                return mission;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+            MissionModel mission = new MissionModel(0,"ERREUR",null,null,0,0,0);
+            return mission;
+        }
+    }
+    public static void deleteMission(String id){
+
+        try {
+            java.util.Date date = new java.util.Date();
+            long now = date.getTime();
+            Timestamp dateDelete = new Timestamp(now);
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            PreparedStatement statement = CON.prepareStatement
+                    ("Update Missions set Titre = null, DateDebut = null, DateFin = null, Niveaux = null, Urgence = null "+
+                            "Where id_Mission = ?");
+            statement.setString(1,id);
+            statement.execute();
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+
     }
 
     //=========================================================================

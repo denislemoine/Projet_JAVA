@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Avengor - Admin User Panel</title>
+
+    <link rel="icon" type="image/png" th:href="@{/assets/img/logo.png}" />
+
+    <link rel="stylesheet" th:href="@{/assets/bootstrap/register/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}">
+</head>
+
+<body class="d-flex" id="page-top">
+<header class="d-flex masthead" style="background-size: contain;background-position: center;background-color: #242424;background-repeat: no-repeat;background-image: url(&quot;assets/img/interface/bginterface.png&quot;);">
+    <div class="container d-flex d-xl-flex flex-column justify-content-center align-items-center align-content-center justify-content-xl-start align-items-xl-center btn-light">
+        <div class="card-body" style="width: 420px;">
+            <h4 class="card-title" th:text="${mission.getTitre()}"></h4>
+            <h6 class="card-text card-subtitle mb-2" th:text="| Date de début : ${mission.getDateDebut()}|"></h6>
+            <h6 class="card-text card-subtitle mb-2" th:text="| Date de Fin : ${mission.getDateFin()}|"></h6>
+            <h6 class="text-muted card-subtitle mb-2" th:text="| Niveaux : ${mission.getNiveaux()}|"></h6>
+            <h6 class="text-muted card-subtitle mb-2" th:text="| Urgence : ${mission.getUrgence()}|"></h6>
+        </div>
+        <p>Etes vous sur de vouloir supprimer ce profil ?</p>
+        <div class="d-flex flex-row bd-highlight mb-3">
+            <form action="/admin/missions/d" method="post">
+                <input type="hidden" name="delete" th:value="${mission.getId_Mission()}">
+                <button type="submit" class="btn btn-danger">Supprimer</button>
+            </form>
+            <a name="2" href="/admin/missions" class="btn btn-light">Retour</a>
+        </div>
+    </div>
+</header>
+</body>
+
+</html>

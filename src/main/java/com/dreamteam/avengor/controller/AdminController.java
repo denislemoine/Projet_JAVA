@@ -2,6 +2,7 @@ package com.dreamteam.avengor.controller;
 
 import com.dreamteam.avengor.model.AdminModel;
 import com.dreamteam.avengor.model.CivilsModel;
+import com.dreamteam.avengor.model.MissionModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import java.util.List;
 public class AdminController {
 
     private List<CivilsModel> listeCivils = new ArrayList<>();
+    private List<MissionModel> listeMissions = new ArrayList<>();
 
     public String adminHome(){
         String login = "admin"; // a changer par la variable contenant le role de l'utilisateur
@@ -28,9 +30,10 @@ public class AdminController {
         }
 
     }
-    public String adminMission(){
-        return "panelAdmin/missions";
-    }
+    //=========================================================================
+    //                          Methodes CIVIL                                 =
+    //=========================================================================
+
     @GetMapping("/admin/accounts")
     public String adminAccounts(Model model){
 
@@ -80,6 +83,36 @@ public class AdminController {
         model.addAttribute("civil",civil);
         return "panelAdmin/modifyAccount";
     }
+    //=========================================================================
+    //                          Methodes MISSIONS                                 =
+    //=========================================================================
+    @GetMapping("/admin/missions")
+    public String adminMission(Model model){
+        listeMissions = MissionModel.getAllMissions();
+
+        model.addAttribute("missions",listeMissions);
+        return "panelAdmin/missions";
+    }
+    @RequestMapping(value = "/admin/deletemission/{id}")
+    public String viewDeleteMission(@PathVariable("id") String id,Model model){
+
+        MissionModel mission = AdminModel.findMissionById(id);
+        model.addAttribute("mission",mission);
+        return "panelAdmin/deleteMission";
+
+    }
+    @RequestMapping(value = "/admin/missions/d", method = RequestMethod.POST)
+    public String deleteMission(HttpServletRequest request,Model model) throws ParseException {
+        if(request.getParameter("delete")!= null){
+            AdminModel.deleteMission(request.getParameter("delete"));
+            listeMissions = MissionModel.getAllMissions();
+            model.addAttribute("missions",listeMissions);
+        }
+        return "panelAdmin/missions";
+    }
+
+
+
     public String adminCrise(){
         return "panelAdmin/crise";
     }

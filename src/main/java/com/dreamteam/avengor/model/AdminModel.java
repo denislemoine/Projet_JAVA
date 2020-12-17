@@ -14,4 +14,11 @@ public class AdminModel {
     public static void modifyCivil(String id, CivilsModel civil){
         Db.modifyCivil(id,civil);
     }
+    public static MissionModel findMissionById(String id){
+
+        return Db.findMissionById(id);
+    }
+    public static void deleteMission(String id){
+        Db.deleteMission(id);
+    }
 }

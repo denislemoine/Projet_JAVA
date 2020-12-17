@@ -86,9 +86,13 @@ public class Db {
                         ("INSERT INTO Incidents (Adresse,TypeIncident,id_Civils,Ennemis,InfoComplementaire) " +
                                 "VALUES (?,?,?,?,?)");
             statement.setString(1,incidentModel.getAdresse());
-            statement.setInt(2,incidentModel.getTypeIncident());
+            statement.setString(2,incidentModel.getTypeIncident());
             statement.setInt(3,incidentModel.getId_Civils());
-            statement.setInt(4,incidentModel.getEnnemis());
+            if (incidentModel.getEnnemis() != null) {
+                statement.setInt(4,incidentModel.getEnnemis());
+            } else {
+                statement.setNull(4,Types.NULL);
+            }
             statement.setString(5,incidentModel.getInfoComplementaire());
             statement.execute();
 
@@ -97,7 +101,7 @@ public class Db {
         }
     }
     //=========================================================================
-    //                          QUERIES CIVIL                                 =
+    //                          QUERIES                                  =
     //=========================================================================
 
 

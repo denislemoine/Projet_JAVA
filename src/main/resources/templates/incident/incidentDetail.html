@@ -55,7 +55,6 @@
 
         <div class="btn-group" role="group" style="margin-top: 12px; margin-bottom: 18px;">
             <a href="/incident" class="btn btn-dark">Liste des Incidents</a>
-            <a href="/incident-add" class="btn btn-dark">Ajouter un Incident</a>
         </div>
 
         <div class="d-flex overflow-auto d-xl-flex flex-wrap justify-content-center align-items-center align-content-center justify-content-xl-center align-items-xl-center"
@@ -63,37 +62,23 @@
 
             <div class="d-flex flex-wrap overflow-auto" style="margin-top: 18px;">
 
-                <div th:each="incident : ${incidentList}" class="d-flex flex-row">
+                <div class="d-flex flex-row">
 
                     <div class="card border-light bg-dark text-white" style="margin-right: 18px; margin-bottom: 18px;">
                         <div class="card-body" style="width: 420px;">
                             <h4 class="card-title" th:text="${incident.getTypeIncident()}"></h4>
                             <h4 class="card-title" th:text="${incident.getMission()}"></h4>
-                            <h6 class="card-text card-subtitle mb-2" th:text="| Adresse : ${incident.getAdresse()}|"></h6>
-                            <h6 class="card-text card-subtitle mb-2" th:text="| Informations : ${incident.getInfoComplementaire()}|"></h6>
-                            <a th:if="${incident.getMission() == 0}" th:href="|mission-add-${incident.getId_Incidents()}|" class="btn btn-link">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
-                                </svg>
-                                Creer mission
-                            </a>
-                            <a th:if="${incident.getMission() == 0}" th:href="|incident-delete-${incident.getId_Incidents()}|" class="btn btn-link">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash2-fill" viewBox="0 0 16 16">
-                                    <path d="M2.037 3.225l1.684 10.104A2 2 0 0 0 5.694 15h4.612a2 2 0 0 0 1.973-1.671l1.684-10.104C13.627 4.224 11.085 5 8 5c-3.086 0-5.627-.776-5.963-1.775z"/>
-                                    <path fill-rule="evenodd" d="M12.9 3c-.18-.14-.497-.307-.974-.466C10.967 2.214 9.58 2 8 2s-2.968.215-3.926.534c-.477.16-.795.327-.975.466.18.14.498.307.975.466C5.032 3.786 6.42 4 8 4s2.967-.215 3.926-.534c.477-.16.795-.327.975-.466zM8 5c3.314 0 6-.895 6-2s-2.686-2-6-2-6 .895-6 2 2.686 2 6 2z"/>
-                                </svg>
-                                Classer sans suite
-                            </a>
+                            <h6 class="card-text card-subtitle mb-2" th:text="| Date de début : ${incident.getAdresse()}|"></h6>
+                            <h6 class="card-text card-subtitle mb-2" th:text="| Date de Fin : ${incident.getInfoComplementaire()}|"></h6>
+                            <a th:if="${incident.getMission() == 0}" th:href="|mission-add-${incident.getId_Incidents()}|" class="btn btn-link"><i class="bi text-danger bi-plus-square-fill"></i>Creer mission</a>
+                            <a th:if="${incident.getMission() == 0}" th:href="|incident-delete-${incident.getId_Incidents()}|" class="btn btn-link"><i class="bi bi-trash2-fill"></i>Classer sans suite</a>
                             <p th:if="${incident.getMission() != 0}" class="text-white">Déjà sur une mission</p>
-                            <a th:href="|incident-${incident.getId_Incidents()}|" class="btn btn-link float-right">
-                                Voir les satisfactions
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-star-fill" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4zm4.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.178.178 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.178.178 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.178.178 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.178.178 0 0 1-.134-.098L8.16 4.1z"/>
-                                </svg>
-                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <h4 class="card-title">Les satisfactions :</h4>
+
                         </div>
                     </div>
-<!--                    mission-add-id-->
                 </div>
 
             </div>

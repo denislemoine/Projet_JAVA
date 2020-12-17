@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Avengor - Les Incidents</title>
+    <title>Avengor - Créer un Incident</title>
 
     <link rel="icon" type="image/png" th:href="@{/assets/img/logo.png}" />
 
@@ -51,62 +51,76 @@
         </div>
     </div>
 
-    <div class="container-fluid border rounded-0 border-dark shadow d-flex d-xl-flex flex-column justify-content-center align-items-center align-content-center justify-content-xl-start align-items-xl-center" style="margin-right: 183px;margin-top: -47px;margin-left: 45px;filter: brightness(100%); padding-bottom: 18px;">
+    <div class="container-fluid border rounded-0 border-dark shadow d-flex d-xl-flex flex-column justify-content-center align-items-center align-content-center justify-content-xl-start align-items-xl-center" style="margin-right: 183px;margin-top: -47px;margin-left: 45px;filter: brightness(100%);">
 
-        <div class="btn-group" role="group" style="margin-top: 12px; margin-bottom: 18px;">
-            <a href="/incident" class="btn btn-dark">Liste des Incidents</a>
-            <a href="/incident-add" class="btn btn-dark">Ajouter un Incident</a>
-        </div>
+        <div class="d-flex d-xl-flex justify-content-center align-items-center align-content-center justify-content-xl-center align-items-xl-center" style="background-repeat: no-repeat;background-size: auto;background-position: center;width: 918px;opacity: 1;filter: grayscale(0%) hue-rotate(0deg) invert(0%) saturate(100%);height: 899px;margin: -1px;">
+            <div class="d-flex flex-column" style="margin-right: 61px;">
+                <h4 class="text-white">Enregistrer une satisfaction</h4>
+                <form action="/satisfaction-add" class="form" method="post">
+                    <label for="type">Type de satisfaction</label>
+                    <select name="type" id="type" class="border form-control rounded shadow-sm mb-0">
+                        <option selected value="courier">Courier reçu</option>
+                        <option value="smsMail">SMS / Mail</option>
+                        <option value="press">Coupure de presse</option>
+                        <option value="enquete">Enquête terrain</option>
+                    </select>
 
-        <div class="d-flex overflow-auto d-xl-flex flex-wrap justify-content-center align-items-center align-content-center justify-content-xl-center align-items-xl-center"
-             style="background-repeat: no-repeat;background-size: auto;background-position: center;width: 918px;opacity: 1;filter: grayscale(0%) hue-rotate(0deg) invert(0%) saturate(100%);height: 899px;margin: -1px;">
+                    <label for="type">Concernant Super Héro</label>
+                    <select th:each="superHero : ${superHeroList}" name="hero" id="hero" class="border form-control rounded shadow-sm mb-0">
+                        <option selected value="0">Ne concerne pas un héro</option>
+                        <option th:value="${superHero.getId_SuperHeros()}" th:text="${superHero.getNom()}"></option>
+                    </select>
 
-            <div class="d-flex flex-wrap overflow-auto" style="margin-top: 18px;">
+                    <label for="type">Concernant Super Vilain</label>
+                    <select th:each="superVilain : ${superVilainList}" name="vilain" id="vilain" class="border form-control rounded shadow-sm mb-0">
+                        <option selected value="0">Ne concerne pas un vilain</option>
+                        <option th:value="${superVilain.getId_SuperVilain()}" th:text="${superVilain.getNom()}"></option>
+                    </select>
 
-                <div th:each="incident : ${incidentList}" class="d-flex flex-row">
+                    <label for="type">Concernant un incident</label>
+                    <select th:each="incident : ${incidentList}" name="incident" id="incident" class="border form-control rounded shadow-sm mb-0">
+                        <option selected value="0">Ne concerne pas un incident</option>
+                        <option th:value="${incident.getId_Incidents()}" th:text="${incident.getTypeIncident()}"></option>
+                    </select>
 
-                    <div class="card border-light bg-dark text-white" style="margin-right: 18px; margin-bottom: 18px;">
-                        <div class="card-body" style="width: 420px;">
-                            <h4 class="card-title" th:text="${incident.getTypeIncident()}"></h4>
-                            <h4 class="card-title" th:text="${incident.getMission()}"></h4>
-                            <h6 class="card-text card-subtitle mb-2" th:text="| Adresse : ${incident.getAdresse()}|"></h6>
-                            <h6 class="card-text card-subtitle mb-2" th:text="| Informations : ${incident.getInfoComplementaire()}|"></h6>
-                            <a th:if="${incident.getMission() == 0}" th:href="|mission-add-${incident.getId_Incidents()}|" class="btn btn-link">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
-                                </svg>
-                                Creer mission
-                            </a>
-                            <a th:if="${incident.getMission() == 0}" th:href="|incident-delete-${incident.getId_Incidents()}|" class="btn btn-link">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash2-fill" viewBox="0 0 16 16">
-                                    <path d="M2.037 3.225l1.684 10.104A2 2 0 0 0 5.694 15h4.612a2 2 0 0 0 1.973-1.671l1.684-10.104C13.627 4.224 11.085 5 8 5c-3.086 0-5.627-.776-5.963-1.775z"/>
-                                    <path fill-rule="evenodd" d="M12.9 3c-.18-.14-.497-.307-.974-.466C10.967 2.214 9.58 2 8 2s-2.968.215-3.926.534c-.477.16-.795.327-.975.466.18.14.498.307.975.466C5.032 3.786 6.42 4 8 4s2.967-.215 3.926-.534c.477-.16.795-.327.975-.466zM8 5c3.314 0 6-.895 6-2s-2.686-2-6-2-6 .895-6 2 2.686 2 6 2z"/>
-                                </svg>
-                                Classer sans suite
-                            </a>
-                            <p th:if="${incident.getMission() != 0}" class="text-white">Déjà sur une mission</p>
-                            <a th:href="|incident-${incident.getId_Incidents()}|" class="btn btn-link float-right">
-                                Voir les satisfactions
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-star-fill" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4zm4.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.178.178 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.178.178 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.178.178 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.178.178 0 0 1-.134-.098L8.16 4.1z"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-<!--                    mission-add-id-->
-                </div>
+                    <label for="type">Concernant une mission</label>
+                    <select th:each="mission : ${missionList}" name="mission" id="mission" class="border form-control rounded shadow-sm mb-0">
+                        <option selected value="0">Ne concerne pas une mission</option>
+                        <option th:value="${mission.getId_Mission()}" th:text="${mission.getTitre()}"></option>
+                    </select>
 
+                    <input class="border rounded shadow-sm" type="text" required="" name="commentaire" placeholder="Commentaire">
+                    <br>
+                    <input class="border rounded shadow-sm" type="number" min="0" max="5" id="note" required name="note" placeholder="Note entre 0 et 5" style="display: none">
+                    <br>
+                    <button class="btn btn-danger mt-3">Enregistrer</button>
+                </form>
             </div>
-
         </div>
     </div>
 
-    <a class="btn border-danger shadow-sm" role="button" style="background-repeat: no-repeat;font-size: 18px;font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);background-image: url(&quot;assets/img/login/button2.png&quot;);background-position: center;background-size: contain;margin-left: 0px;margin-top: 0px;margin-right: 81px;padding-top: 9px;font-weight: normal;padding-bottom: 0px;padding-left: 75px;height: 39px;padding-right: 19px;"
-       href="logout">DISCONNECT</a></header>
-
+    <a class="btn border-danger shadow-sm" role="button" style="background-repeat: no-repeat;font-size: 18px;font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);background-image: url(&quot;assets/img/login/button2.png&quot;);background-position: center;background-size: contain;margin-left: 0px;margin-top: 0px;margin-right: 81px;padding-top: 9px;font-weight: normal;padding-bottom: 0px;padding-left: 75px;height: 39px;padding-right: 19px;" href="logout">DISCONNECT</a></header>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<script>
+    $('#hero').change(function(){
+        console.log($('#hero').val());
+        if ($('#hero').val() == 0){
+            $('#note').css('display','none');
+        } else {
+            $('#note').css('display','block');
+        }
+    })
+    $('#vilain').change(function(){
+        console.log($('#vilain').val());
+        if ($('#vilain').val() == 0){
+            $('#note').css('display','none');
+        } else {
+            $('#note').css('display','block');
+        }
+    })
+</script>
 <script th:src="@{/assets/js/register.js}"></script>
 </body>
 

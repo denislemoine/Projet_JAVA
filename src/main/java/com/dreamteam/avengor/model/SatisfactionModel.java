@@ -25,6 +25,8 @@ public class SatisfactionModel {
         this.commentaire = commentaire;
     }
 
+
+
     public int getId_Satisfaction() {
         return id_Satisfaction;
     }

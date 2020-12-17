@@ -19,19 +19,23 @@
 <body class="d-flex" id="page-top">
 <header class="d-flex masthead" style="background-size: contain;background-position: center;background-color: #242424;background-repeat: no-repeat;background-image: url(&quot;assets/img/interface/bginterface.png&quot;);">
     <div class="container d-flex d-xl-flex flex-column justify-content-center align-items-center align-content-center justify-content-xl-start align-items-xl-center btn-light">
-        <div name="FirstLine" class="d-flex justify-content-around">
-            <p th:text="|${civil.getId_Civil()}  ${civil.getCivilite()}.${civil.getNom()} ${civil.getPrenom()}|">Civilite Nom Prenom</p>
-            <p th:text="${civil.getNationalite()}">Nationality</p>
+        <div class="card-body" style="width: 420px;">
+            <h4 class="card-title" th:text="${mission.getTitre()}"></h4>
+            <h6 class="card-text card-subtitle mb-2" th:text="| Date de début : ${mission.getDateDebut()}|"></h6>
+            <h6 class="card-text card-subtitle mb-2" th:text="| Date de Fin : ${mission.getDateFin()}|"></h6>
+            <h6 class="text-muted card-subtitle mb-2" th:text="| Niveaux : ${mission.getNiveaux()}|"></h6>
+            <h6 class="text-muted card-subtitle mb-2" th:text="| Urgence : ${mission.getUrgence()}|"></h6>
         </div>
         <p>Etes vous sur de vouloir supprimer ce profil ?</p>
         <div class="d-flex flex-row bd-highlight mb-3">
-            <form action="/admin/accounts/d" method="post">
-                <input type="hidden" name="delete" th:value="${civil.getId_Civil()}">
+            <form action="/admin/missions/d" method="post">
+                <input type="hidden" name="delete" th:value="${mission.getId_Mission()}">
                 <button type="submit" class="btn btn-danger">Supprimer</button>
             </form>
-            <a name="2" href="/admin/accounts" class="btn btn-light">Retour</a>
+            <a name="2" href="/admin/missions" class="btn btn-light">Retour</a>
         </div>
     </div>
+</header>
 </body>
 
 </html>

@@ -204,7 +204,7 @@ public class Db {
         try {
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             Statement statement = CON.createStatement();
-            ResultSet res = statement.executeQuery("SELECT * FROM Super-vilains");
+            ResultSet res = statement.executeQuery("SELECT * FROM Super_vilains");
 
             while(res.next()){
 

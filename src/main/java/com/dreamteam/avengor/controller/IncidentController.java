@@ -1,7 +1,7 @@
 package com.dreamteam.avengor.controller;
 
 
-import com.dreamteam.avengor.model.CivilsModel;
+import com.dreamteam.avengor.model.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.dreamteam.avengor.model.IncidentModel;
 import com.dreamteam.avengor.database.Db;
 import org.springframework.web.context.request.WebRequest;
 
@@ -24,8 +23,7 @@ public class IncidentController {
 
     @RequestMapping(value="/incident", method = RequestMethod.POST)
     public String addIncident(WebRequest request) throws ParseException {
-        
-        
+
         String Adresse = request.getParameter("Adresse");
         int TypeIncident = Integer.parseInt(request.getParameter("TypeIncident"));
         int id_Civils = Integer.parseInt(request.getParameter("id_Civils"));
@@ -39,9 +37,10 @@ public class IncidentController {
 
     @GetMapping("/incident")
     public String showFormIncident(Model model){
-        int LastID = IncidentModel.getLastId();
+        List<SuperVilainModel> superVilainList = new ArrayList<>();
+        superVilainList = Db.getAllVilains();
 
-        model.addAttribute("LastID",LastID);
+        model.addAttribute("superVilainList",superVilainList);
 
         return "incident";
     }

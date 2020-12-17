@@ -22,7 +22,7 @@ public class Db {
     //=========================================================================
 
 
-    public static void saveCivil(CivilsModel civilsModel){
+    public static int saveCivil(CivilsModel civilsModel){
 
         try {
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -43,11 +43,18 @@ public class Db {
                 statement.setString(8,civilsModel.getencrytedPassword());
                 statement.setString(9,civilsModel.getNationalite());
                 statement.execute();
+
+                ResultSet res = statement.executeQuery("SELECT Id_Civil FROM Civils WHERE Email = " + civilsModel.getEmail());
+                if(res.next()){
+                    return res.getInt("Id_civil");
+
+                }
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return 0;
     }
 
     public static void saveHero(SuperHerosModel superHerosModel){

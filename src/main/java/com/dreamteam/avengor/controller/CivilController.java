@@ -3,6 +3,7 @@ package com.dreamteam.avengor.controller;
 
 import com.dreamteam.avengor.model.CivilsModel;
 import  com.dreamteam.avengor.database.Db;
+import com.dreamteam.avengor.model.SuperHerosModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -49,9 +50,7 @@ public class CivilController {
         String dateDeNaissance = request.getParameter("birth");
         String password = request.getParameter("password");
 
-        if (request.getParameter("isHero") == "0"){
 
-        }
         String civ = null;
         if (civilite == 0){
           civ = "H";
@@ -60,7 +59,13 @@ public class CivilController {
 
 
         CivilsModel civilsModel1 = new CivilsModel(1,nom,prenom,civ,adresse,email,tel,dateDeNaissance,password, nationalite);
-        Db.saveCivil(civilsModel1);
+        int id_civil = Db.saveCivil(civilsModel1);
+
+        if (request.getParameter("isHero") == "1"){
+            SuperHerosModel superHerosModel = new SuperHerosModel(1,request.getParameter("super_name"),id_civil,request.getParameter("super_pouvoir"),
+                    request.getParameter("super_pfaible"), (float) 0,null,civilsModel1);
+            Db.saveHero(superHerosModel);
+        }
         return "redirect:/login";
     }
 

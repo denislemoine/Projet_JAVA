@@ -63,12 +63,13 @@ public class Db {
 
             //creation d'une organisation
 
+
                 PreparedStatement statement = CON.prepareStatement
-                        ("INSERT INTO Civils (Nom, Adresse, Dirigeant, Commentaire) " +
+                        ("INSERT INTO Civils (Nom, Adresse, Dirigeant, Commentaire,) " +
                                 "VALUES (?, ?, ?, ?)");
                 statement.setString(1,organisationModel.getNom());
                 statement.setString(2,organisationModel.getAdresse());
-                statement.setInt(3,organisationModel.getDirigeant());
+                //statement.setString(3,organisationModel.getDirigeant());
                 statement.setString(4,organisationModel.getCommentaire());
 
                 statement.execute();
@@ -411,6 +412,37 @@ public class Db {
             e.printStackTrace();
         }
         return vilains;
+    }
+    //=========================================================================
+    //                          QUERIES DES SATISFACTIONS                     =
+    //=========================================================================
+    // Ajout d'une satisfaction
+    public static void saveSatisfaction(SatisfactionModel satisfactionModel){
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            PreparedStatement statement = CON.prepareStatement
+                    ("INSERT INTO Satisfaction (id_Civil,id_super_vilain,id_Incidents,id_Mission,satisfactionType,Message,Note,Commentaire) " +
+                            "VALUES (?,?,?,?,?,?,?,?)");
+            if (satisfactionModel.getId_Civil() != null) { statement.setInt(1,satisfactionModel.getId_Civil()); }
+            else { statement.setNull(1,Types.NULL); }
+
+            if (satisfactionModel.getId_super_vilain() != null) { statement.setInt(2,satisfactionModel.getId_super_vilain()); }
+            else { statement.setNull(2,Types.NULL); }
+
+            if (satisfactionModel.getId_Incidents() != null) { statement.setInt(3,satisfactionModel.getId_Incidents()); }
+            else { statement.setNull(3,Types.NULL); }
+
+            if (satisfactionModel.getId_Mission() != null) { statement.setInt(4,satisfactionModel.getId_Mission()); }
+            else { statement.setNull(4,Types.NULL); }
+
+            statement.setString(5,satisfactionModel.getSatisfactionType());
+            statement.setString(6,satisfactionModel.getMessage());
+            statement.setInt(7,satisfactionModel.getNote());
+            statement.setString(8,satisfactionModel.getCommentaire());
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     //=========================================================================

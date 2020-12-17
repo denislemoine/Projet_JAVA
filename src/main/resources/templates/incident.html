@@ -56,16 +56,16 @@
             <div class="d-flex flex-column" style="margin-right: 61px;">
                 <h4 class="text-white">Enregistrer un incident</h4>
                 <form action="/incident" class="form" method="post">
-                    <input class="border rounded shadow-sm" type="text" required="" name="Adresse" placeholder="Adresse">
+                    <input class="border rounded shadow-sm" type="text" required="" name="Adresse" placeholder="Ville, adresse, lieux">
                     <br>
-                    <input class="border rounded shadow-sm" type="number" required="" name="TypeIncident" placeholder="TypeIncident">
+                    <input class="border rounded shadow-sm" type="text" required="" name="TypeIncident" placeholder="Type d'incident (Braquage/Vole/etc..)">
                     <br>
                     <input class="border rounded shadow-sm" type="number" required="" name="id_Civils" placeholder="Votre ID (en attendant le logIn)">
                     <br>
                     <label for="Ennemis" class="text-white">Super Vilain impliqué</label>
                     <br>
                     <select th:each="superVilain : ${superVilainList}" name="Ennemis" id="Ennemis" class="border form-control rounded shadow-sm mb-0">
-                        <option value="">Non connus</option>
+                        <option value="">Non connus / reconnus</option>
                         <option th:value="${superVilain.getId_SuperVilain()}" th:text="${superVilain.getNom()}"></option>
                     </select>
                     <br>

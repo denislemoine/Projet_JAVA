@@ -43,7 +43,7 @@ public class MissionController {
 
 
     @RequestMapping(value="/mission-add-{id}", method = RequestMethod.POST)
-    public String addMission (@PathVariable("id") String id, HttpServletRequest request, CivilsModel civilsModel) throws ParseException {
+    public String addMission (@PathVariable("id") String id, HttpServletRequest request, CivilsModel civilsModel) {
 
         String titre = request.getParameter("titre");
         int niveau = Integer.parseInt(request.getParameter("niveau"));

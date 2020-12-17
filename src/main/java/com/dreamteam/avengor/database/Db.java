@@ -61,7 +61,7 @@ public class Db {
 
             if(superHerosModel.getId_SuperHeros() != 0){
                 PreparedStatement statement = CON.prepareStatement
-                        ("INSERT INTO Super_heros (Nom, IdentitéSecretes, Pouvoir, Point_faible, Score, Commentaire) " +
+                        ("INSERT INTO Super_heros (Nom, IdentiteSecretes, Pouvoir, Point_faible, Score, Commentaire) " +
                                 "VALUES (?, ?, ?, ?, ?, ?)");
                 statement.setString(1,superHerosModel.getNom());
                 statement.setInt(2,superHerosModel.getIdentiteSecrete());
@@ -212,10 +212,10 @@ public class Db {
 
             while(res.next()){
 
-                CivilsModel civil = findCivilById(res.getString("IdentitéSecretes"));
+                CivilsModel civil = findCivilById(res.getString("IdentiteSecretes"));
 
                 SuperHerosModel hero = new SuperHerosModel(
-                    res.getInt("id_SuperHeros"), res.getString("Nom"), res.getInt("IdentitéSecretes"),
+                    res.getInt("id_SuperHeros"), res.getString("Nom"), res.getInt("IdentiteSecretes"),
                         res.getString("Pouvoir"), res.getString("Point_faible"), res.getFloat("Score"),
                         res.getString("Commentaire"), civil
                 );
@@ -285,7 +285,7 @@ public class Db {
 
             while(res.next()){
                 SuperVilainModel vilain = new SuperVilainModel(
-                        res.getInt("id_SuperVilains"), res.getString("Nom"), res.getInt("IdentitéSecretes"),
+                        res.getInt("id_SuperVilains"), res.getString("Nom"), res.getInt("IdentiteSecretes"),
                         res.getString("Pouvoir"), res.getString("Point-faible"), (float) res.getInt("Score"),
                         res.getString("Commentaire")
                 );

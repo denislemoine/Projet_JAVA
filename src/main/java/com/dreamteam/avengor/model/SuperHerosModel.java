@@ -89,7 +89,7 @@ public class SuperHerosModel {
     //==================================================================================
 
     public static List<SuperHerosModel> getAllHeros(){
-        return null;
+        return Db.getAllHero();
     }
 
 

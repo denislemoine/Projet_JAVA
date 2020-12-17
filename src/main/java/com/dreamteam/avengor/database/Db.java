@@ -15,6 +15,12 @@ public class Db {
     private static final String PASSWORD = "avengor76";
     private static Connection CON;
 
+
+    //=========================================================================
+    //                          QUERIES SAVE                                  =
+    //=========================================================================
+
+
     public static void saveCivil(CivilsModel civilsModel){
 
         try {
@@ -86,6 +92,10 @@ public class Db {
         }
     }
 
+    //=========================================================================
+    //                          QUERIES CIVIL                                 =
+    //=========================================================================
+
     public static List<CivilsModel> getAllCivil(){
         List<CivilsModel> civils = new ArrayList<>();
         try {
@@ -120,4 +130,30 @@ public class Db {
         }
 
     }
+
+    //=========================================================================
+    //                          QUERIES HERO                                  =
+    //=========================================================================
+
+    public static List<SuperHerosModel> getAllHero(){
+        List<SuperHerosModel> heros = new ArrayList<>();
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Statement statement = CON.createStatement();
+
+            ResultSet resultSet = statement.executeQuery("select * from Super-heros");
+
+            while(resultSet.next()){
+                SuperHerosModel hero = new SuperHerosModel(
+                    1, null, 0, null, null, null, null
+                );
+                heros.add(hero);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return heros;
+    }
+
 }

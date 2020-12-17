@@ -53,11 +53,12 @@ public class SatisfactionController {
         String message = request.getParameter("message");
         String commentaire = request.getParameter("commentaire");
 
-        if (id_Civils == 0)             { id_Civils = null;         }
-        if (id_super_vilain == 0)       { id_super_vilain = null;   }
-        if (id_incidents == 0)          { id_incidents = null;      }
-        if (id_mission == 0)            { id_mission = null;        }
-//        if (note == 0 || note == null)  { note = null;              }
+        if (id_Civils == 0)                 { id_Civils = null;         }
+        if (id_super_vilain == 0)           { id_super_vilain = null;   }
+        if (id_incidents == 0)              { id_incidents = null;      }
+        if (id_mission == 0)                { id_mission = null;        }
+        if ((note == 0 && id_incidents != null) || (note == 0 && id_mission != null))
+                                            { note = null;              }
 
         SatisfactionModel satisfaction = new SatisfactionModel(
                 1

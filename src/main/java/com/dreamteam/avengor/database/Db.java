@@ -599,6 +599,114 @@ public class Db {
         }
     }
 
+    public static List<SatisfactionModel> getSatisfactionByIncidentID(String id){
+        List<SatisfactionModel> satisfactions = new ArrayList<>();
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Statement statement = CON.createStatement();
+            ResultSet res = statement.executeQuery("SELECT * FROM Satisfaction WHERE id_Incidents ="+ id);
+
+            while(res.next()){
+                SatisfactionModel satisfaction = new SatisfactionModel(
+                        res.getInt("id_Satisfaction")
+                        ,res.getInt("id_Civil")
+                        ,res.getInt("id_super_vilain")
+                        ,res.getInt("id_Incidents")
+                        ,res.getInt("id_Mission")
+                        ,res.getString("satisfactionType")
+                        ,res.getString("Message")
+                        ,res.getInt("Note")
+                        ,res.getString("Commentaire")
+                );
+                satisfactions.add(satisfaction);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return satisfactions;
+    }
+
+    public static List<SatisfactionModel> getSatisfactionByMissionID(String id){
+        List<SatisfactionModel> satisfactions = new ArrayList<>();
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Statement statement = CON.createStatement();
+            ResultSet res = statement.executeQuery("SELECT * FROM Satisfaction WHERE id_Mission ="+ id);
+
+            while(res.next()){
+                SatisfactionModel satisfaction = new SatisfactionModel(
+                        res.getInt("id_Satisfaction")
+                        ,res.getInt("id_Civil")
+                        ,res.getInt("id_super_vilain")
+                        ,res.getInt("id_Incidents")
+                        ,res.getInt("id_Mission")
+                        ,res.getString("satisfactionType")
+                        ,res.getString("Message")
+                        ,res.getInt("Note")
+                        ,res.getString("Commentaire")
+                );
+                satisfactions.add(satisfaction);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return satisfactions;
+    }
+
+    public static List<SatisfactionModel> getSatisfactionByCivilID(String id){
+        List<SatisfactionModel> satisfactions = new ArrayList<>();
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Statement statement = CON.createStatement();
+            ResultSet res = statement.executeQuery("SELECT * FROM Satisfaction WHERE id_Civil ="+ id);
+
+            while(res.next()){
+                SatisfactionModel satisfaction = new SatisfactionModel(
+                        res.getInt("id_Satisfaction")
+                        ,res.getInt("id_Civil")
+                        ,res.getInt("id_super_vilain")
+                        ,res.getInt("id_Incidents")
+                        ,res.getInt("id_Mission")
+                        ,res.getString("satisfactionType")
+                        ,res.getString("Message")
+                        ,res.getInt("Note")
+                        ,res.getString("Commentaire")
+                );
+                satisfactions.add(satisfaction);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return satisfactions;
+    }
+
+    public static List<SatisfactionModel> getSatisfactionByVilainID(String id){
+        List<SatisfactionModel> satisfactions = new ArrayList<>();
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Statement statement = CON.createStatement();
+            ResultSet res = statement.executeQuery("SELECT * FROM Satisfaction WHERE id_super_vilain ="+ id);
+
+            while(res.next()){
+                SatisfactionModel satisfaction = new SatisfactionModel(
+                        res.getInt("id_Satisfaction")
+                        ,res.getInt("id_Civil")
+                        ,res.getInt("id_super_vilain")
+                        ,res.getInt("id_Incidents")
+                        ,res.getInt("id_Mission")
+                        ,res.getString("satisfactionType")
+                        ,res.getString("Message")
+                        ,res.getInt("Note")
+                        ,res.getString("Commentaire")
+                );
+                satisfactions.add(satisfaction);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return satisfactions;
+    }
+
     //=========================================================================
     //                          QUERIES DES ORGANISATION                    =
     //=========================================================================

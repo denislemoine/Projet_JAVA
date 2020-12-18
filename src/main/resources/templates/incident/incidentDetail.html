@@ -67,16 +67,16 @@
                     <div class="card border-light bg-dark text-white" style="margin-right: 18px; margin-bottom: 18px;">
                         <div class="card-body" style="width: 420px;">
                             <h4 class="card-title" th:text="${incident.getTypeIncident()}"></h4>
-                            <h4 class="card-title" th:text="${incident.getMission()}"></h4>
                             <h6 class="card-text card-subtitle mb-2" th:text="| Date de début : ${incident.getAdresse()}|"></h6>
                             <h6 class="card-text card-subtitle mb-2" th:text="| Date de Fin : ${incident.getInfoComplementaire()}|"></h6>
-                            <a th:if="${incident.getMission() == 0}" th:href="|mission-add-${incident.getId_Incidents()}|" class="btn btn-link"><i class="bi text-danger bi-plus-square-fill"></i>Creer mission</a>
-                            <a th:if="${incident.getMission() == 0}" th:href="|incident-delete-${incident.getId_Incidents()}|" class="btn btn-link"><i class="bi bi-trash2-fill"></i>Classer sans suite</a>
-                            <p th:if="${incident.getMission() != 0}" class="text-white">Déjà sur une mission</p>
                         </div>
                         <div class="card-footer">
                             <h4 class="card-title">Les satisfactions :</h4>
-
+                            <div th:each="satisfaction : ${satisfactionList}" class="card bg-info">
+                                <p th:text="${satisfaction.getSatisfactionType()}"></p>
+                                <p th:text="${satisfaction.getMessage()}"></p>
+                                <p th:text="${satisfaction.getCommentaire()}"></p>
+                            </div>
                         </div>
                     </div>
                 </div>

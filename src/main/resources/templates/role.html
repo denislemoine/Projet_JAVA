@@ -66,7 +66,7 @@
                             <h6 th:if="${civil.getPrivilege() == 0}" class="card-text card-subtitle mb-2">Privilège : Civil</h6>
                             <h6 th:if="${civil.getPrivilege() == 1}" class="card-text card-subtitle mb-2">Privilège : Héro</h6>
                             <h6 th:if="${civil.getPrivilege() == 2}" class="card-text card-subtitle mb-2">Privilège : Maître Supreme</h6>
-                            <form>
+                            <form th:action="|/role-update-${civil.getId_Civil()}|" method="POST">
                                 <select name="role" id="role" class="bg-dark text-white border form-control rounded shadow-sm mb-0">
                                     <option th:value="0">Civil</option>
                                     <option th:value="1">Héro</option>

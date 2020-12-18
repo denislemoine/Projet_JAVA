@@ -360,6 +360,25 @@ public class Db {
 
     }
 
+    public static boolean updatePrivilege(String idUser, int newRoleId){
+
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            PreparedStatement statement = CON.prepareStatement
+                    ("UPDATE Civils SET privilege = ?" +
+                            " WHERE id_Civil = ?");
+            statement.setInt(1, newRoleId);
+            statement.setString(2, idUser);
+            statement.execute();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     //=========================================================================
     //                          QUERIES HERO                                  =
     //=========================================================================

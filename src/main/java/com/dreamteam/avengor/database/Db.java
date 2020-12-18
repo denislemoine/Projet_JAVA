@@ -41,7 +41,7 @@ public class Db {
         try {
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             Statement state = CON.createStatement();
-            ResultSet res = state.executeQuery("SELECT privilege FROM Civils WHERE Email = '" + mail + "'");
+            ResultSet res = state.executeQuery("SELECT privilege, Email FROM Civils WHERE Email = '" + mail + "'");
             if(res.next()){
                 if(res.getString("Email").equals(mail)) {
                     return res.getInt("privilege");

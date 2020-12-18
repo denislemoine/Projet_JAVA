@@ -10,6 +10,18 @@ public class SatisfactionModel {
     private String message;
     private Integer note;
     private String commentaire;
+
+    /**
+     * @param id_Satisfaction
+     * @param id_Civil
+     * @param id_super_vilain
+     * @param id_Incidents
+     * @param id_Mission
+     * @param satisfactionType
+     * @param message
+     * @param note
+     * @param commentaire
+     */
     // Contructor de la class "SatisfactionModel"
     public SatisfactionModel(
             int id_Satisfaction

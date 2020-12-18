@@ -26,6 +26,15 @@ public class IncidentModel{
     public void setMission(int mission)                          { Mission = mission;            }
     public void setInfoComplementaire(String infoComplementaire) { InfoComplementaire = infoComplementaire; }
 
+    /**
+     * @param id_Incidents
+     * @param Adresse
+     * @param TypeIncident
+     * @param id_Civils
+     * @param Ennemis
+     * @param Mission
+     * @param InfoComplementaire
+     */
     // CONSTRUCT IncidentModel
     public IncidentModel(
             int id_Incidents

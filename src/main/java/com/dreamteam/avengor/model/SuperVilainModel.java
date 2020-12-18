@@ -13,6 +13,15 @@ public class SuperVilainModel {
 
     }
 
+    /**
+     * @param id_SuperVilain
+     * @param Nom
+     * @param IdentiteSecrete
+     * @param Pouvoir
+     * @param PointFaible
+     * @param Score
+     * @param Commentaire
+     */
     public SuperVilainModel(int id_SuperVilain,String Nom,int IdentiteSecrete,String Pouvoir,String PointFaible,Float Score,String Commentaire){
 
         super();

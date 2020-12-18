@@ -18,6 +18,17 @@ public class MissionModel {
     private String rapportFinMission;
     private SuperHerosModel hero;
 
+    /**
+     * @param id_Mission
+     * @param Titre
+     * @param DateDebut
+     * @param DateFin
+     * @param Niveaux
+     * @param Urgence
+     * @param Id_Incidents
+     * @param rapportFinMission
+     * @param hero
+     */
        public MissionModel(int id_Mission, String Titre, Timestamp DateDebut, Timestamp DateFin, int Niveaux, int Urgence, int Id_Incidents, String rapportFinMission, SuperHerosModel hero) {
         super();
         this.id_Mission = id_Mission;

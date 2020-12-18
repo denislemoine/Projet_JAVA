@@ -15,6 +15,16 @@ public class SuperHerosModel {
     private String Commentaire;
     private CivilsModel civil;
 
+    /**
+     * @param id_SuperHeros
+     * @param Nom
+     * @param IdentiteSecrete
+     * @param Pouvoir
+     * @param PointFaible
+     * @param Score
+     * @param Commentaire
+     * @param civil
+     */
     public SuperHerosModel(int id_SuperHeros,String Nom,int IdentiteSecrete,String Pouvoir,String PointFaible,Float Score,String Commentaire, CivilsModel civil) {
         super();
         this.id_SuperHeros = id_SuperHeros;

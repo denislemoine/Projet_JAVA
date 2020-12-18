@@ -1,7 +1,5 @@
 package com.dreamteam.avengor.model;
 
-import java.sql.*;
-
 public class IncidentModel{
     private int id_Incidents;
     private String Adresse;
@@ -11,7 +9,6 @@ public class IncidentModel{
     private Integer Mission;
     private String InfoComplementaire;
 
-
     // GETTER IncidentModel
     public int getId_Incidents()            {   return id_Incidents;         }
     public String getAdresse()              {   return Adresse;              }
@@ -20,6 +17,7 @@ public class IncidentModel{
     public Integer getEnnemis()             {   return Ennemis;              }
     public Integer getMission()             {   return Mission;              }
     public String getInfoComplementaire()   {   return InfoComplementaire;   }
+
     // SETTER IncidentModel
     public void setAdresse(String adresse)                       { Adresse = adresse;            }
     public void setTypeIncident(String typeIncident)             { TypeIncident = typeIncident;  }
@@ -28,6 +26,15 @@ public class IncidentModel{
     public void setMission(int mission)                          { Mission = mission;            }
     public void setInfoComplementaire(String infoComplementaire) { InfoComplementaire = infoComplementaire; }
 
+    /**
+     * @param id_Incidents
+     * @param Adresse
+     * @param TypeIncident
+     * @param id_Civils
+     * @param Ennemis
+     * @param Mission
+     * @param InfoComplementaire
+     */
     // CONSTRUCT IncidentModel
     public IncidentModel(
             int id_Incidents

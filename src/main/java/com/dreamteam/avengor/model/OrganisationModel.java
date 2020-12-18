@@ -17,6 +17,17 @@ public class OrganisationModel {
     private int nbIncidentsDeclares;
     private int nbMissionsImplique;
 
+    /**
+     * @param id_Organisations
+     * @param nom
+     * @param adresse
+     * @param dirigeant
+     * @param commentaire
+     * @param dateAjout
+     * @param dateDerniereModif
+     * @param nbIncidentsDeclares
+     * @param nbMissionsImplique
+     */
     public OrganisationModel(int id_Organisations, String nom, String adresse, int dirigeant, String commentaire, Timestamp dateAjout, Timestamp dateDerniereModif, int nbIncidentsDeclares, int nbMissionsImplique){
         super();
         this.id_Organisations = id_Organisations;

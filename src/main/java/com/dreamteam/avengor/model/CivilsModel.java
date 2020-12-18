@@ -5,6 +5,7 @@ import com.dreamteam.avengor.database.Db;
 import java.util.Date;
 import java.util.List;
 
+
 public class CivilsModel {
     private int id_Civil;
     private String nom;
@@ -18,6 +19,19 @@ public class CivilsModel {
     private String encrytedPassword;
     private int privilege;
 
+    /**
+     * @param id_Civil
+     * @param nom
+     * @param prenom
+     * @param civilite
+     * @param adresse
+     * @param email
+     * @param tel
+     * @param dateDeNaissance
+     * @param encrytedPassword
+     * @param nationalite
+     * @param privilege
+     */
     public CivilsModel(int id_Civil, String nom, String prenom, String civilite, String adresse, String email, String tel,//
                        String dateDeNaissance, String encrytedPassword, String nationalite, int privilege){
 
@@ -34,9 +48,6 @@ public class CivilsModel {
         this.privilege = privilege;
     }
 
-    public CivilsModel() {
-
-    }
 
     public int getId_Civil(){
         return id_Civil;

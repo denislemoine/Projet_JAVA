@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Avengor - Supers Héros</title>
+    <title>Avengor - Gestion des Privilèges</title>
 
     <link rel="icon" type="image/png" th:href="@{/assets/img/logo.png}" />
 
@@ -52,42 +52,31 @@
     </div>
 
     <div class="container-fluid border rounded-0 border-dark shadow d-flex d-xl-flex flex-column justify-content-center align-items-center align-content-center justify-content-xl-start align-items-xl-center"
-         style="margin-right: 183px;margin-top: -47px;margin-left: 45px;filter: brightness(100%); padding-bottom: 18px;">
-
-        <div class="btn-group" role="group" style="margin-top: 12px; margin-bottom: 18px;">
-            <a href="/hero" class="btn btn-dark">Liste des Supers Héros</a>
-            <a href="/register" class="btn btn-dark">Ajouter un Super Héro</a>
-        </div>
+         style="padding-top: inherit; margin-right: 183px;margin-left: 45px;filter: brightness(100%); padding-bottom: 18px;">
 
         <div class="d-flex overflow-auto d-xl-flex flex-wrap justify-content-center align-items-center align-content-center justify-content-xl-center align-items-xl-center"
-             style="padding-top: 300px; background-repeat: no-repeat;background-size: auto;background-position: center;width: 918px;opacity: 1;filter: grayscale(0%) hue-rotate(0deg) invert(0%) saturate(100%);height: 899px;margin: -1px;">
+             style="background-repeat: no-repeat;background-size: auto;background-position: center;width: 918px;opacity: 1;filter: grayscale(0%) hue-rotate(0deg) invert(0%) saturate(100%);height: 899px;margin: -1px;">
 
-            <div class="d-flex flex-wrap overflow-auto" style="margin-top: 18px;">
+            <div class="d-flex flex-wrap overflow-auto">
 
-                <div th:each="hero : ${heros}" class="d-flex flex-row">
+                <div th:each="civil : ${civils}" class="card bg-dark text-white" style="margin-right: 18px; margin-bottom: 18px;">
 
-                <div class="card border-light bg-dark text-white" style="margin-right: 18px; margin-bottom: 18px;">
-                    <div class="card-body" style="width: 420px;">
-                        <h4 class="card-title" th:text="${hero.getNom()}"></h4>
-                        <h6 class="card-text card-subtitle mb-2" th:text="| Pouvoir ${hero.getPouvoir()}|">Pouvoir</h6>
-                        <h6 class="card-text card-subtitle mb-2" th:text="| Point Faible ${hero.getPointFaible()}|">Point Faible</h6>
-                        <h6 class="text-muted card-subtitle mb-2" th:text="| Score ${hero.getScore()}|">Score</h6>
-                        <h6 class="text-muted card-subtitle mb-2" th:text="| Commentaire : ${hero.getCommentaire()}|">Commentaire</h6>
-                    </div>
-                </div>
+                        <div class="card-body" style="width: 900px;">
+                            <h4 class="card-title" th:text="|${civil.getNom()} ${civil.getPrenom()}|"></h4>
+                            <h6 th:if="${civil.getPrivilege() == 0}" class="card-text card-subtitle mb-2">Privilège : Civil</h6>
+                            <h6 th:if="${civil.getPrivilege() == 1}" class="card-text card-subtitle mb-2">Privilège : Héro</h6>
+                            <h6 th:if="${civil.getPrivilege() == 2}" class="card-text card-subtitle mb-2">Privilège : Maître Supreme</h6>
+                            <form>
+                                <select name="role" id="role" class="bg-dark text-white border form-control rounded shadow-sm mb-0">
+                                    <option th:value="0">Civil</option>
+                                    <option th:value="1">Héro</option>
+                                    <option th:value="2">Maître Supreme</option>
+                                </select>
+                                <button type="submit" class="btn btn-danger mt-3">Sauvegarder</button>
 
-                    <div class="card border-dark" style="margin-right: 18px; margin-bottom: 18px;">
-                        <div class="card-body" style="width: 420px;">
-                            <h4 class="card-title" th:text="|${hero.getCivil().getPrenom()} ${hero.getCivil().getNom()}|"></h4>
-                            <h6 class="card-text card-subtitle mb-2" th:text="| Civilité : ${hero.getCivil().getCivilite()}|"></h6>
-                            <h6 class="card-text card-subtitle mb-2" th:text="| Résidence : ${hero.getCivil().getAdresse()}|"></h6>
-                            <h6 class="card-text card-subtitle mb-2" th:text="| Email : ${hero.getCivil().getEmail()}|"></h6>
-                            <h6 class="card-text card-subtitle mb-2" th:text="| Téléphone : ${hero.getCivil().getTel()}|"></h6>
-                            <h6 class="text-muted card-subtitle mb-2" th:text="| Nationalité : ${hero.getCivil().getNationalite()}|"></h6>
-                            <h6 class="text-muted card-subtitle mb-2" th:text="| Date de Naissance : ${hero.getCivil().getDateDeNaissance()}|"></h6>
-                            <h6 class="text-muted card-subtitle mb-2" th:text="| Date de Décès : |"></h6>
+                            </form>
+
                         </div>
-                    </div>
 
                 </div>
 

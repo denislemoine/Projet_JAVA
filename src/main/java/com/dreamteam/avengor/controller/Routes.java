@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping
@@ -43,6 +45,17 @@ public class Routes {
         }
 
         return "home";
+    }
+
+    private List<CivilsModel> listeCivils = new ArrayList<>();
+
+    @GetMapping("/roles")
+    public String showRoles(Model model){
+
+        listeCivils = CivilsModel.getAllCivils();
+        model.addAttribute("civils", listeCivils);
+
+        return "role";
     }
 
     @GetMapping("/register")

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class RapportMissionController {
         return "mission/missionEnd";
     }
 
+    @RolesAllowed("ADMIN")
     @RequestMapping(value = "/mission/endmission/d", method = RequestMethod.POST)
     public String endMission(HttpServletRequest request, Model model){
         if(request.getParameter("rapport")!= null){

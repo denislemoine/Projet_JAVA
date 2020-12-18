@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import com.dreamteam.avengor.database.Db;
 import org.springframework.web.context.request.WebRequest;
 
+import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.Null;
 import java.sql.Timestamp;
@@ -19,29 +20,28 @@ import java.util.List;
 
 @Controller
 public class IncidentController {
-    // Route pour la vue de tout les incidents
+
+
     @GetMapping("/incident")
     public String showListIncidents(Model model){
-        // On recupère la liste des incidents et on l'envois en variable dans la vue
         List<IncidentModel> incidentList = new ArrayList<>();
         incidentList = Db.getAllIncidents();
         model.addAttribute("incidentList",incidentList);
-        // On retourne la vue
+
         return "incident/incident";
     }
-    // Route pour la vue d'un incident
+
     @RequestMapping(value="/incident-{id}", method = RequestMethod.GET)
     public String deleteIncident (@PathVariable("id") String id, HttpServletRequest request, Model model) {
-        // On recupère l'incidents et on l'envois en variable dans la vue
         IncidentModel incident = Db.getIncidentByID(id);
         model.addAttribute("incident",incident);
 
         List<SatisfactionModel> satisfactionList = Db.getSatisfactionByIncidentID(id);
         model.addAttribute("satisfactionList",satisfactionList);
-        // On retourne la vue
+
         return "incident/incidentDetail";
     }
-    // Route en post pour l'ajout d'un incident
+
     @RequestMapping(value="/incident-add", method = RequestMethod.POST)
     public String addIncident(WebRequest request) throws ParseException {
 
@@ -59,7 +59,8 @@ public class IncidentController {
         Db.saveIncident(incident);
         return "redirect:incident";
     }
-    // Route pour la vue d'ajout d'un incident
+
+    @RolesAllowed({"HERO", "ADMIN"})
     @GetMapping("/incident-add")
     public String showFormIncident(Model model){
         List<SuperVilainModel> superVilainList = new ArrayList<>();
@@ -69,7 +70,8 @@ public class IncidentController {
 
         return "incident/incidentAdd";
     }
-    // Route en get pour la suppression d'un incident
+
+    @RolesAllowed("ADMIN")
     @RequestMapping(value="/incident-delete-{id}", method = RequestMethod.GET)
     public String deleteIncident (@PathVariable("id") String id, HttpServletRequest request) {
         Db.deleteIncidentByID(id);

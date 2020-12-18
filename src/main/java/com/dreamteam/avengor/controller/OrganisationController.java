@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -38,6 +39,7 @@ public class OrganisationController {
 
     private List<CivilsModel> listeCivils = new ArrayList<>();
 
+    @RolesAllowed({"HERO", "ADMIN"})
     @GetMapping("/organisation-add")
     public String organisationAdd(Model model) {
 
@@ -48,6 +50,7 @@ public class OrganisationController {
         return "organisation/organisation";
     }
 
+    @RolesAllowed("ADMIN")
     @RequestMapping(value="/organisation-add", method = RequestMethod.POST)
     public String addOrganisation (HttpServletRequest request) {
 

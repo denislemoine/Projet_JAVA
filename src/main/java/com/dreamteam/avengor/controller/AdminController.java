@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class AdminController {
     //                          Methodes CIVIL                                 =
     //=========================================================================
 
+    @RolesAllowed("ADMIN")
     @GetMapping("/admin/accounts")
     public String adminAccounts(Model model){
 
@@ -44,6 +46,8 @@ public class AdminController {
         model.addAttribute("civil",listeCivils);
         return "panelAdmin/accounts";
     }
+
+    @RolesAllowed("ADMIN")
     @RequestMapping(value = "/admin/accounts/d", method = RequestMethod.POST)
     public String deleteAccount(HttpServletRequest request,Model model) throws ParseException {
         if(request.getParameter("delete")!= null){
@@ -54,6 +58,7 @@ public class AdminController {
         return "panelAdmin/accounts";
     }
 
+    @RolesAllowed("ADMIN")
     @RequestMapping(value = "/admin/deleteaccounts/{id}")
     public String viewDeleteAccount(@PathVariable("id") String id,Model model){
 
@@ -62,6 +67,8 @@ public class AdminController {
         return "panelAdmin/deleteAccount";
 
     }
+
+    @RolesAllowed("ADMIN")
     @RequestMapping(value = "/admin/accounts/m", method = RequestMethod.POST)
     public String modifyAccount(HttpServletRequest request,Model model) throws ParseException{
         CivilsModel civil = new CivilsModel();
@@ -78,6 +85,8 @@ public class AdminController {
         model.addAttribute("civil",listeCivils);
         return "panelAdmin/accounts";
     }
+
+    @RolesAllowed("ADMIN")
     @RequestMapping("/admin/modifyaccounts/{id}")
     public String viewModifyAccount(@PathVariable("id") String id,Model model){
 
@@ -88,6 +97,8 @@ public class AdminController {
     //=========================================================================
     //                          Methodes MISSIONS                                 =
     //=========================================================================
+
+    @RolesAllowed("ADMIN")
     @GetMapping("/admin/missions")
     public String adminMission(Model model){
         listeMissions = MissionModel.getAllMissions();
@@ -95,6 +106,8 @@ public class AdminController {
         model.addAttribute("missions",listeMissions);
         return "panelAdmin/missions";
     }
+
+    @RolesAllowed("ADMIN")
     @RequestMapping(value = "/admin/deletemission/{id}")
     public String viewDeleteMission(@PathVariable("id") String id,Model model){
 
@@ -103,6 +116,8 @@ public class AdminController {
         return "panelAdmin/deleteMission";
 
     }
+
+    @RolesAllowed("ADMIN")
     @RequestMapping(value = "/admin/missions/d", method = RequestMethod.POST)
     public String deleteMission(HttpServletRequest request,Model model) throws ParseException {
         if(request.getParameter("delete")!= null){
@@ -115,6 +130,8 @@ public class AdminController {
     //=========================================================================
     //                          Methodes Organisations                                 =
     //=========================================================================
+
+    @RolesAllowed("ADMIN")
     @GetMapping("/admin/organisations")
     public String adminOrganisation(Model model){
 

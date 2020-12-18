@@ -103,19 +103,15 @@ public class Db {
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
             //creation d'une organisation
-
-
                 PreparedStatement statement = CON.prepareStatement
-                        ("INSERT INTO Civils (Nom, Adresse, Dirigeant, Commentaire,) " +
+                        ("INSERT INTO Organisations (Nom, Adresse, Dirigeant, Commentaire) " +
                                 "VALUES (?, ?, ?, ?)");
                 statement.setString(1,organisationModel.getNom());
                 statement.setString(2,organisationModel.getAdresse());
-                //statement.setString(3,organisationModel.getDirigeant());
+                statement.setInt(3,organisationModel.getDirigeant());
                 statement.setString(4,organisationModel.getCommentaire());
 
                 statement.execute();
-
-
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -362,6 +358,25 @@ public class Db {
             e.printStackTrace();
         }
 
+    }
+
+    public static boolean updatePrivilege(String idUser, int newRoleId){
+
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            PreparedStatement statement = CON.prepareStatement
+                    ("UPDATE Civils SET privilege = ?" +
+                            " WHERE id_Civil = ?");
+            statement.setInt(1, newRoleId);
+            statement.setString(2, idUser);
+            statement.execute();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     //=========================================================================
@@ -728,7 +743,7 @@ public class Db {
     }
 
     //=========================================================================
-    //                          QUERIES DES ORGANISATION                    =
+    //                          QUERIES DES ORGANISATION                      =
     //=========================================================================
     public static List<OrganisationModel> getAllOrga() {
         List<OrganisationModel> orgas = new ArrayList<>();
@@ -751,6 +766,28 @@ public class Db {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static List<OrganisationModel> getAllOrganisations(){
+        List<OrganisationModel> organisations = new ArrayList<>();
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Statement statement = CON.createStatement();
+            ResultSet res = statement.executeQuery("SELECT * FROM Organisations");
+
+            while(res.next()){
+                OrganisationModel organisation = new OrganisationModel(
+                    res.getInt("id_Organisations"), res.getString("Nom"), res.getString("Adresse"), res.getInt("Dirigeant"),
+                    res.getString("Commentaire"), res.getTimestamp("DateAjout"), res.getTimestamp("DATEDerniereModif"),
+                    res.getInt("NbIncidentsDeclares"), res.getInt("NbMissionsImplique")
+                );
+                organisations.add(organisation);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return organisations;
     }
 
 }

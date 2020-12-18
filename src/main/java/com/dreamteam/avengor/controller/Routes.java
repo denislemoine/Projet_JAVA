@@ -2,6 +2,7 @@ package com.dreamteam.avengor.controller;
 
 import com.dreamteam.avengor.database.Db;
 import com.dreamteam.avengor.model.CivilsModel;
+import com.dreamteam.avengor.model.MissionModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.security.core.Authentication;
@@ -11,11 +12,16 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping
@@ -23,7 +29,7 @@ public class Routes {
 
     //===================================================================================
     //                                                                                  =
-    //                              GET  METHODS                                        =
+    //                              POST / GET METHODS                                  =
     //                                                                                  =
     //===================================================================================
 
@@ -45,6 +51,17 @@ public class Routes {
         return "home";
     }
 
+    private List<CivilsModel> listeCivils = new ArrayList<>();
+
+    @GetMapping("/roles")
+    public String showRoles(Model model){
+
+        listeCivils = CivilsModel.getAllCivils();
+        model.addAttribute("civils", listeCivils);
+
+        return "role";
+    }
+
     @GetMapping("/register")
     public String register() {
         return "register";
@@ -52,16 +69,6 @@ public class Routes {
 
     @GetMapping("/vilain")
     public String vilain() { return "Vilain"; }
-
-    @GetMapping("/organisation")
-    public String organisation() {
-        return "organisation/organisationList";
-    }
-
-    @GetMapping("/organisation-add")
-    public String organisationAdd() {
-        return "organisation/organisation";
-    }
 
     @GetMapping("/admin")
     public String SuperUserHome(){ return "panelAdmin/admin";}
@@ -75,11 +82,16 @@ public class Routes {
     public String SuperUserOrga(){ return "panelAdmin/organisations";}
 
 
+    @RequestMapping(value="/role-update-{id}", method = RequestMethod.POST)
+    public String addMission (@PathVariable("id") String idUser, HttpServletRequest request, CivilsModel civilsModel) {
 
-    //===================================================================================
-    //                                                                                  =
-    //                              POST / GET METHODS                                  =
-    //                                                                                  =
-    //===================================================================================
+        int newRoleId = Integer.parseInt(request.getParameter("role"));
+
+        Db.updatePrivilege(idUser, newRoleId);
+
+        return "redirect:roles";
+    }
+
+
 
 }

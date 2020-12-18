@@ -2,10 +2,7 @@ package com.dreamteam.avengor.controller;
 
 
 import com.dreamteam.avengor.database.Db;
-import com.dreamteam.avengor.model.CivilsModel;
-import com.dreamteam.avengor.model.IncidentModel;
-import com.dreamteam.avengor.model.MissionModel;
-import com.dreamteam.avengor.model.SuperHerosModel;
+import com.dreamteam.avengor.model.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +31,17 @@ public class MissionController {
 
 
         return "mission/missionList";
+    }
+
+    @RequestMapping(value="/mission-{id}", method = RequestMethod.GET)
+    public String showDetailMission (@PathVariable("id") String id, HttpServletRequest request, Model model) {
+        MissionModel mission = Db.findMissionById(id);
+        model.addAttribute("mission",mission);
+
+        List<SatisfactionModel> satisfactionList = Db.getSatisfactionByMissionID(id);
+        model.addAttribute("satisfactionList",satisfactionList);
+
+        return "mission/missionDetail";
     }
 
     @GetMapping("/mission-add-{id}")

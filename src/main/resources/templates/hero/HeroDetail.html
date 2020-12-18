@@ -51,8 +51,7 @@
         </div>
     </div>
 
-    <div class="container-fluid border rounded-0 border-dark shadow d-flex d-xl-flex flex-column justify-content-center align-items-center align-content-center justify-content-xl-start align-items-xl-center"
-         style="margin-right: 183px;margin-top: -47px;margin-left: 45px;filter: brightness(100%); padding-bottom: 18px;">
+    <div class="container-fluid border rounded-0 border-dark shadow d-flex d-xl-flex flex-column justify-content-center align-items-center align-content-center justify-content-xl-start align-items-xl-center" style="margin-right: 183px;margin-top: -47px;margin-left: 45px;filter: brightness(100%); padding-bottom: 18px;">
 
         <div class="btn-group" role="group" style="margin-top: 12px; margin-bottom: 18px;">
             <a href="/hero" class="btn btn-dark">Liste des Supers Héros</a>
@@ -60,41 +59,30 @@
         </div>
 
         <div class="d-flex overflow-auto d-xl-flex flex-wrap justify-content-center align-items-center align-content-center justify-content-xl-center align-items-xl-center"
-             style="padding-top: 300px; background-repeat: no-repeat;background-size: auto;background-position: center;width: 918px;opacity: 1;filter: grayscale(0%) hue-rotate(0deg) invert(0%) saturate(100%);height: 899px;margin: -1px;">
+             style="background-repeat: no-repeat;background-size: auto;background-position: center;width: 918px;opacity: 1;filter: grayscale(0%) hue-rotate(0deg) invert(0%) saturate(100%);height: 899px;margin: -1px;">
 
             <div class="d-flex flex-wrap overflow-auto" style="margin-top: 18px;">
 
-                <div th:each="hero : ${heros}" class="d-flex flex-row">
+                <div class="d-flex flex-row">
 
-                <div class="card border-light bg-dark text-white" style="margin-right: 18px; margin-bottom: 18px;">
-                    <div class="card-body" style="width: 420px;">
-                        <h4 class="card-title" th:text="${hero.getNom()}"></h4>
-                        <h6 class="card-text card-subtitle mb-2" th:text="| Pouvoir ${hero.getPouvoir()}|">Pouvoir</h6>
-                        <h6 class="card-text card-subtitle mb-2" th:text="| Point Faible ${hero.getPointFaible()}|">Point Faible</h6>
-                        <h6 class="text-muted card-subtitle mb-2" th:text="| Score ${hero.getScore()}|">Score</h6>
-                        <h6 class="text-muted card-subtitle mb-2" th:text="| Commentaire : ${hero.getCommentaire()}|">Commentaire</h6>
-                        <a th:href="|hero-${hero.getId_SuperHeros()}|" class="btn btn-link float-right">
-                            Voir les satisfactions
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-star-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4zm4.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.178.178 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.178.178 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.178.178 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.178.178 0 0 1-.134-.098L8.16 4.1z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
-                    <div class="card border-dark" style="margin-right: 18px; margin-bottom: 18px;">
+                    <div class="card border-light bg-dark text-white" style="margin-right: 18px; margin-bottom: 18px;">
                         <div class="card-body" style="width: 420px;">
-                            <h4 class="card-title" th:text="|${hero.getCivil().getPrenom()} ${hero.getCivil().getNom()}|"></h4>
-                            <h6 class="card-text card-subtitle mb-2" th:text="| Civilité : ${hero.getCivil().getCivilite()}|"></h6>
-                            <h6 class="card-text card-subtitle mb-2" th:text="| Résidence : ${hero.getCivil().getAdresse()}|"></h6>
-                            <h6 class="card-text card-subtitle mb-2" th:text="| Email : ${hero.getCivil().getEmail()}|"></h6>
-                            <h6 class="card-text card-subtitle mb-2" th:text="| Téléphone : ${hero.getCivil().getTel()}|"></h6>
-                            <h6 class="text-muted card-subtitle mb-2" th:text="| Nationalité : ${hero.getCivil().getNationalite()}|"></h6>
-                            <h6 class="text-muted card-subtitle mb-2" th:text="| Date de Naissance : ${hero.getCivil().getDateDeNaissance()}|"></h6>
-                            <h6 class="text-muted card-subtitle mb-2" th:text="| Date de Décès : |"></h6>
+                            <h4 class="card-title" th:text="${hero.getNom()}"></h4>
+                            <h6 class="card-text card-subtitle mb-2" th:text="| Pouvoir ${hero.getPouvoir()}|">Pouvoir</h6>
+                            <h6 class="card-text card-subtitle mb-2" th:text="| Point Faible ${hero.getPointFaible()}|">Point Faible</h6>
+                            <h6 class="text-muted card-subtitle mb-2" th:text="| Score ${hero.getScore()}|">Score</h6>
+                            <h6 class="text-muted card-subtitle mb-2" th:text="| Commentaire : ${hero.getCommentaire()}|">Commentaire</h6>
+                        </div>
+                        <div class="card-footer">
+                            <h4 class="card-title">Les satisfactions :</h4>
+                            <div th:each="satisfaction : ${satisfactionList}" class="card bg-info">
+                                <p th:text="|Type : ${satisfaction.getSatisfactionType()}|"></p>
+                                <p th:text="|Message : ${satisfaction.getMessage()}|"></p>
+                                <p th:text="|Commentaire : ${satisfaction.getCommentaire()}|"></p>
+                                <p th:text="|Note : ${satisfaction.getNote()}|"></p>
+                            </div>
                         </div>
                     </div>
-
                 </div>
 
             </div>

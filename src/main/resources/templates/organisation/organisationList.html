@@ -63,10 +63,12 @@
 
             <div class="d-flex flex-wrap overflow-auto" style="margin-top: 18px;">
 
-                <div th:each="civilList : ${civilian}" class="card" style="margin-right: 18px; margin-bottom: 18px;">
-                    <div class="card-body" style="width: 900px; height: 100px;">
-                        <h4 class="card-title" th:text="${civilList.getNom()}"></h4>
-                        <h6 class="text-muted card-subtitle mb-2">CIVIL</h6>
+                <div th:each="orga : ${organisations}" class="card bg-dark text-white" style="margin-right: 18px; margin-bottom: 18px;">
+                    <div class="card-body" style="width: 900px;">
+                        <h4 class="card-title" th:text="${orga.getNom()}"></h4>
+                        <h6 class="text-muted card-subtitle mb-2" th:text="| Adresse : ${orga.getAdresse()}|"></h6>
+                        <h6 class="text-muted card-subtitle mb-2" th:text="| Commentaire : ${orga.getCommentaire()}|"></h6>
+                        <h6 class="text-muted card-subtitle mb-2" th:text="| Créé le : ${orga.getDateAjout()}|"></h6>
                     </div>
                 </div>
 

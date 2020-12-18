@@ -23,21 +23,47 @@ import java.util.List;
 @Controller
 public class OrganisationController {
 
+    private List<OrganisationModel> listeOrga = new ArrayList<>();
+
+    @GetMapping("/organisation")
+    public String organisation(Model model) {
+
+        listeOrga = Db.getAllOrganisations();
+
+        model.addAttribute("organisations", listeOrga);
+        return "organisation/organisationList";
+    }
+
+
+
+    private List<CivilsModel> listeCivils = new ArrayList<>();
+
+    @GetMapping("/organisation-add")
+    public String organisationAdd(Model model) {
+
+        listeCivils = CivilsModel.getAllCivils();
+
+        model.addAttribute("civilList", listeCivils);
+
+        return "organisation/organisation";
+    }
 
     @RequestMapping(value="/organisation-add", method = RequestMethod.POST)
-    public String addOrganisation (HttpServletRequest request, OrganisationModel organisationModel) {
+    public String addOrganisation (HttpServletRequest request) {
 
-        String nom = request.getParameter("nom");
-        String adresse = request.getParameter("adresse");
-        int dirigent = Integer.parseInt(request.getParameter("dirigeant"));
-        String commentaire = request.getParameter("commentaire");
+        String nom = request.getParameter("Nom");
+        String adresse = request.getParameter("Adresse");
+        int civilDirigeant = Integer.parseInt(request.getParameter("Dirigeant"));
+        String commentaire = request.getParameter("Commentaire");
 
         Date date = new Date();
         long now = date.getTime();
         Timestamp dateAjout = new Timestamp(now);
 
-        OrganisationModel organisationModel1 = new OrganisationModel(1, nom, adresse, dirigent, commentaire,dateAjout , null, 0, 0);
-        Db.saveOrganisation(organisationModel1);
+        OrganisationModel organisation = new OrganisationModel(0, nom, adresse, civilDirigeant, commentaire, dateAjout,
+                dateAjout, 0, 0);
+
+        Db.saveOrganisation(organisation);
         return "organisation/organisationList";
     }
 }

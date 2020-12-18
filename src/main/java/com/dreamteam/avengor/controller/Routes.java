@@ -53,16 +53,6 @@ public class Routes {
     @GetMapping("/vilain")
     public String vilain() { return "Vilain"; }
 
-    @GetMapping("/organisation")
-    public String organisation() {
-        return "organisation/organisationList";
-    }
-
-    @GetMapping("/organisation-add")
-    public String organisationAdd() {
-        return "organisation/organisation";
-    }
-
     @GetMapping("/admin")
     public String SuperUserHome(){ return "panelAdmin/admin";}
 

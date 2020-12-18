@@ -1,7 +1,6 @@
 package com.dreamteam.avengor.model;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 public class OrganisationModel {
     private int id_Organisations;
@@ -10,11 +9,11 @@ public class OrganisationModel {
     private int dirigeant;
     private String commentaire;
     private Timestamp dateAjout;
-    private LocalDateTime dateDerniereModif;
+    private Timestamp dateDerniereModif;
     private int nbIncidentsDeclares;
     private int nbMissionsImplique;
 
-    public OrganisationModel(int id_Organisations, String nom, String adresse, int dirigeant, String commentaire, Timestamp dateAjout, LocalDateTime dateDerniereModif, int nbIncidentsDeclares, int nbMissionsImplique){
+    public OrganisationModel(int id_Organisations, String nom, String adresse, int dirigeant, String commentaire, Timestamp dateAjout, Timestamp dateDerniereModif, int nbIncidentsDeclares, int nbMissionsImplique){
         super();
         this.id_Organisations = id_Organisations;
         this.nom = nom;
@@ -76,11 +75,11 @@ public class OrganisationModel {
         this.dateAjout = dateAjout;
     }
 
-    public LocalDateTime getDateDerniereModif() {
+    public Timestamp getDateDerniereModif() {
         return dateDerniereModif;
     }
 
-    public void setDateDerniereModif(LocalDateTime dateDerniereModif) {
+    public void setDateDerniereModif(Timestamp dateDerniereModif) {
         this.dateDerniereModif = dateDerniereModif;
     }
 

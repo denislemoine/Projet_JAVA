@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
 
@@ -33,6 +34,7 @@ public class MissionController {
         return "mission/missionList";
     }
 
+    @RolesAllowed({"CIVIL", "HERO", "ADMIN"})
     @RequestMapping(value="/mission-{id}", method = RequestMethod.GET)
     public String showDetailMission (@PathVariable("id") String id, HttpServletRequest request, Model model) {
         MissionModel mission = Db.findMissionById(id);
@@ -44,6 +46,7 @@ public class MissionController {
         return "mission/missionDetail";
     }
 
+    @RolesAllowed({"ADMIN", "HERO"})
     @GetMapping("/mission-add-{id}")
     public String showFormAddMission(@PathVariable("id") String id, Model model){
 
@@ -55,7 +58,7 @@ public class MissionController {
         return "mission/missionAdd";
     }
 
-
+    @RolesAllowed("ADMIN")
     @RequestMapping(value="/mission-add-{id}", method = RequestMethod.POST)
     public String addMission (@PathVariable("id") String id, HttpServletRequest request, CivilsModel civilsModel) {
 

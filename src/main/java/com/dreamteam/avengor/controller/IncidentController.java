@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import com.dreamteam.avengor.database.Db;
 import org.springframework.web.context.request.WebRequest;
 
+import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.Null;
 import java.sql.Timestamp;
@@ -59,6 +60,7 @@ public class IncidentController {
         return "redirect:incident";
     }
 
+    @RolesAllowed({"HERO", "ADMIN"})
     @GetMapping("/incident-add")
     public String showFormIncident(Model model){
         List<SuperVilainModel> superVilainList = new ArrayList<>();
@@ -69,6 +71,7 @@ public class IncidentController {
         return "incident/incidentAdd";
     }
 
+    @RolesAllowed("ADMIN")
     @RequestMapping(value="/incident-delete-{id}", method = RequestMethod.GET)
     public String deleteIncident (@PathVariable("id") String id, HttpServletRequest request) {
         Db.deleteIncidentByID(id);

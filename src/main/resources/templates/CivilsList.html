@@ -61,7 +61,7 @@
         <div class="d-flex overflow-auto d-xl-flex flex-wrap justify-content-center align-items-center align-content-center justify-content-xl-center align-items-xl-center"
              style="background-repeat: no-repeat;background-size: auto;background-position: center;width: 918px;opacity: 1;filter: grayscale(0%) hue-rotate(0deg) invert(0%) saturate(100%);height: 899px;margin: -1px;">
 
-            <div class="d-flex flex-wrap overflow-auto" style="margin-top: 18px;">
+            <div class="d-flex flex-wrap overflow-auto" style="margin-top: 100px;">
 
                 <div th:each="civil : ${civilian}" class="card bg-dark text-white" style="margin-right: 18px; margin-bottom: 18px;">
 
@@ -73,6 +73,9 @@
                             <h6 class="card-text card-subtitle mb-2" th:text="| Téléphone : ${civil.getTel()}|"></h6>
                             <h6 class="card-text card-subtitle mb-2" th:text="| Nationalité : ${civil.getNationalite()}|"></h6>
                             <h6 class="card-text card-subtitle mb-2" th:text="| Date de Naissance : ${civil.getDateDeNaissance()}|"></h6>
+                            <h6 th:if="${civil.getPrivilege() == 0}" class="card-text card-subtitle mb-2">Privilège : Civil</h6>
+                            <h6 th:if="${civil.getPrivilege() == 1}" class="card-text card-subtitle mb-2">Privilège : Héro</h6>
+                            <h6 th:if="${civil.getPrivilege() == 2}" class="card-text card-subtitle mb-2">Privilège : Maître Supreme</h6>
 
 
                         </div>

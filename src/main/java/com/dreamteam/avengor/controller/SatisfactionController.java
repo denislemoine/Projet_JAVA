@@ -19,31 +19,32 @@ import java.util.List;
 
 @Controller
 public class SatisfactionController {
-
+    // Route pour la vue d'ajout d'une satisfaction
     @GetMapping("/satisfaction")
     public String showListIncidents(Model model){
+        // On recupère la liste des incidents et on l'envois en variable dans la vue
         List<IncidentModel> incidentList = new ArrayList<>();
         incidentList = Db.getAllIncidents();
         model.addAttribute("incidentList",incidentList);
-
+        // On récupère la liste des super vilains et on l'envois en variable dans la vue
         List<SuperVilainModel> superVilainList = new ArrayList<>();
         superVilainList = Db.getAllVilains();
         model.addAttribute("superVilainList",superVilainList);
-
+        // On récupère la liste des super héros et on l'envois en variable dans la vue
         List<SuperHerosModel> superHeroList = new ArrayList<>();
         superHeroList = Db.getAllHero();
         model.addAttribute("superHeroList",superHeroList);
-
+        // On récupère la liste des missions et on l'envois en variable dans la vue
         List<MissionModel> missionList = new ArrayList<>();
         missionList = Db.getAllMission();
         model.addAttribute("missionList",missionList);
-
+        // On retourne la vue
         return "satisfactionAdd";
     }
-
+    // Route en post pour l'ajout d'une satisfaction
     @RequestMapping(value="/satisfaction-add", method = RequestMethod.POST)
     public String addIncident(WebRequest request) {
-
+        // On récupère les données entré dans le formulaire
         String satisfactionType = request.getParameter("type");
         Integer id_Civils = Integer.parseInt(request.getParameter("hero"));
         Integer id_super_vilain = Integer.parseInt(request.getParameter("vilain"));
@@ -59,7 +60,7 @@ public class SatisfactionController {
         if (id_mission == 0)                { id_mission = null;        }
         if ((note == 0 && id_incidents != null) || (note == 0 && id_mission != null))
                                             { note = null;              }
-
+        // On créer l'objet satisfaction
         SatisfactionModel satisfaction = new SatisfactionModel(
                 1
                 ,id_Civils
@@ -71,7 +72,9 @@ public class SatisfactionController {
                 ,note
                 ,commentaire
                 );
+        // On envoi l'objet a la méthode pour enregistrer les données en base
         Db.saveSatisfaction(satisfaction);
+        // On redirige vers l'url "satisfaction"
         return "redirect:satisfaction";
     }
 }

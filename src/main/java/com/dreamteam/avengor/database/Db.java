@@ -451,7 +451,7 @@ public class Db {
                         res.getTimestamp("DateFin"), res.getInt("Niveaux"), res.getInt("Urgence"),
                         res.getInt("id_Incidents"),res.getString("RapportFinMission"), hero
                 );
-                if(res.getTimestamp("DateFin") != null){
+                if(res.getTimestamp("DateFin") == null){
                     missions.add(mission);
                 }
 

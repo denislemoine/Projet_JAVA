@@ -2,6 +2,8 @@ package com.dreamteam.avengor.controller;
 
 
 import com.dreamteam.avengor.database.Db;
+import com.dreamteam.avengor.model.AdminModel;
+import com.dreamteam.avengor.model.CivilsModel;
 import com.dreamteam.avengor.model.MissionModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -27,10 +29,12 @@ public class RapportMissionController {
 
     @RequestMapping(value = "/mission/endmission/d", method = RequestMethod.POST)
     public String endMission(HttpServletRequest request, Model model){
-
-
-
-        return "missionList";
+        if(request.getParameter("rapport")!= null){
+            Db.finishMission(request.getParameter("rapport"),request.getParameter("commentaire"));
+        }
+        List<MissionModel> missionsList = MissionModel.getAllMissions();
+        model.addAttribute("missions",missionsList);
+        return "mission/missionList";
     }
 
 }

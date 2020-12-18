@@ -64,7 +64,7 @@
                 <form action="/mission/endmission/d", method="post">
                     <input class="border rounded shadow-sm form-control-lg d-xl-flex justify-content-xl-center align-items-xl-center" type="text" style=" color: rgb(255,255,255);background-color: rgb(87,87,87);background-repeat: no-repeat;background-size: cover;background-position: center;margin-right: 0px;width: 235px;height: 250px;padding-right: 8px;margin-top: 18px;"
                            required="" name="commentaire" placeholder="Ecrire le rapport ici" size="1500">
-                    <input type="hidden" th:value="${mission.getId_Mission()}">
+                    <input type="hidden" name="rapport" th:value="${mission.getId_Mission()}">
                     <button type="submit" class="btn btn-success">
                         Fin de mission
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-square-fill" viewBox="0 0 16 16">

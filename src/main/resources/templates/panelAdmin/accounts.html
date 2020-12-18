@@ -51,8 +51,8 @@
         </div>
     </div>
 
-
-        <div>
+    <div class="container-fluid border rounded-0 border-dark shadow d-flex d-xl-flex flex-column justify-content-center align-items-center align-content-center justify-content-xl-start align-items-xl-center" style="margin-right: 183px;margin-top: -47px;margin-left: 45px;filter: brightness(100%); padding-bottom: 18px;">
+        <div class="overflow-auto">
             <div class="list-group btn-light mt-1 mr-xl-5" th:each="civilList : ${civil}">
                     <ul name="FirstLine" class="list-group list-group-horizontal-xl">
                         <li class="list-group-item" th:text="|${civilList.getId_Civil()}  ${civilList.getCivilite()}.${civilList.getNom()} ${civilList.getPrenom()}|">Civilite Nom Prenom</li>
@@ -84,7 +84,7 @@
 
             </div>
         </div>
-
+    </div>
 
     <a class="btn border-danger shadow-sm" role="button" style="background-repeat: no-repeat;font-size: 18px;font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);background-image: url(&quot;assets/img/login/button2.png&quot;);background-position: center;background-size: contain;margin-left: 0px;margin-top: 0px;margin-right: 81px;padding-top: 9px;font-weight: normal;padding-bottom: 0px;padding-left: 75px;height: 39px;padding-right: 19px;"
        href="logout">DISCONNECT</a></header>

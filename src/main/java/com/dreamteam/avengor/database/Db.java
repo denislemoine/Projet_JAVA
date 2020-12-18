@@ -37,6 +37,25 @@ public class Db {
         return "null";
     }
 
+    public static int getPrivilegeOfCivil(String mail){
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Statement state = CON.createStatement();
+            ResultSet res = state.executeQuery("SELECT privilege FROM Civils WHERE Email = '" + mail + "'");
+            if(res.next()){
+                if(res.getString("Email").equals(mail)) {
+                    return res.getInt("privilege");
+                }
+            } else {
+                return 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return 0;
+    }
+
     //=========================================================================
     //                          QUERIES SAVE                                  =
     //=========================================================================
@@ -51,8 +70,8 @@ public class Db {
             if(civilsModel.getId_Civil() != 0){
                 Date birth = Date.valueOf(civilsModel.getDateDeNaissance());
                 PreparedStatement statement = CON.prepareStatement
-                        ("INSERT INTO Civils (Nom, Prenom, Civilite, Adresse, Email, Tel, DateDeNaissance, Password, Nationalite) " +
-                                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                        ("INSERT INTO Civils (Nom, Prenom, Civilite, Adresse, Email, Tel, DateDeNaissance, Password, Nationalite, privilege) " +
+                                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                 statement.setString(1,civilsModel.getNom());
                 statement.setString(2,civilsModel.getPrenom());
                 statement.setString(3,civilsModel.getCivilite());
@@ -62,6 +81,7 @@ public class Db {
                 statement.setDate(7, birth);
                 statement.setString(8,civilsModel.getencrytedPassword());
                 statement.setString(9,civilsModel.getNationalite());
+                statement.setInt(10,civilsModel.getPrivilege());
                 statement.execute();
 
                 Statement state = CON.createStatement();
@@ -240,7 +260,7 @@ public class Db {
             while(resultSet.next()){
                 if(resultSet.getString("Password") != null){
                     CivilsModel civil = new CivilsModel(resultSet.getInt("id_Civil"),resultSet.getString("nom"),resultSet.getString("prenom"),resultSet.getString("civilite"),resultSet.getString("adresse"),
-                            resultSet.getString("email"),resultSet.getString("tel"),resultSet.getString("dateDeNaissance"),null,resultSet.getString("Nationalite"));
+                            resultSet.getString("email"),resultSet.getString("tel"),resultSet.getString("dateDeNaissance"),null,resultSet.getString("Nationalite"), resultSet.getInt("privilege"));
                     civils.add(civil);
                 }
             }
@@ -259,7 +279,7 @@ public class Db {
 
             if(resultSet.next()) {
                 CivilsModel civil = new CivilsModel(resultSet.getInt("id_Civil"),resultSet.getString("nom"),resultSet.getString("prenom"),resultSet.getString("civilite"),resultSet.getString("adresse"),
-                        resultSet.getString("email"),resultSet.getString("tel"),resultSet.getString("dateDeNaissance"),null,resultSet.getString("Nationalite"));
+                        resultSet.getString("email"),resultSet.getString("tel"),resultSet.getString("dateDeNaissance"),null,resultSet.getString("Nationalite"), resultSet.getInt("privilege"));
                 return civil;
             } else {
                 return null;
@@ -268,7 +288,7 @@ public class Db {
         } catch (SQLException e) {
 
             e.printStackTrace();
-            CivilsModel civil = new CivilsModel(0,"ERREUR",null,null,null,null,null,null,null,null);
+            CivilsModel civil = new CivilsModel(0,"ERREUR",null,null,null,null,null,null,null,null, 0);
             return civil;
         }
     }

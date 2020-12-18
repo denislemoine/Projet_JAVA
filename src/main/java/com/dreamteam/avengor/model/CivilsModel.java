@@ -16,15 +16,10 @@ public class CivilsModel {
     private String nationalite;
     private String dateDeNaissance;
     private String encrytedPassword;
-
-    public CivilsModel() {
-
-    }
-
-
+    private int privilege;
 
     public CivilsModel(int id_Civil, String nom, String prenom, String civilite, String adresse, String email, String tel,//
-                       String dateDeNaissance, String encrytedPassword, String nationalite){
+                       String dateDeNaissance, String encrytedPassword, String nationalite, int privilege){
 
         this.id_Civil = id_Civil;
         this.nom = nom;
@@ -36,6 +31,11 @@ public class CivilsModel {
         this.dateDeNaissance = dateDeNaissance;
         this.encrytedPassword = encrytedPassword;
         this.nationalite= nationalite;
+        this.privilege = privilege;
+    }
+
+    public CivilsModel() {
+
     }
 
     public int getId_Civil(){
@@ -119,5 +119,10 @@ public class CivilsModel {
 
     public void setNationalite(String nationalite) {
         this.nationalite = nationalite;
+    }
+
+    public void setPrivilege(int privilege){ this.privilege = privilege; }
+    public int getPrivilege(){
+        return privilege;
     }
 }

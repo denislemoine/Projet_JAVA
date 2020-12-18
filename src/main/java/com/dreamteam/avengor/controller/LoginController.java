@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -46,20 +47,35 @@ public class LoginController {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String successLogin = Db.login(mail);
 
-
-
         if(!encoder.matches(password, successLogin)) {
             return "redirect:login?error=accountnotfound";
         }
 
-        //WEB SECURITY
-        List<GrantedAuthority> privilege = new ArrayList<GrantedAuthority>();
-        privilege.add(new SimpleGrantedAuthority("USER"));
+        //WEB SECURITY ROLES
+        int role = Db.getPrivilegeOfCivil(mail);
 
-        UserDetails user = new User(mail, successLogin, privilege);
-
-        Authentication auth = new UsernamePasswordAuthenticationToken(user, null, privilege);
-        SecurityContextHolder.getContext().setAuthentication(auth);
+        if(role == 2) {
+            //ADMIN SESSION
+            List<GrantedAuthority> privilege = new ArrayList<GrantedAuthority>();
+            privilege.add(new SimpleGrantedAuthority("ADMIN"));
+            UserDetails user = new User(mail, successLogin, privilege);
+            Authentication auth = new UsernamePasswordAuthenticationToken(user, null, privilege);
+            SecurityContextHolder.getContext().setAuthentication(auth);
+        }else if (role == 1) {
+            //HERO SESSION
+            List<GrantedAuthority> privilege = new ArrayList<GrantedAuthority>();
+            privilege.add(new SimpleGrantedAuthority("HERO"));
+            UserDetails user = new User(mail, successLogin, privilege);
+            Authentication auth = new UsernamePasswordAuthenticationToken(user, null, privilege);
+            SecurityContextHolder.getContext().setAuthentication(auth);
+        }else {
+            //CIVIL SESSION
+            List<GrantedAuthority> privilege = new ArrayList<GrantedAuthority>();
+            privilege.add(new SimpleGrantedAuthority("CIVIL"));
+            UserDetails user = new User(mail, successLogin, privilege);
+            Authentication auth = new UsernamePasswordAuthenticationToken(user, null, privilege);
+            SecurityContextHolder.getContext().setAuthentication(auth);
+        }
 
         return "redirect:civil";
     }

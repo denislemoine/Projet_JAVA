@@ -55,9 +55,14 @@ public class CivilController {
           civ = "H";
         }else{ civ = "F"; }
 
+        int role = 0;
+        if (request.getParameter("isHero").equals("1")){
+            role = 1;
+        }else{
+            role = 0;
+        }
 
-
-        CivilsModel civilsModel1 = new CivilsModel(1,nom,prenom,civ,adresse,email,tel,dateDeNaissance, passEncrypted, nationalite);
+        CivilsModel civilsModel1 = new CivilsModel(1,nom,prenom,civ,adresse,email,tel,dateDeNaissance, passEncrypted, nationalite, role);
         int id_civil = Db.saveCivil(civilsModel1);
 
         if (request.getParameter("isHero").equals("1")){

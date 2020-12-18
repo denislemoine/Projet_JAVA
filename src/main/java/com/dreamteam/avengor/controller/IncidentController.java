@@ -35,6 +35,9 @@ public class IncidentController {
         IncidentModel incident = Db.getIncidentByID(id);
         model.addAttribute("incident",incident);
 
+        List<SatisfactionModel> satisfactionList = Db.getSatisfactionByIncidentID(id);
+        model.addAttribute("satisfactionList",satisfactionList);
+
         return "incident/incidentDetail";
     }
 

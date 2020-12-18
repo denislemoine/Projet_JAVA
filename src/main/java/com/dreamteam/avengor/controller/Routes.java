@@ -22,9 +22,9 @@ public class Routes {
     //                                                                                  =
     //===================================================================================
 
-    @GetMapping("/interface")
+    @GetMapping("/")
     public String showInterface() {
-        return "interface";
+        return "error-404";
     }
 
     @GetMapping("/register")

@@ -31,6 +31,14 @@
         <div class="d-flex d-xl-flex justify-content-center align-items-center align-content-center justify-content-xl-center align-items-xl-center" style="background-repeat: no-repeat;background-size: auto;background-position: center;width: 918px;opacity: 1;filter: grayscale(0%) hue-rotate(0deg) invert(0%) saturate(100%);height: 899px;margin: -1px;">
             <div class="d-flex flex-column" style="margin-right: 61px;">
 
+                <h4 class="text-white" th:text="|Utilisateur actuel : ${user.getPrenom()} ${user.getNom()}|"></h4>
+                <h5 th:if="${user.getPrivilege() == 0}" class="text-white" th:text="|Privilège : Civil|"></h5>
+                <h5 th:if="${user.getPrivilege() == 1}" class="text-white" th:text="|Privilège : Héro|"></h5>
+                <h5 th:if="${user.getPrivilege() == 2}" class="text-white" th:text="|Privilège : Maître Supreme|"></h5>
+
+                <br>
+                <br>
+
                     <a class="btn border-dark shadow" role="button" style="background-repeat: no-repeat;font-size: 18px;font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);background-image: url(&quot;assets/img/interface/button.png&quot;);background-position: center;background-size: cover;margin-top: 0px;font-weight: normal;padding-bottom: 0px;height: 41px;width: 205px;"
                        href="civil">CIVIL</a>
                     <a class="btn border-dark shadow" role="button" style="background-repeat: no-repeat;font-size: 18px;font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);background-image: url(&quot;assets/img/interface/button.png&quot;);background-position: center;background-size: cover;margin-top: 0px;font-weight: normal;padding-bottom: 0px;height: 41px;width: 205px;"

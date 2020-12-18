@@ -293,6 +293,26 @@ public class Db {
         }
     }
 
+    public static CivilsModel findCivilByMail(String mail){
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Statement statement = CON.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM Civils WHERE Email = '" + mail + "'");
+
+            if(resultSet.next()) {
+                CivilsModel civil = new CivilsModel(resultSet.getInt("id_Civil"),resultSet.getString("nom"),resultSet.getString("prenom"),resultSet.getString("civilite"),resultSet.getString("adresse"),
+                        resultSet.getString("email"),resultSet.getString("tel"),resultSet.getString("dateDeNaissance"),null,resultSet.getString("Nationalite"), resultSet.getInt("privilege"));
+                return civil;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static void deleteCivil(String id){
 
         try {

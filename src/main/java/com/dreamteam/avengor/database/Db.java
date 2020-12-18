@@ -451,7 +451,10 @@ public class Db {
                         res.getTimestamp("DateFin"), res.getInt("Niveaux"), res.getInt("Urgence"),
                         res.getInt("id_Incidents"),res.getString("RapportFinMission"), hero
                 );
-                missions.add(mission);
+                if(res.getTimestamp("DateFin") == null){
+                    missions.add(mission);
+                }
+
             }
 
         } catch (SQLException e) {
@@ -560,7 +563,7 @@ public class Db {
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
             PreparedStatement statement = CON.prepareStatement
-                    ("Update Mission set Titre = ?, DateDebut = ?, DateFin = ?, Niveaux = ?, Urgence = ?," +
+                    ("Update Missions set Titre = ?, DateDebut = ?, DateFin = ?, Niveaux = ?, Urgence = ?," +
                             "where id_Civil = ?");
             statement.setString(1,mission.getTitre());
             /*statement.setString(2,mission.getDateDebut());
@@ -577,17 +580,17 @@ public class Db {
     }
     public static void finishMission(String id, MissionModel mission){
         try {
+            java.util.Date date = new java.util.Date();
+            long now = date.getTime();
+            Timestamp dateModif = new Timestamp(now);
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
             PreparedStatement statement = CON.prepareStatement
-                    ("Update Mission set DateFin = ?,RapportFinMission = ?," +
-                            "where id_Civil = ?");
-            statement.setString(1,mission.getTitre());
-            /*statement.setString(2,mission.getDateDebut());
-            statement.setString(3,mission.getDateFin());
-            statement.setString(4,mission.getNiveaux());
-            statement.setString(5,mission.getUrgence());*/
-            statement.setString(6,id);
+                    ("Update Missions set DateFin = ?,RapportFinMission = ?," +
+                            "where id_Mission = ?");
+            statement.setTimestamp(1,dateModif);
+            statement.setString(2,mission.getRapportFinMission());
+            statement.setString(3,id);
             statement.execute();
         } catch (SQLException e) {
 
@@ -623,16 +626,26 @@ public class Db {
     //=========================================================================
     // Ajout d'une satisfaction
     public static void saveSatisfaction(SatisfactionModel satisfactionModel){
+        int civilNote = 0;
+        int id = 0;
+        int vilainNote = 0;
+        int scoreSend = 0;
         try {
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             PreparedStatement statement = CON.prepareStatement
                     ("INSERT INTO Satisfaction (id_Civil,id_super_vilain,id_Incidents,id_Mission,satisfactionType,Message,Note,Commentaire) " +
                             "VALUES (?,?,?,?,?,?,?,?)");
-            if (satisfactionModel.getId_Civil() != null) { statement.setInt(1,satisfactionModel.getId_Civil()); }
-            else { statement.setNull(1,Types.NULL); }
+            if (satisfactionModel.getId_Civil() != null) {
+                statement.setInt(1,satisfactionModel.getId_Civil());
+                civilNote = 1;
+                id = satisfactionModel.getId_Civil();
+            } else { statement.setNull(1,Types.NULL); }
 
-            if (satisfactionModel.getId_super_vilain() != null) { statement.setInt(2,satisfactionModel.getId_super_vilain()); }
-            else { statement.setNull(2,Types.NULL); }
+            if (satisfactionModel.getId_super_vilain() != null) {
+                statement.setInt(2,satisfactionModel.getId_super_vilain());
+                vilainNote = 1;
+                id = satisfactionModel.getId_super_vilain();
+            } else { statement.setNull(2,Types.NULL); }
 
             if (satisfactionModel.getId_Incidents() != null) { statement.setInt(3,satisfactionModel.getId_Incidents()); }
             else { statement.setNull(3,Types.NULL); }
@@ -643,11 +656,42 @@ public class Db {
             statement.setString(5,satisfactionModel.getSatisfactionType());
             statement.setString(6,satisfactionModel.getMessage());
 
-            if (satisfactionModel.getNote() != null) { statement.setInt(7,satisfactionModel.getNote()); }
-            else { statement.setNull(7,Types.NULL); }
+            if (satisfactionModel.getNote() != null) {
+                statement.setInt(7,satisfactionModel.getNote());
+                scoreSend = satisfactionModel.getNote();
+            } else { statement.setNull(7,Types.NULL); }
 
             statement.setString(8,satisfactionModel.getCommentaire());
             statement.execute();
+
+            if (civilNote != 0) {
+                CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+                Statement statementFindScore = CON.createStatement();
+                ResultSet resultSet = statementFindScore.executeQuery("select * from Super_heros where IdentiteSecretes =" + id);
+                if(resultSet.next()) {
+                    int score = resultSet.getInt("Score");
+                    scoreSend += score;
+                    PreparedStatement state = CON.prepareStatement
+                            ("UPDATE Super_heros SET Score = (?) WHERE IdentiteSecretes = (?)");
+                    state.setInt(1, scoreSend);
+                    state.setInt(2, id);
+                    state.execute();
+                }
+            }
+            if (vilainNote != 0){
+                CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+                Statement statementFindScore = CON.createStatement();
+                ResultSet resultSet = statementFindScore.executeQuery("select * from Super_heros where IdentiteSecretes =" + id);
+                if(resultSet.next()) {
+                    int score = resultSet.getInt("Score");
+                    scoreSend += score;
+                    PreparedStatement state = CON.prepareStatement
+                            ("UPDATE Super_vilains SET Score = (?) WHERE id_SuperVilains = (?)");
+                    state.setInt(1, scoreSend);
+                    state.setInt(2, id);
+                    state.execute();
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

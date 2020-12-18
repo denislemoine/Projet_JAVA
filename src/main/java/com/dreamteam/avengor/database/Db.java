@@ -602,5 +602,27 @@ public class Db {
     //=========================================================================
     //                          QUERIES DES ORGANISATION                    =
     //=========================================================================
+    public static List<OrganisationModel> getAllOrga() {
+        List<OrganisationModel> orgas = new ArrayList<>();
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            //renvoie de toute les orga
+            Statement statement = CON.createStatement();
+            ResultSet resultSet = statement.executeQuery("select * from Organisations");
+            while (resultSet.next()) {
+                if (resultSet.getString("Nom") != null) {
+                    OrganisationModel orga = new OrganisationModel(resultSet.getInt("id_Organisations"), resultSet.getString("Nom"), resultSet.getString("Adresse"), resultSet.getInt("Dirigeant"), resultSet.getString("Commentaire"),
+                            resultSet.getTimestamp("DateAjout"), resultSet.getTimestamp("DATEDerniereModif"), resultSet.getInt("NbIncidentsDeclares"), resultSet.getInt("NbMissionsImplique"));
+                    orgas.add(orga);
+
+                }
+
+            }
+            return orgas;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }

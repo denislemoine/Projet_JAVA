@@ -6,6 +6,7 @@ import  com.dreamteam.avengor.database.Db;
 import com.dreamteam.avengor.model.SuperHerosModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -46,7 +47,8 @@ public class CivilController {
         String nationalite = request.getParameter("nationalite");
         String dateDeNaissance = request.getParameter("birth");
         String password = request.getParameter("password");
-
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String passEncrypted = passwordEncoder.encode(password);
 
         String civ = null;
         if (civilite == 0){
@@ -55,7 +57,7 @@ public class CivilController {
 
 
 
-        CivilsModel civilsModel1 = new CivilsModel(1,nom,prenom,civ,adresse,email,tel,dateDeNaissance,password, nationalite);
+        CivilsModel civilsModel1 = new CivilsModel(1,nom,prenom,civ,adresse,email,tel,dateDeNaissance, passEncrypted, nationalite);
         int id_civil = Db.saveCivil(civilsModel1);
 
         if (request.getParameter("isHero").equals("1")){

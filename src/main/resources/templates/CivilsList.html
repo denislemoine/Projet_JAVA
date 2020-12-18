@@ -63,11 +63,20 @@
 
             <div class="d-flex flex-wrap overflow-auto" style="margin-top: 18px;">
 
-                <div th:each="civilList : ${civilian}" class="card" style="margin-right: 18px; margin-bottom: 18px;">
-                    <div class="card-body" style="width: 900px; height: 100px;">
-                        <h4 class="card-title" th:text="${civilList.getNom()}"></h4>
-                        <h6 class="text-muted card-subtitle mb-2">CIVIL</h6>
-                    </div>
+                <div th:each="civil : ${civilian}" class="card bg-dark text-white" style="margin-right: 18px; margin-bottom: 18px;">
+
+                        <div class="card-body" style="width: 420px;">
+                            <h4 class="card-title" th:text="|${civil.getNom()} ${civil.getPrenom()}|"></h4>
+                            <h6 class="card-text card-subtitle mb-2" th:text="| Civilité : ${civil.getCivilite()}|"></h6>
+                            <h6 class="card-text card-subtitle mb-2" th:text="| Adresse : ${civil.getAdresse()}|"></h6>
+                            <h6 class="card-text card-subtitle mb-2" th:text="| Email : ${civil.getEmail()}|"></h6>
+                            <h6 class="card-text card-subtitle mb-2" th:text="| Téléphone : ${civil.getTel()}|"></h6>
+                            <h6 class="card-text card-subtitle mb-2" th:text="| Nationalité : ${civil.getNationalite()}|"></h6>
+                            <h6 class="card-text card-subtitle mb-2" th:text="| Date de Naissance : ${civil.getDateDeNaissance()}|"></h6>
+
+
+                        </div>
+
                 </div>
 
             </div>

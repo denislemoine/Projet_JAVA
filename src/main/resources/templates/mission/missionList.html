@@ -67,10 +67,11 @@
                 <div class="card border-light bg-dark text-white" style="margin-right: 18px; margin-bottom: 18px;">
                     <div class="card-body" style="width: 420px;">
                         <h4 class="card-title" th:text="${mission.getTitre()}"></h4>
-                        <h6 class="card-text card-subtitle mb-2" th:text="| Date de début : ${mission.getDateDebut()}|"></h6>
-                        <h6 class="card-text card-subtitle mb-2" th:text="| Date de Fin : ${mission.getDateFin()}|"></h6>
+                        <h6 class="card-text card-subtitle mb-2" th:text="| Date de début : ${#calendars.format(mission.getDateDebut(), 'dd MMMM yyyy')}|"></h6>
+                        <h6 th:if="${mission.getDateFin()} != null" class="card-text card-subtitle mb-2" th:text="| Date de Fin : ${mission.getDateFin()}|"></h6>
                         <h6 class="text-muted card-subtitle mb-2" th:text="| Niveaux : ${mission.getNiveaux()}|"></h6>
                         <h6 class="text-muted card-subtitle mb-2" th:text="| Urgence : ${mission.getUrgence()}|"></h6>
+                        <h6 th:if="${mission.getHero()} != null" class="text-muted card-subtitle mb-2" th:text="| Super Héro impliqué : ${mission.getHero().getNom()}|"></h6>
                     </div>
                 </div>
 

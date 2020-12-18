@@ -4,7 +4,6 @@ import com.dreamteam.avengor.model.*;
 
 
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +14,28 @@ public class Db {
     private static final String PASSWORD = "avengor76";
     private static Connection CON;
 
+    //=========================================================================
+    //                          QUERY LOGIN                                   =
+    //=========================================================================
+
+    public static String login(String mail){
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Statement state = CON.createStatement();
+            ResultSet res = state.executeQuery("SELECT Password, Email FROM Civils WHERE Email = '" + mail + "'");
+            if(res.next()){
+                if(res.getString("Email").equals(mail)) {
+                    return res.getString("Password");
+                }
+            } else {
+                return "null";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "null";
+        }
+        return "null";
+    }
 
     //=========================================================================
     //                          QUERIES SAVE                                  =
@@ -333,6 +354,28 @@ public class Db {
         return heros;
     }
 
+    public static SuperHerosModel findHeroById(int id){
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Statement statement = CON.createStatement();
+            ResultSet res = statement.executeQuery("select * from Super_heros where id_SuperHeros = " + id);
+
+            if(res.next()) {
+                return new SuperHerosModel(
+                        res.getInt("id_SuperHeros"), res.getString("Nom"), res.getInt("IdentiteSecretes"),
+                        res.getString("Pouvoir"), res.getString("Point_faible"), res.getFloat("Score"),
+                        res.getString("Commentaire"), null
+                );
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     //=========================================================================
     //                          QUERIES MISSIONS                              =
     //=========================================================================
@@ -345,14 +388,15 @@ public class Db {
             ResultSet res = statement.executeQuery("SELECT * FROM Missions");
 
             while(res.next()){
-                if(res.getString("Titre") != null){
-                    MissionModel mission = new MissionModel(
-                            res.getInt("id_Mission"), res.getString("Titre"), res.getTimestamp("DateDebut"),
-                            res.getTimestamp("DateFin"), res.getInt("Niveaux"), res.getInt("Urgence"),
-                            res.getInt("id_Incidents")
-                    );
-                    missions.add(mission);
-                }
+
+                SuperHerosModel hero = Db.getHeroFromMission(res.getInt("id_Mission"));
+
+                MissionModel mission = new MissionModel(
+                        res.getInt("id_Mission"), res.getString("Titre"), res.getTimestamp("DateDebut"),
+                        res.getTimestamp("DateFin"), res.getInt("Niveaux"), res.getInt("Urgence"),
+                        res.getInt("id_Incidents"), hero
+                );
+                missions.add(mission);
             }
 
         } catch (SQLException e) {
@@ -361,7 +405,22 @@ public class Db {
         return missions;
     }
 
-    public static void saveMission(MissionModel missionModel){
+    public static SuperHerosModel getHeroFromMission(int idMission) throws SQLException {
+
+        CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        Statement statement = CON.createStatement();
+
+        ResultSet result = statement.executeQuery("SELECT * FROM SH_Mission WHERE Missions_id_Mission = " + idMission);
+        if(result.next()) {
+            int heroId = result.getInt("Super_heros_id_SuperHeros");
+
+            return Db.findHeroById(heroId);
+
+        }
+        return null;
+    }
+
+    public static void saveMission(MissionModel missionModel, int idHero){
         try {
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             PreparedStatement statement = CON.prepareStatement
@@ -386,6 +445,20 @@ public class Db {
                 state.execute();
             }
 
+            try {
+                CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+                int id_mission = res.getInt("id_Mission");
+                PreparedStatement state = CON.prepareStatement
+                        ("INSERT INTO SH_Mission (Super_heros_id_SuperHeros, Missions_id_Mission) " +
+                                "VALUES (?,?)");
+                state.setInt(1, idHero);
+                state.setInt(2, id_mission);
+                state.execute();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -398,7 +471,7 @@ public class Db {
 
             if(resultSet.next()) {
                 MissionModel mission = new MissionModel(resultSet.getInt("id_Mission"),resultSet.getString("titre"),resultSet.getTimestamp("dateDebut"),resultSet.getTimestamp("dateFin"),resultSet.getInt("niveaux"),
-                        resultSet.getInt("urgence"),resultSet.getInt("id_incidents"));
+                        resultSet.getInt("urgence"),resultSet.getInt("id_incidents"), null);
                 return mission;
             } else {
                 return null;
@@ -407,8 +480,7 @@ public class Db {
         } catch (SQLException e) {
 
             e.printStackTrace();
-            MissionModel mission = new MissionModel(0,"ERREUR",null,null,0,0,0);
-            return mission;
+            return null;
         }
     }
     public static void deleteMission(String id){

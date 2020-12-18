@@ -15,8 +15,9 @@ public class MissionModel {
     private int Niveaux;
     private int Urgence;
     private int id_Incidents;
+    private SuperHerosModel hero;
 
-    public MissionModel(int id_Mission, String Titre, Timestamp DateDebut, Timestamp DateFin, int Niveaux, int Urgence, int Id_Incidents) {
+    public MissionModel(int id_Mission, String Titre, Timestamp DateDebut, Timestamp DateFin, int Niveaux, int Urgence, int Id_Incidents, SuperHerosModel hero) {
         super();
         this.id_Mission = id_Mission;
         this.Titre = Titre;
@@ -25,6 +26,7 @@ public class MissionModel {
         this.Niveaux = Niveaux;
         this.Urgence = Urgence;
         this.id_Incidents = Id_Incidents;
+        this.hero = hero;
     }
 
     //==================================================================================
@@ -78,6 +80,13 @@ public class MissionModel {
     }
     public void setId_Incidents(int id_Incidents){
         this.id_Incidents = id_Incidents;
+    }
+
+    public SuperHerosModel getHero(){
+        return hero;
+    }
+    public void setHero(SuperHerosModel hero){
+        this.hero = hero;
     }
 
     //==================================================================================

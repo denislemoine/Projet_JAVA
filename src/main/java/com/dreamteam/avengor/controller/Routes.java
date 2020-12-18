@@ -16,9 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping
 public class Routes {
 
-    @Value("${welcome.message}")
-    private String message;
-
     //===================================================================================
     //                                                                                  =
     //                              GET  METHODS                                        =
@@ -28,11 +25,6 @@ public class Routes {
     @GetMapping("/interface")
     public String showInterface() {
         return "interface";
-    }
-
-    @GetMapping("/login")
-    public String login() {
-        return "login";
     }
 
     @GetMapping("/register")
@@ -71,14 +63,5 @@ public class Routes {
     //                              POST / GET METHODS                                  =
     //                                                                                  =
     //===================================================================================
-
-    @RequestMapping(value="/logout", method = RequestMethod.GET)
-    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){
-            new SecurityContextLogoutHandler().logout(request, response, auth);
-        }
-        return "redirect:/login?logout=true";
-    }
 
 }

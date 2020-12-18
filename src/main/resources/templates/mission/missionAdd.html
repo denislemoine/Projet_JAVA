@@ -67,6 +67,11 @@
                     <br>
                     <input class="border rounded shadow-sm" type="number" required="" name="urgence" placeholder="Urgence de Mission">
                     <br>
+                    <br>
+                    <select name="hero" id="hero" class="bg-dark text-white border form-control rounded shadow-sm mb-0">
+                        <option value="0">Non connus / reconnus</option>
+                        <option th:each="hero : ${herosList}" th:value="${hero.getId_SuperHeros()}" th:text="${hero.getNom()}"></option>
+                    </select>
                     <button type="submit" class="btn btn-danger mt-3">Créer la mission</button>
                 </form>
             </div>

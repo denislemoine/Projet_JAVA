@@ -70,7 +70,7 @@
                     <br>
                     <label for="Ennemis" class="text-white">Super Vilain impliqué</label>
                     <br>
-                    <select th:each="superVilain : ${superVilainList}" name="Ennemis" id="Ennemis" class="border form-control rounded shadow-sm mb-0">
+                    <select th:each="superVilain : ${superVilainList}" name="Ennemis" id="Ennemis" class="bg-dark text-white border form-control rounded shadow-sm mb-0">
                         <option value="0">Non connus / reconnus</option>
                         <option th:value="${superVilain.getId_SuperVilain()}" th:text="${superVilain.getNom()}"></option>
                     </select>

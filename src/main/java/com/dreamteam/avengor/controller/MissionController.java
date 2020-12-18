@@ -34,7 +34,7 @@ public class MissionController {
     }
 
     @RequestMapping(value="/mission-{id}", method = RequestMethod.GET)
-    public String deleteIncident (@PathVariable("id") String id, HttpServletRequest request, Model model) {
+    public String showDetailMission (@PathVariable("id") String id, HttpServletRequest request, Model model) {
         MissionModel mission = Db.findMissionById(id);
         model.addAttribute("mission",mission);
 

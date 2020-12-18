@@ -75,14 +75,13 @@
                         <div class="card-footer">
                             <h4 class="card-title">Les satisfactions :</h4>
                             <div th:each="satisfaction : ${satisfactionList}" class="card bg-info">
-                                <p th:text="${satisfaction.getSatisfactionType()}"></p>
-                                <p th:text="${satisfaction.getMessage()}"></p>
-                                <p th:text="${satisfaction.getCommentaire()}"></p>
+                                <p th:text="|Type : ${satisfaction.getSatisfactionType()}|"></p>
+                                <p th:text="|Message : ${satisfaction.getMessage()}|"></p>
+                                <p th:text="|Commentaire : ${satisfaction.getCommentaire()}|"></p>
                             </div>
                         </div>
                     </div>
                 </div>
-
 
 
                 </div>

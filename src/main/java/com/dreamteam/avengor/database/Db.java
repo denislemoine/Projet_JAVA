@@ -578,7 +578,7 @@ public class Db {
         }
 
     }
-    public static void finishMission(String id, MissionModel mission){
+    public static void finishMission(String id, String rapport){
         try {
             java.util.Date date = new java.util.Date();
             long now = date.getTime();
@@ -586,10 +586,10 @@ public class Db {
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
             PreparedStatement statement = CON.prepareStatement
-                    ("Update Missions set DateFin = ?,RapportFinMission = ?," +
+                    ("Update Missions set DateFin = ?,RapportFinMission = ?" +
                             "where id_Mission = ?");
             statement.setTimestamp(1,dateModif);
-            statement.setString(2,mission.getRapportFinMission());
+            statement.setString(2,rapport);
             statement.setString(3,id);
             statement.execute();
         } catch (SQLException e) {

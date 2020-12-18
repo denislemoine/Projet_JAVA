@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Timestamp;
@@ -53,6 +54,7 @@ public class Routes {
 
     private List<CivilsModel> listeCivils = new ArrayList<>();
 
+    @RolesAllowed("ADMIN")
     @GetMapping("/roles")
     public String showRoles(Model model){
 
@@ -70,18 +72,19 @@ public class Routes {
     @GetMapping("/vilain")
     public String vilain() { return "Vilain"; }
 
+    @RolesAllowed("ADMIN")
     @GetMapping("/admin")
     public String SuperUserHome(){ return "panelAdmin/admin";}
 
-
+    @RolesAllowed("ADMIN")
     @GetMapping("/admin/crise")
     public String SuperUserCrise(){ return "panelAdmin/crise";}
 
-
+    @RolesAllowed("ADMIN")
     @GetMapping("/admin/organisation")
     public String SuperUserOrga(){ return "panelAdmin/organisations";}
 
-
+    @RolesAllowed("ADMIN")
     @RequestMapping(value="/role-update-{id}", method = RequestMethod.POST)
     public String addMission (@PathVariable("id") String idUser, HttpServletRequest request, CivilsModel civilsModel) {
 

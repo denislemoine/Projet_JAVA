@@ -7,6 +7,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Db connection
+ */
 public class Db {
 
     private static final String URL = "jdbc:mysql://185.31.40.53:3306/avengor_db";
@@ -37,6 +40,10 @@ public class Db {
         return "null";
     }
 
+    /**
+     * @param mail
+     * @return
+     */
     public static int getPrivilegeOfCivil(String mail){
         try {
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -61,6 +68,10 @@ public class Db {
     //=========================================================================
 
 
+    /**
+     * @param civilsModel
+     * @return
+     */
     public static int saveCivil(CivilsModel civilsModel){
 
         try {
@@ -97,6 +108,10 @@ public class Db {
         return 0;
     }
 
+    /**
+     * @param organisationModel
+     * @return
+     */
     public static int saveOrganisation(OrganisationModel organisationModel){
 
         try {
@@ -119,6 +134,9 @@ public class Db {
         return 0;
     }
 
+    /**
+     * @param superHerosModel
+     */
     public static void saveHero(SuperHerosModel superHerosModel){
 
         try {
@@ -142,6 +160,9 @@ public class Db {
         }
     }
 
+    /**
+     * @param superVilainModel
+     */
     public static void saveVilain(SuperVilainModel superVilainModel){
 
         try {
@@ -164,6 +185,10 @@ public class Db {
             e.printStackTrace();
         }
     }
+
+    /**
+     * @param incidentModel
+     */
     //=========================================================================
     //                          QUERIES INCIDENT                              =
     //=========================================================================
@@ -189,6 +214,10 @@ public class Db {
             e.printStackTrace();
         }
     }
+
+    /**
+     * @param id
+     */
     // Suppression d'un incident avec son identifiant
     public static void deleteIncidentByID(String id){
         try {
@@ -201,6 +230,10 @@ public class Db {
             e.printStackTrace();
         }
     }
+
+    /**
+     * @return
+     */
     // Liste de tous les incidents
     public static List<IncidentModel> getAllIncidents(){
         List<IncidentModel> incidents = new ArrayList<>();
@@ -221,6 +254,11 @@ public class Db {
         }
         return incidents;
     }
+
+    /**
+     * @param id
+     * @return
+     */
     // Un incident particulié avec son identifiant
     public static IncidentModel getIncidentByID(String id){
         try {
@@ -246,6 +284,9 @@ public class Db {
     //                          QUERIES CIVIL                                 =
     //=========================================================================
 
+    /**
+     * @return
+     */
     public static List<CivilsModel> getAllCivil(){
         List<CivilsModel> civils = new ArrayList<>();
         try {
@@ -267,6 +308,10 @@ public class Db {
         return civils;
     }
 
+    /**
+     * @param id
+     * @return
+     */
     public static CivilsModel findCivilById(String id){
         try {
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -289,6 +334,10 @@ public class Db {
         }
     }
 
+    /**
+     * @param mail
+     * @return
+     */
     public static CivilsModel findCivilByMail(String mail){
         try {
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -309,6 +358,9 @@ public class Db {
         }
     }
 
+    /**
+     * @param id
+     */
     public static void deleteCivil(String id){
 
         try {
@@ -330,6 +382,11 @@ public class Db {
         }
         
     }
+
+    /**
+     * @param id
+     * @param civil
+     */
     public static void modifyCivil(String id,CivilsModel civil){
 
         try {
@@ -360,6 +417,11 @@ public class Db {
 
     }
 
+    /**
+     * @param idUser
+     * @param newRoleId
+     * @return
+     */
     public static boolean updatePrivilege(String idUser, int newRoleId){
 
         try {
@@ -383,6 +445,9 @@ public class Db {
     //                          QUERIES HERO                                  =
     //=========================================================================
 
+    /**
+     * @return
+     */
     public static List<SuperHerosModel> getAllHero(){
         List<SuperHerosModel> heros = new ArrayList<>();
         try {
@@ -409,6 +474,10 @@ public class Db {
         return heros;
     }
 
+    /**
+     * @param id
+     * @return
+     */
     public static SuperHerosModel findHeroById(int id){
         try {
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -435,6 +504,9 @@ public class Db {
     //                          QUERIES MISSIONS                              =
     //=========================================================================
 
+    /**
+     * @return
+     */
     public static List<MissionModel> getAllMission(){
         List<MissionModel> missions = new ArrayList<>();
         try {
@@ -463,6 +535,11 @@ public class Db {
         return missions;
     }
 
+    /**
+     * @param idMission
+     * @return
+     * @throws SQLException
+     */
     public static SuperHerosModel getHeroFromMission(int idMission) throws SQLException {
 
         CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -478,6 +555,10 @@ public class Db {
         return null;
     }
 
+    /**
+     * @param missionModel
+     * @param idHero
+     */
     public static void saveMission(MissionModel missionModel, int idHero){
         try {
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -521,6 +602,11 @@ public class Db {
             e.printStackTrace();
         }
     }
+
+    /**
+     * @param id
+     * @return
+     */
     public static MissionModel findMissionById(String id){
         try {
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -541,6 +627,10 @@ public class Db {
             return null;
         }
     }
+
+    /**
+     * @param id
+     */
     public static void deleteMission(String id){
 
         try {
@@ -557,6 +647,11 @@ public class Db {
         }
 
     }
+
+    /**
+     * @param id
+     * @param mission
+     */
     public static void modifyMission(String id,MissionModel mission){
 
         try {
@@ -578,6 +673,11 @@ public class Db {
         }
 
     }
+
+    /**
+     * @param id
+     * @param rapport
+     */
     public static void finishMission(String id, String rapport){
         try {
             java.util.Date date = new java.util.Date();
@@ -598,6 +698,9 @@ public class Db {
         }
     }
 
+    /**
+     * @return
+     */
     //=========================================================================
     //                          QUERIES DES SUPERVILAINS                      =
     //=========================================================================
@@ -621,6 +724,10 @@ public class Db {
         }
         return vilains;
     }
+
+    /**
+     * @param satisfactionModel
+     */
     //=========================================================================
     //                          QUERIES DES SATISFACTIONS                     =
     //=========================================================================
@@ -697,6 +804,10 @@ public class Db {
         }
     }
 
+    /**
+     * @param id
+     * @return
+     */
     public static List<SatisfactionModel> getSatisfactionByIncidentID(String id){
         List<SatisfactionModel> satisfactions = new ArrayList<>();
         try {
@@ -724,6 +835,10 @@ public class Db {
         return satisfactions;
     }
 
+    /**
+     * @param id
+     * @return
+     */
     public static List<SatisfactionModel> getSatisfactionByMissionID(String id){
         List<SatisfactionModel> satisfactions = new ArrayList<>();
         try {
@@ -751,6 +866,10 @@ public class Db {
         return satisfactions;
     }
 
+    /**
+     * @param id
+     * @return
+     */
     public static List<SatisfactionModel> getSatisfactionByCivilID(String id){
         List<SatisfactionModel> satisfactions = new ArrayList<>();
         try {
@@ -778,6 +897,10 @@ public class Db {
         return satisfactions;
     }
 
+    /**
+     * @param id
+     * @return
+     */
     public static List<SatisfactionModel> getSatisfactionByVilainID(String id){
         List<SatisfactionModel> satisfactions = new ArrayList<>();
         try {
@@ -805,6 +928,9 @@ public class Db {
         return satisfactions;
     }
 
+    /**
+     * @return
+     */
     //=========================================================================
     //                          QUERIES DES ORGANISATION                      =
     //=========================================================================
@@ -831,6 +957,9 @@ public class Db {
         return null;
     }
 
+    /**
+     * @return
+     */
     public static List<OrganisationModel> getAllOrganisations(){
         List<OrganisationModel> organisations = new ArrayList<>();
         try {

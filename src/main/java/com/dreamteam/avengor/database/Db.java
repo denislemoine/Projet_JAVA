@@ -414,15 +414,33 @@ public class Db {
     public static void deleteMission(String id){
 
         try {
-            java.util.Date date = new java.util.Date();
-            long now = date.getTime();
-            Timestamp dateDelete = new Timestamp(now);
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
             PreparedStatement statement = CON.prepareStatement
                     ("Update Missions set Titre = null, DateDebut = null, DateFin = null, Niveaux = null, Urgence = null "+
                             "Where id_Mission = ?");
             statement.setString(1,id);
+            statement.execute();
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+
+    }
+    public static void modifyMission(String id,MissionModel mission){
+
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            PreparedStatement statement = CON.prepareStatement
+                    ("Update Mission set Titre = ?, DateDebut = ?, DateFin = ?, Niveaux = ?, Urgence = ?," +
+                            "where id_Civil = ?");
+            statement.setString(1,mission.getTitre());
+            /*statement.setString(2,mission.getDateDebut());
+            statement.setString(3,mission.getDateFin());
+            statement.setString(4,mission.getNiveaux());
+            statement.setString(5,mission.getUrgence());*/
+            statement.setString(6,id);
             statement.execute();
         } catch (SQLException e) {
 

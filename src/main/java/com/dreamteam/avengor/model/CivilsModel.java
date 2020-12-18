@@ -48,7 +48,6 @@ public class CivilsModel {
         this.privilege = privilege;
     }
 
-
     public int getId_Civil(){
         return id_Civil;
     }
@@ -107,6 +106,7 @@ public class CivilsModel {
     public String getDateDeNaissance(){
         return dateDeNaissance;
     }
+    public CivilsModel() {}
 
     public void setDateDeNaissance(String dateDeNaissance){
         this.dateDeNaissance = dateDeNaissance;

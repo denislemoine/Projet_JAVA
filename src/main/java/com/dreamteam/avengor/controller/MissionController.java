@@ -68,7 +68,7 @@ public class MissionController {
         long now = date.getTime();
         Timestamp dateDebut = new Timestamp(now);
 
-        MissionModel mission = new MissionModel(1, titre, dateDebut, null, niveau, urgence, Integer.parseInt(id), null);
+        MissionModel mission = new MissionModel(1, titre, dateDebut, null, niveau, urgence, Integer.parseInt(id), null,null);
         Db.saveMission(mission, idHero);
 
         return "redirect:mission";

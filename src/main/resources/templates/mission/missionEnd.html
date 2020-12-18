@@ -61,7 +61,7 @@
                 <h6 class="text-muted card-subtitle mb-2" th:text="| Niveaux : ${mission.getNiveaux()}|">C</h6>
                 <h6 class="text-muted card-subtitle mb-2" th:text="| Urgence : ${mission.getUrgence()}|">D</h6>
                 <h6 th:if="${mission.getHero()} != null" class="text-muted card-subtitle mb-2" th:text="| Super Héro impliqué : ${mission.getHero().getNom()}|">E</h6>
-                <form>
+                <form action="/mission/endmission/d", method="post">
                     <input type="hidden" th:value="${mission.getId_Mission()}">
                     <button type="submit" class="btn btn-success">
                         Fin de mission

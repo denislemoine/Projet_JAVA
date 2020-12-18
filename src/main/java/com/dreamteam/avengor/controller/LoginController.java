@@ -19,20 +19,29 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.Serializable;
+
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
+/**
+ * Login Controller
+ */
 @Controller
 @RequestMapping
 public class LoginController {
 
+    /**
+     * @return
+     */
     @GetMapping("/login")
     public String showLogin() {
         return "login";
     }
 
+    /**
+     * @param request
+     * @return
+     */
     @RequestMapping(value="/login", method = RequestMethod.POST)
     public String loginPost (HttpServletRequest request) {
 
@@ -80,6 +89,11 @@ public class LoginController {
         return "redirect:civil";
     }
 
+    /**
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping(value="/logout", method = RequestMethod.GET)
     public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

@@ -4,28 +4,32 @@ package com.dreamteam.avengor.controller;
 import com.dreamteam.avengor.database.Db;
 import com.dreamteam.avengor.model.CivilsModel;
 import com.dreamteam.avengor.model.OrganisationModel;
-import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Organisation Controller
+ */
 @Controller
 public class OrganisationController {
 
     private List<OrganisationModel> listeOrga = new ArrayList<>();
 
+    /**
+     * @param model
+     * @return
+     */
     @GetMapping("/organisation")
     public String organisation(Model model) {
 
@@ -36,9 +40,15 @@ public class OrganisationController {
     }
 
 
-
+    /**
+     * Liste Civils
+     */
     private List<CivilsModel> listeCivils = new ArrayList<>();
 
+    /**
+     * @param model
+     * @return
+     */
     @RolesAllowed({"HERO", "ADMIN"})
     @GetMapping("/organisation-add")
     public String organisationAdd(Model model) {
@@ -50,6 +60,10 @@ public class OrganisationController {
         return "organisation/organisation";
     }
 
+    /**
+     * @param request
+     * @return
+     */
     @RolesAllowed("ADMIN")
     @RequestMapping(value="/organisation-add", method = RequestMethod.POST)
     public String addOrganisation (HttpServletRequest request) {

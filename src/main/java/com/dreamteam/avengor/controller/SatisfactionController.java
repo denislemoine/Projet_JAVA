@@ -3,24 +3,27 @@ package com.dreamteam.avengor.controller;
 
 import com.dreamteam.avengor.database.Db;
 import com.dreamteam.avengor.model.*;
-import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
-import javax.annotation.security.RolesAllowed;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Satisfaction Controller
+ */
 @Controller
 public class SatisfactionController {
 
+    /**
+     * @param model
+     * @return
+     */
     @GetMapping("/satisfaction")
     public String showListIncidents(Model model){
         List<IncidentModel> incidentList = new ArrayList<>();
@@ -42,6 +45,10 @@ public class SatisfactionController {
         return "satisfactionAdd";
     }
 
+    /**
+     * @param request
+     * @return
+     */
     @RequestMapping(value="/satisfaction-add", method = RequestMethod.POST)
     public String addIncident(WebRequest request) {
 

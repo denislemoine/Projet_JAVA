@@ -2,7 +2,6 @@ package com.dreamteam.avengor.controller;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -16,10 +15,16 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import java.util.LinkedHashMap;
 
+/**
+ * Security Config
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    /**
+     * @return
+     */
     @Bean
     public AuthenticationEntryPoint delegatingEntryPoint() {
         final LinkedHashMap<RequestMatcher, AuthenticationEntryPoint> map = new LinkedHashMap();
@@ -32,6 +37,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return entryPoint;
     }
 
+    /**
+     * @param http
+     * @throws Exception
+     */
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
 

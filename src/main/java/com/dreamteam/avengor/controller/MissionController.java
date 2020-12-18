@@ -11,18 +11,24 @@ import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 
+/**
+ * Mission Controller
+ */
 @Controller
 public class MissionController {
 
     private List<MissionModel> missionsList = new ArrayList<>();
     private List<SuperHerosModel> herosList = new ArrayList<>();
 
+    /**
+     * @param model
+     * @return
+     */
     @GetMapping("/mission")
     public String showListHero(Model model){
 
@@ -34,6 +40,12 @@ public class MissionController {
         return "mission/missionList";
     }
 
+    /**
+     * @param id
+     * @param request
+     * @param model
+     * @return
+     */
     @RolesAllowed({"CIVIL", "HERO", "ADMIN"})
     @RequestMapping(value="/mission-{id}", method = RequestMethod.GET)
     public String showDetailMission (@PathVariable("id") String id, HttpServletRequest request, Model model) {
@@ -46,6 +58,11 @@ public class MissionController {
         return "mission/missionDetail";
     }
 
+    /**
+     * @param id
+     * @param model
+     * @return
+     */
     @RolesAllowed({"ADMIN", "HERO"})
     @GetMapping("/mission-add-{id}")
     public String showFormAddMission(@PathVariable("id") String id, Model model){
@@ -58,6 +75,12 @@ public class MissionController {
         return "mission/missionAdd";
     }
 
+    /**
+     * @param id
+     * @param request
+     * @param civilsModel
+     * @return
+     */
     @RolesAllowed("ADMIN")
     @RequestMapping(value="/mission-add-{id}", method = RequestMethod.POST)
     public String addMission (@PathVariable("id") String id, HttpServletRequest request, CivilsModel civilsModel) {

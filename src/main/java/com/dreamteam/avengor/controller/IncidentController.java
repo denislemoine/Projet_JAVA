@@ -1,7 +1,7 @@
 package com.dreamteam.avengor.controller;
 
 import com.dreamteam.avengor.model.*;
-import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,18 +10,23 @@ import org.springframework.web.context.request.WebRequest;
 
 import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.Null;
-import java.sql.Timestamp;
+
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
+
 import java.util.List;
 
+/**
+ * Incident Controller
+ */
 @Controller
 public class IncidentController {
 
 
+    /**
+     * @param model
+     * @return
+     */
     @GetMapping("/incident")
     public String showListIncidents(Model model){
         List<IncidentModel> incidentList = new ArrayList<>();
@@ -31,6 +36,12 @@ public class IncidentController {
         return "incident/incident";
     }
 
+    /**
+     * @param id
+     * @param request
+     * @param model
+     * @return
+     */
     @RequestMapping(value="/incident-{id}", method = RequestMethod.GET)
     public String deleteIncident (@PathVariable("id") String id, HttpServletRequest request, Model model) {
         IncidentModel incident = Db.getIncidentByID(id);
@@ -42,6 +53,11 @@ public class IncidentController {
         return "incident/incidentDetail";
     }
 
+    /**
+     * @param request
+     * @return
+     * @throws ParseException
+     */
     @RequestMapping(value="/incident-add", method = RequestMethod.POST)
     public String addIncident(WebRequest request) throws ParseException {
 
@@ -60,6 +76,10 @@ public class IncidentController {
         return "redirect:incident";
     }
 
+    /**
+     * @param model
+     * @return
+     */
     @RolesAllowed({"HERO", "ADMIN"})
     @GetMapping("/incident-add")
     public String showFormIncident(Model model){
@@ -71,6 +91,11 @@ public class IncidentController {
         return "incident/incidentAdd";
     }
 
+    /**
+     * @param id
+     * @param request
+     * @return
+     */
     @RolesAllowed("ADMIN")
     @RequestMapping(value="/incident-delete-{id}", method = RequestMethod.GET)
     public String deleteIncident (@PathVariable("id") String id, HttpServletRequest request) {

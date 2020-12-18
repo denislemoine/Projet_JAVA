@@ -7,14 +7,19 @@ import org.springframework.web.filter.DelegatingFilterProxy;
 
 import javax.servlet.ServletContext;
 
+/**
+ * Web App Initializer
+ */
 public class AppInitializer implements WebApplicationInitializer {
 
+    /**
+     * @param sc
+     */
     @Override
     public void onStartup(ServletContext sc) {
 
         AnnotationConfigWebApplicationContext root = new AnnotationConfigWebApplicationContext();
         root.register(Routes.class);
-
         sc.addListener(new ContextLoaderListener(root));
 
         sc.addFilter("securityFilter", new DelegatingFilterProxy("springSecurityFilterChain"))

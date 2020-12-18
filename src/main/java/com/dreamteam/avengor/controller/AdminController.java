@@ -17,6 +17,9 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Admin Controller
+ */
 @Controller
 public class AdminController {
 
@@ -24,6 +27,9 @@ public class AdminController {
     private List<MissionModel> listeMissions = new ArrayList<>();
     private List<OrganisationModel> listeOrga = new ArrayList<>();
 
+    /**
+     * @return
+     */
     public String adminHome(){
         String login = "admin"; // a changer par la variable contenant le role de l'utilisateur
         if (login == "admin"){
@@ -33,10 +39,11 @@ public class AdminController {
         }
 
     }
-    //=========================================================================
-    //                          Methodes CIVIL                                 =
-    //=========================================================================
 
+    /**
+     * @param model
+     * @return
+     */
     @RolesAllowed("ADMIN")
     @GetMapping("/admin/accounts")
     public String adminAccounts(Model model){
@@ -47,6 +54,12 @@ public class AdminController {
         return "panelAdmin/accounts";
     }
 
+    /**
+     * @param request
+     * @param model
+     * @return
+     * @throws ParseException
+     */
     @RolesAllowed("ADMIN")
     @RequestMapping(value = "/admin/accounts/d", method = RequestMethod.POST)
     public String deleteAccount(HttpServletRequest request,Model model) throws ParseException {
@@ -58,6 +71,11 @@ public class AdminController {
         return "panelAdmin/accounts";
     }
 
+    /**
+     * @param id
+     * @param model
+     * @return
+     */
     @RolesAllowed("ADMIN")
     @RequestMapping(value = "/admin/deleteaccounts/{id}")
     public String viewDeleteAccount(@PathVariable("id") String id,Model model){
@@ -68,6 +86,12 @@ public class AdminController {
 
     }
 
+    /**
+     * @param request
+     * @param model
+     * @return
+     * @throws ParseException
+     */
     @RolesAllowed("ADMIN")
     @RequestMapping(value = "/admin/accounts/m", method = RequestMethod.POST)
     public String modifyAccount(HttpServletRequest request,Model model) throws ParseException{
@@ -86,6 +110,11 @@ public class AdminController {
         return "panelAdmin/accounts";
     }
 
+    /**
+     * @param id
+     * @param model
+     * @return
+     */
     @RolesAllowed("ADMIN")
     @RequestMapping("/admin/modifyaccounts/{id}")
     public String viewModifyAccount(@PathVariable("id") String id,Model model){
@@ -98,6 +127,10 @@ public class AdminController {
     //                          Methodes MISSIONS                                 =
     //=========================================================================
 
+    /**
+     * @param model
+     * @return
+     */
     @RolesAllowed("ADMIN")
     @GetMapping("/admin/missions")
     public String adminMission(Model model){
@@ -107,6 +140,11 @@ public class AdminController {
         return "panelAdmin/missions";
     }
 
+    /**
+     * @param id
+     * @param model
+     * @return
+     */
     @RolesAllowed("ADMIN")
     @RequestMapping(value = "/admin/deletemission/{id}")
     public String viewDeleteMission(@PathVariable("id") String id,Model model){
@@ -117,6 +155,12 @@ public class AdminController {
 
     }
 
+    /**
+     * @param request
+     * @param model
+     * @return
+     * @throws ParseException
+     */
     @RolesAllowed("ADMIN")
     @RequestMapping(value = "/admin/missions/d", method = RequestMethod.POST)
     public String deleteMission(HttpServletRequest request,Model model) throws ParseException {
@@ -127,10 +171,11 @@ public class AdminController {
         }
         return "panelAdmin/missions";
     }
-    //=========================================================================
-    //                          Methodes Organisations                                 =
-    //=========================================================================
 
+    /**
+     * @param model
+     * @return
+     */
     @RolesAllowed("ADMIN")
     @GetMapping("/admin/organisations")
     public String adminOrganisation(Model model){

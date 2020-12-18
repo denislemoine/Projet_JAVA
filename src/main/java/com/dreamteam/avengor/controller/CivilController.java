@@ -4,27 +4,28 @@ package com.dreamteam.avengor.controller;
 import com.dreamteam.avengor.model.CivilsModel;
 import  com.dreamteam.avengor.database.Db;
 import com.dreamteam.avengor.model.SuperHerosModel;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
+/**
+ * Civil Controller
+ */
 @Controller
 public class CivilController {
 
     private List<CivilsModel> listeCivils = new ArrayList<>();
 
+    /**
+     * @param model
+     * @return
+     */
     @GetMapping("/civil")
     public String showCivilList(Model model){
 
@@ -35,6 +36,12 @@ public class CivilController {
         return "CivilsList";
     }
 
+    /**
+     * @param request
+     * @param civilsModel
+     * @return
+     * @throws ParseException
+     */
     @RequestMapping(value="/register", method = RequestMethod.POST)
     public String addCivils (HttpServletRequest request, CivilsModel civilsModel) throws ParseException {
 

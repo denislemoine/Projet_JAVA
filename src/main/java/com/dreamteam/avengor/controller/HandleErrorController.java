@@ -8,9 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Handle Error Controller
+ */
 @Controller
 public class HandleErrorController implements ErrorController {
 
+    /**
+     * @param request
+     * @return
+     */
     @RequestMapping("/error")
     public String handleError(HttpServletRequest request) {
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
@@ -25,6 +32,9 @@ public class HandleErrorController implements ErrorController {
         return "error";
     }
 
+    /**
+     * @return
+     */
     @Override
     public String getErrorPath() {
         return null;

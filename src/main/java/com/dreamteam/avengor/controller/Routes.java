@@ -2,13 +2,10 @@ package com.dreamteam.avengor.controller;
 
 import com.dreamteam.avengor.database.Db;
 import com.dreamteam.avengor.model.CivilsModel;
-import com.dreamteam.avengor.model.MissionModel;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.servlet.server.Session;
-import org.springframework.security.core.Authentication;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,22 +15,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.sql.Timestamp;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+/**
+ * Routes
+ */
 @Controller
 @RequestMapping
 public class Routes {
 
-    //===================================================================================
-    //                                                                                  =
-    //                              POST / GET METHODS                                  =
-    //                                                                                  =
-    //===================================================================================
 
+    /**
+     * @param model
+     * @return
+     */
     @GetMapping("/")
     public String showInterface(Model model) {
 
@@ -52,8 +49,15 @@ public class Routes {
         return "home";
     }
 
+    /**
+     * Liste Civils
+     */
     private List<CivilsModel> listeCivils = new ArrayList<>();
 
+    /**
+     * @param model
+     * @return
+     */
     @RolesAllowed("ADMIN")
     @GetMapping("/roles")
     public String showRoles(Model model){
@@ -64,26 +68,47 @@ public class Routes {
         return "role";
     }
 
+    /**
+     * @return
+     */
     @GetMapping("/register")
     public String register() {
         return "register";
     }
 
+    /**
+     * @return
+     */
     @GetMapping("/vilain")
     public String vilain() { return "Vilain"; }
 
+    /**
+     * @return
+     */
     @RolesAllowed("ADMIN")
     @GetMapping("/admin")
     public String SuperUserHome(){ return "panelAdmin/admin";}
 
+    /**
+     * @return
+     */
     @RolesAllowed("ADMIN")
     @GetMapping("/admin/crise")
     public String SuperUserCrise(){ return "panelAdmin/crise";}
 
+    /**
+     * @return
+     */
     @RolesAllowed("ADMIN")
     @GetMapping("/admin/organisation")
     public String SuperUserOrga(){ return "panelAdmin/organisations";}
 
+    /**
+     * @param idUser
+     * @param request
+     * @param civilsModel
+     * @return
+     */
     @RolesAllowed("ADMIN")
     @RequestMapping(value="/role-update-{id}", method = RequestMethod.POST)
     public String addMission (@PathVariable("id") String idUser, HttpServletRequest request, CivilsModel civilsModel) {

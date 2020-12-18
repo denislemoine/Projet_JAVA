@@ -449,7 +449,7 @@ public class Db {
                 MissionModel mission = new MissionModel(
                         res.getInt("id_Mission"), res.getString("Titre"), res.getTimestamp("DateDebut"),
                         res.getTimestamp("DateFin"), res.getInt("Niveaux"), res.getInt("Urgence"),
-                        res.getInt("id_Incidents"), hero
+                        res.getInt("id_Incidents"),res.getString("RapportFinMission"), hero
                 );
                 missions.add(mission);
             }
@@ -526,7 +526,7 @@ public class Db {
 
             if(resultSet.next()) {
                 MissionModel mission = new MissionModel(resultSet.getInt("id_Mission"),resultSet.getString("titre"),resultSet.getTimestamp("dateDebut"),resultSet.getTimestamp("dateFin"),resultSet.getInt("niveaux"),
-                        resultSet.getInt("urgence"),resultSet.getInt("id_incidents"), null);
+                        resultSet.getInt("urgence"),resultSet.getInt("id_incidents"), resultSet.getString("RapportFinMission"),null);
                 return mission;
             } else {
                 return null;
@@ -574,6 +574,25 @@ public class Db {
             e.printStackTrace();
         }
 
+    }
+    public static void finishMission(String id, MissionModel mission){
+        try {
+            CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            PreparedStatement statement = CON.prepareStatement
+                    ("Update Mission set DateFin = ?,RapportFinMission = ?," +
+                            "where id_Civil = ?");
+            statement.setString(1,mission.getTitre());
+            /*statement.setString(2,mission.getDateDebut());
+            statement.setString(3,mission.getDateFin());
+            statement.setString(4,mission.getNiveaux());
+            statement.setString(5,mission.getUrgence());*/
+            statement.setString(6,id);
+            statement.execute();
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
     }
 
     //=========================================================================

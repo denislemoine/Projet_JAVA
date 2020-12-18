@@ -15,9 +15,10 @@ public class MissionModel {
     private int Niveaux;
     private int Urgence;
     private int id_Incidents;
+    private String rapportFinMission;
     private SuperHerosModel hero;
 
-    public MissionModel(int id_Mission, String Titre, Timestamp DateDebut, Timestamp DateFin, int Niveaux, int Urgence, int Id_Incidents, SuperHerosModel hero) {
+       public MissionModel(int id_Mission, String Titre, Timestamp DateDebut, Timestamp DateFin, int Niveaux, int Urgence, int Id_Incidents, String rapportFinMission, SuperHerosModel hero) {
         super();
         this.id_Mission = id_Mission;
         this.Titre = Titre;
@@ -26,6 +27,7 @@ public class MissionModel {
         this.Niveaux = Niveaux;
         this.Urgence = Urgence;
         this.id_Incidents = Id_Incidents;
+        this.rapportFinMission = rapportFinMission;
         this.hero = hero;
     }
 
@@ -88,6 +90,10 @@ public class MissionModel {
     public void setHero(SuperHerosModel hero){
         this.hero = hero;
     }
+
+    public String getRapportFinMission() { return rapportFinMission; }
+
+    public void setRapportFinMission(String rapportFinMission) { this.rapportFinMission = rapportFinMission; }
 
     //==================================================================================
     //                              CALLBACK QUERIES DB

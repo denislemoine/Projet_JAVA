@@ -51,42 +51,32 @@
         </div>
     </div>
 
+    <div class="d-flex flex-row">
 
-    <div class="container-fluid border rounded-0 border-dark shadow d-flex d-xl-flex flex-column justify-content-center align-items-center align-content-center justify-content-xl-start align-items-xl-center" style="margin-right: 183px;margin-top: -47px;margin-left: 45px;filter: brightness(100%); padding-bottom: 18px;">
-        <div class="overflow-auto">
-        <div class="list-group btn-light mt-1 mr-xl-5" th:each="orga : ${orgas}">
-            <ul name="FirstLine" class="list-group list-group-horizontal-xl">
-                <ul class="list-group">
-                    <li class="list-group-item" th:text="${orga.getNom()}">Nom</li>
-                    <li class="list-group-item" th:text="${orga.getDirigeant()}">Dirigeant</li>
-                    <li class="list-group-item" th:text="${orga.getAdresse()}">Adresse</li>
-                </ul>
+        <div class="card border-light bg-dark text-white" style="margin-right: 18px; margin-bottom: 18px;">
+            <div class="card-body" style="width: 420px;">
+                <h4 class="card-title" th:text="${mission.getTitre()}"></h4>
+                <h6 class="card-text card-subtitle mb-2" th:text="| Date de début : ${#calendars.format(mission.getDateDebut(), 'dd MMMM yyyy')}|">A</h6>
+                <h6 th:if="${mission.getDateFin()} != null" class="card-text card-subtitle mb-2" th:text="| Date de Fin : ${mission.getDateFin()}|">B</h6>
+                <h6 class="text-muted card-subtitle mb-2" th:text="| Niveaux : ${mission.getNiveaux()}|">C</h6>
+                <h6 class="text-muted card-subtitle mb-2" th:text="| Urgence : ${mission.getUrgence()}|">D</h6>
+                <h6 th:if="${mission.getHero()} != null" class="text-muted card-subtitle mb-2" th:text="| Super Héro impliqué : ${mission.getHero().getNom()}|">E</h6>
+                <form action="/mission/endmission/d", method="post">
+                    <input type="hidden" th:value="${mission.getId_Mission()}">
+                    <button type="submit" class="btn btn-success">
+                        Fin de mission
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-square-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm10.03 4.97a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                        </svg>
+                    </button>
+                </form>
 
-                <li class="list-group-item">
-                    <div class="d-flex flex-column bd-highlight mb-3">
-                        <a class="btn btn-danger mb-1" th:href="|/admin/deleteorga/${orga.getId_Organisations()}|">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16" >
-                                <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
-                            </svg>
-                        </a>
-                        <a class="btn btn-warning mb-1" th:href="|/admin/modifyorga/${orga.getId_Organisations()}|">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                            </svg>
-                        </a>
-                        <a class="btn btn-light mb-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
-                            </svg>
-                        </a>
-                    </div>
-
-                </li>
-            </ul>
+            </div>
         </div>
-        </div>
+
+
+
     </div>
-
 
     <a class="btn border-danger shadow-sm" role="button" style="background-repeat: no-repeat;font-size: 18px;font-family: 'Source Sans Pro', sans-serif;color: rgb(255,255,255);background-image: url(&quot;assets/img/login/button2.png&quot;);background-position: center;background-size: contain;margin-left: 0px;margin-top: 0px;margin-right: 81px;padding-top: 9px;font-weight: normal;padding-bottom: 0px;padding-left: 75px;height: 39px;padding-right: 19px;"
        href="logout">DISCONNECT</a></header>

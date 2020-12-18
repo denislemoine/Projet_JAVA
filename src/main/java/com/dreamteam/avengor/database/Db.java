@@ -623,16 +623,26 @@ public class Db {
     //=========================================================================
     // Ajout d'une satisfaction
     public static void saveSatisfaction(SatisfactionModel satisfactionModel){
+        int civilNote = 0;
+        int id = 0;
+        int vilainNote = 0;
+        int scoreSend = 0;
         try {
             CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             PreparedStatement statement = CON.prepareStatement
                     ("INSERT INTO Satisfaction (id_Civil,id_super_vilain,id_Incidents,id_Mission,satisfactionType,Message,Note,Commentaire) " +
                             "VALUES (?,?,?,?,?,?,?,?)");
-            if (satisfactionModel.getId_Civil() != null) { statement.setInt(1,satisfactionModel.getId_Civil()); }
-            else { statement.setNull(1,Types.NULL); }
+            if (satisfactionModel.getId_Civil() != null) {
+                statement.setInt(1,satisfactionModel.getId_Civil());
+                civilNote = 1;
+                id = satisfactionModel.getId_Civil();
+            } else { statement.setNull(1,Types.NULL); }
 
-            if (satisfactionModel.getId_super_vilain() != null) { statement.setInt(2,satisfactionModel.getId_super_vilain()); }
-            else { statement.setNull(2,Types.NULL); }
+            if (satisfactionModel.getId_super_vilain() != null) {
+                statement.setInt(2,satisfactionModel.getId_super_vilain());
+                vilainNote = 1;
+                id = satisfactionModel.getId_super_vilain();
+            } else { statement.setNull(2,Types.NULL); }
 
             if (satisfactionModel.getId_Incidents() != null) { statement.setInt(3,satisfactionModel.getId_Incidents()); }
             else { statement.setNull(3,Types.NULL); }
@@ -643,11 +653,42 @@ public class Db {
             statement.setString(5,satisfactionModel.getSatisfactionType());
             statement.setString(6,satisfactionModel.getMessage());
 
-            if (satisfactionModel.getNote() != null) { statement.setInt(7,satisfactionModel.getNote()); }
-            else { statement.setNull(7,Types.NULL); }
+            if (satisfactionModel.getNote() != null) {
+                statement.setInt(7,satisfactionModel.getNote());
+                scoreSend = satisfactionModel.getNote();
+            } else { statement.setNull(7,Types.NULL); }
 
             statement.setString(8,satisfactionModel.getCommentaire());
             statement.execute();
+
+            if (civilNote != 0) {
+                CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+                Statement statementFindScore = CON.createStatement();
+                ResultSet resultSet = statementFindScore.executeQuery("select * from Super_heros where IdentiteSecretes =" + id);
+                if(resultSet.next()) {
+                    int score = resultSet.getInt("Score");
+                    scoreSend += score;
+                    PreparedStatement state = CON.prepareStatement
+                            ("UPDATE Super_heros SET Score = (?) WHERE IdentiteSecretes = (?)");
+                    state.setInt(1, scoreSend);
+                    state.setInt(2, id);
+                    state.execute();
+                }
+            }
+            if (vilainNote != 0){
+                CON = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+                Statement statementFindScore = CON.createStatement();
+                ResultSet resultSet = statementFindScore.executeQuery("select * from Super_heros where IdentiteSecretes =" + id);
+                if(resultSet.next()) {
+                    int score = resultSet.getInt("Score");
+                    scoreSend += score;
+                    PreparedStatement state = CON.prepareStatement
+                            ("UPDATE Super_vilains SET Score = (?) WHERE id_SuperVilains = (?)");
+                    state.setInt(1, scoreSend);
+                    state.setInt(2, id);
+                    state.execute();
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -21,4 +21,5 @@ public class AdminModel {
     public static void deleteMission(String id){
         Db.deleteMission(id);
     }
+
 }

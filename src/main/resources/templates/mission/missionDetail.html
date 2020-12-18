@@ -62,7 +62,7 @@
 
             <div class="d-flex flex-wrap overflow-auto" style="margin-top: 18px;">
 
-                <div th:each="mission : ${missions}" class="d-flex flex-row">
+                <div class="d-flex flex-row">
 
                 <div class="card border-light bg-dark text-white" style="margin-right: 18px; margin-bottom: 18px;">
                     <div class="card-body" style="width: 420px;">
@@ -72,12 +72,14 @@
                         <h6 class="text-muted card-subtitle mb-2" th:text="| Niveaux : ${mission.getNiveaux()}|"></h6>
                         <h6 class="text-muted card-subtitle mb-2" th:text="| Urgence : ${mission.getUrgence()}|"></h6>
                         <h6 th:if="${mission.getHero()} != null" class="text-muted card-subtitle mb-2" th:text="| Super Héro impliqué : ${mission.getHero().getNom()}|"></h6>
-                        <a th:href="|mission-${mission.getId_Mission()}|" class="btn btn-link float-right">
-                            Voir les satisfactions
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-star-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4zm4.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.178.178 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.178.178 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.178.178 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.178.178 0 0 1-.134-.098L8.16 4.1z"/>
-                            </svg>
-                        </a>
+                        <div class="card-footer">
+                            <h4 class="card-title">Les satisfactions :</h4>
+                            <div th:each="satisfaction : ${satisfactionList}" class="card bg-info">
+                                <p th:text="${satisfaction.getSatisfactionType()}"></p>
+                                <p th:text="${satisfaction.getMessage()}"></p>
+                                <p th:text="${satisfaction.getCommentaire()}"></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

@@ -3,6 +3,7 @@ package com.dreamteam.avengor.controller;
 import com.dreamteam.avengor.model.AdminModel;
 import com.dreamteam.avengor.model.CivilsModel;
 import com.dreamteam.avengor.model.MissionModel;
+import com.dreamteam.avengor.model.OrganisationModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ public class AdminController {
 
     private List<CivilsModel> listeCivils = new ArrayList<>();
     private List<MissionModel> listeMissions = new ArrayList<>();
+    private List<OrganisationModel> listeOrga = new ArrayList<>();
 
     public String adminHome(){
         String login = "admin"; // a changer par la variable contenant le role de l'utilisateur
@@ -110,13 +112,19 @@ public class AdminController {
         }
         return "panelAdmin/missions";
     }
+    //=========================================================================
+    //                          Methodes Organisations                                 =
+    //=========================================================================
+    @GetMapping("/admin/organisations")
+    public String adminOrganisation(Model model){
 
+        listeOrga = OrganisationModel.getAllOrga();
 
-
+        model.addAttribute("orgas",listeOrga);
+        return "panelAdmin/organisations";
+    }
     public String adminCrise(){
         return "panelAdmin/crise";
     }
-    public String adminOrganisation(){
-        return "panelAdmin/organisations";
-    }
+
 }

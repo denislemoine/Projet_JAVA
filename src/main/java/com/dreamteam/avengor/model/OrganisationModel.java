@@ -1,6 +1,10 @@
 package com.dreamteam.avengor.model;
 
+import com.dreamteam.avengor.database.Db;
+
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.List;
 
 public class OrganisationModel {
     private int id_Organisations;
@@ -97,6 +101,10 @@ public class OrganisationModel {
 
     public void setNbMissionsImplique(int nbMissionsImplique) {
         this.nbMissionsImplique = nbMissionsImplique;
+    }
+
+    public static List<OrganisationModel> getAllOrga(){
+        return Db.getAllOrga();
     }
 
 

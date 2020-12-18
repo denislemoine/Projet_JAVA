@@ -68,7 +68,6 @@
                     <div class="card border-light bg-dark text-white" style="margin-right: 18px; margin-bottom: 18px;">
                         <div class="card-body" style="width: 420px;">
                             <h4 class="card-title" th:text="${incident.getTypeIncident()}"></h4>
-                            <h4 class="card-title" th:text="${incident.getMission()}"></h4>
                             <h6 class="card-text card-subtitle mb-2" th:text="| Adresse : ${incident.getAdresse()}|"></h6>
                             <h6 class="card-text card-subtitle mb-2" th:text="| Informations : ${incident.getInfoComplementaire()}|"></h6>
                             <a th:if="${incident.getMission() == 0}" th:href="|mission-add-${incident.getId_Incidents()}|" class="btn btn-link">
